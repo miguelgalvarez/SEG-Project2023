@@ -1,0 +1,16 @@
+<resources>
+    <string name = "app_name">My Application</string>
+    <string name = "login_title">Login/Register</string>
+    <string name = "app_title">Grimpeurs Cycling Club App</string>
+    <string name = "admin_title">Administrator</string>
+    <string name = "Club_manager_title">Club Manager</string>
+    <string name = "participant_title">Participant</string>
+    <string name = "username_hint">Username</string>
+    <string name = "password_hint">Password</string>
+    <string name = "button_text_admin">Login</string>
+    <string name = "button_text">Login/Register</string>
+
+    <string name = "welcome_page">Welcome!</string>
+
+
+</resources>
