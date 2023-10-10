@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static android.graphics.Color.rgb;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -18,13 +20,24 @@ public class MainActivity extends AppCompatActivity {
     }
     public void AdminLogin(View view) {
 
-        EditText adminPassword = (EditText) findViewById(R.id.usernameHint);
-        EditText adminUsername = (EditText) findViewById(R.id.passwordHint);
+        EditText adminUsername = (EditText) findViewById(R.id.usernameHint);
+        EditText adminPassword = (EditText) findViewById(R.id.passwordHint);
 
         //Application Context and Activity
         if (adminPassword.getText().toString().equals("Admin") && adminUsername.getText().toString().equals("Admin")) {
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivityForResult (intent,0);
+        }
+
+        if (adminUsername.getText().toString().equals("")) {
+            adminUsername.setHint("Please enter a username");
+            adminUsername.setHintTextColor(rgb(255,0,0));
+
+        }
+
+        if (adminPassword.getText().toString().equals("")) {
+            adminPassword.setHint("Please enter a password");
+            adminPassword.setHintTextColor(rgb(255,0,0));
         }
     }
     public void Login(View view) {
@@ -35,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void CreateAccount(View view) {
+    public void CreateAccountLink(View view) {
 
         //Application Context and Activity
         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);

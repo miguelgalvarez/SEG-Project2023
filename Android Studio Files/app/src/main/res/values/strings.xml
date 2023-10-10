@@ -8,13 +8,21 @@
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="button_text_admin">Login</string>
-    <string name="button_text">Login/Register</string>
+    <string name="button_text_register">Register</string>
 
     <string name="welcome_page">Welcome!</string>
 
     <string name="register_account">Register</string>
 
     <string name="register_account_text">Register for an account</string>
+
+    //CreateAccountActivity
+    <string name = "First_Name_input_field">First Name</string>
+
+    <string name = "Last_Name_input_field">Last Name</string>
+
+    <string name = "email_input_field">Email</string>
+
 
 
 </resources>

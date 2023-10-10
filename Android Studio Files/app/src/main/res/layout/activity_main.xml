@@ -82,7 +82,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/darker_grotesque_light"
             android:gravity="center"
-            android:onClick="CreateAccount"
+            android:onClick="CreateAccountLink"
             android:text="@string/register_account_text"
             android:textSize="24sp"
             android:textStyle="bold" />
