@@ -31,7 +31,7 @@ public class DBHandler extends SQLiteOpenHelper{
     private static final String email_COL = "email";
 
     // below variable for user's accountType column.
-    private static final String accountType_COL = "accountType"
+    private static final String accountType_COL = "accountType";
 
     // creating a constructor for our database handler.
     public DBHandler(Context context) {
