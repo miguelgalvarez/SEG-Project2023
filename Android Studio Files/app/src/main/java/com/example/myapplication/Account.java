@@ -4,6 +4,11 @@ public class Account {
 
     String username;
     String password;
-    int accountID;
+    String accountID;
 
+    public Account(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.accountID = username;
+    }
 }
