@@ -15,20 +15,23 @@ public class DBHandler extends SQLiteOpenHelper{
     // below variable is for our table name.
     private static final String TABLE_NAME = "mycourses";
 
-    // below variable is for our id column.
+    // below variable is for our user's username column.
     private static final String username_COL = "username";
 
-    // below variable is for our course name column
+    // below variable is for our user's password column
     private static final String password_COL = "password";
 
-    // below variable id for our course duration column.
+    // below variable id for our user's firstName column.
     private static final String firstName_COL = "firstName";
 
-    // below variable for our course description column.
+    // below variable for our user's lastName column.
     private static final String lastName_COL = "lastName";
 
-    // below variable is for our course tracks column.
+    // below variable is for our user email column.
     private static final String email_COL = "email";
+
+    // below variable for user's accountType column.
+    private static final String accountType_COL = "accountType"
 
     // creating a constructor for our database handler.
     public DBHandler(Context context) {
@@ -47,7 +50,8 @@ public class DBHandler extends SQLiteOpenHelper{
                 + password_COL + " TEXT,"
                 + firstName_COL + " TEXT,"
                 + lastName_COL + " TEXT,"
-                + email_COL + " TEXT)";
+                + email_COL + " TEXT,"
+                + accountType_COL + "TEXT)";
 
         // at last we are calling a exec sql
         // method to execute above sql query
@@ -55,7 +59,7 @@ public class DBHandler extends SQLiteOpenHelper{
     }
 
     // this method is use to add new course to our sqlite database.
-    public void addNewUser(String userName, String passWord, String firstName, String lastName, String email) {
+    public void addNewUser(String userName, String passWord, String firstName, String lastName, String email, String accountType) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -73,6 +77,7 @@ public class DBHandler extends SQLiteOpenHelper{
         values.put(firstName_COL, firstName);
         values.put(lastName_COL, lastName);
         values.put(email_COL, email);
+        values.put(accountType_COL,accountType);
 
         // after adding all values we are passing
         // content values to our table.
