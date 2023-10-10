@@ -21,7 +21,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
 
         //dropdown menu
-        Spinner accountDropDown = (Spinner) findViewById(R.id.accountTypeDropDown);
+        /*Spinner accountDropDown = (Spinner) findViewById(R.id.accountTypeDropDown);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dropdown_menu, android.R.layout.simple_spinner_item);
 
@@ -29,7 +29,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Apply the adapter to the spinner.
-        accountDropDown.setAdapter(adapter);
+        accountDropDown.setAdapter(adapter);*/
 
     }
 

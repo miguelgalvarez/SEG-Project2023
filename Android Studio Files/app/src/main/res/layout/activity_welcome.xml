@@ -58,12 +58,12 @@
             android:layout_width="match_parent"
             android:layout_height="90dp" />
 
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="312dp"
-            android:src="@tools:sample/avatars"
-            tools:srcCompat="@drawable/ride" />
+            android:layout_height="288dp"
+            app:srcCompat="@drawable/ride" />
 
         <TextView
             android:id="@+id/welcomePageTitle"

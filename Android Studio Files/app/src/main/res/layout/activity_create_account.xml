@@ -26,15 +26,9 @@
             android:textSize="32sp"
             android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/accountTypeDropDown"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:spinnerMode="dropdown" />
-
         <Space
             android:layout_width="match_parent"
-            android:layout_height="67dp" />
+            android:layout_height="31dp" />
 
         <EditText
             android:id="@+id/editTextText"
