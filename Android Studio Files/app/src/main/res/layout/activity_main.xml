@@ -29,7 +29,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="22dp" />
+            android:layout_height="104dp" />
 
         <TextView
             android:id="@+id/adminTitle"
@@ -73,88 +73,23 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="37dp" />
+            android:layout_height="16dp" />
 
         <TextView
             android:id="@+id/adminTitle2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/darker_grotesque_light"
             android:gravity="center"
-            android:text="@string/Club_manager_title"
+            android:onClick="CreateAccount"
+            android:text="@string/register_account_text"
             android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/usernameHint2"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:ems="10"
-            android:hint="@string/username_hint"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/passwordHint2"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:ems="10"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/buttongClubManager"
-            android:layout_width="250sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="#F66335"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:onClick="Login"
-            android:text="@string/button_text"
-            android:textSize="22sp"
             android:textStyle="bold" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="36dp" />
 
-        <TextView
-            android:id="@+id/adminTitle3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:gravity="center"
-            android:text="@string/participant_title"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/usernameHint3"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:ems="10"
-            android:hint="@string/username_hint"
-            android:inputType="text" />
-
-        <EditText
-            android:id="@+id/passwordHint3"
-            android:layout_width="match_parent"
-            android:layout_height="48sp"
-            android:ems="10"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword" />
-
-        <Button
-            android:id="@+id/buttonParticipant"
-            android:layout_width="250sp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="#F66335"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:onClick="Login"
-            android:text="@string/button_text"
-            android:textSize="22sp"
-            android:textStyle="bold" />
     </LinearLayout>
 </RelativeLayout>

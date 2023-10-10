@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void CreateAccount(View view) {
+
+        //Application Context and Activity
+        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        startActivityForResult (intent,0);
+
+    }
+
     public void createAccount(String email, String username, String Password) {
     }
 }
