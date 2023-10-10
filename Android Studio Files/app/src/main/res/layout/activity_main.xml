@@ -38,7 +38,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/darker_grotesque_light"
             android:gravity="center"
-            android:text="@string/admin_title"
+            android:text="@string/button_text_admin"
             android:textSize="24sp"
             android:textStyle="bold" />
 
