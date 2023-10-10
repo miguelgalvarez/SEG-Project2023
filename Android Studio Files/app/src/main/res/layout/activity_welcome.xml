@@ -16,6 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/welcome_page"
-            android:textSize="40sp" />
+            android:textSize="40sp"
+            android:translationX="100dp"
+            android:translationY="350dp" />
     </LinearLayout>
 </RelativeLayout>
