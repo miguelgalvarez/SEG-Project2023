@@ -11,6 +11,10 @@
     <string name="button_text_register">Register</string>
 
     <string name="welcome_page">Welcome!</string>
+    <string name="username_display_welcome_page">username</string>
+    <string name="typeUser_display_welcome_page">user_type</string>
+    <string name="nameOfProj_display_welcome_page">smth</string>
+<string name="event_text_display">Here is a new event happening!</string>
 
     <string name="register_account">Register</string>
 
