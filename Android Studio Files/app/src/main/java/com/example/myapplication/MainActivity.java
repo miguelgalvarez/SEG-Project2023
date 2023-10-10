@@ -27,4 +27,8 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult (intent,0);
 
     }
+
+    public void createAccount(String email, String username, String Password) {
+
+    }
 }

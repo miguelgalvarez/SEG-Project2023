@@ -3,10 +3,7 @@ package com.example.myapplication;
 import java.util.Random;
 
 
-public class AdministratorAccount {
-    String username;
-    String password;
-    int accountID;
+public class AdministratorAccount extends Account{
 
     public AdministratorAccount(String username, String password) {
         this.username = username;

@@ -2,11 +2,7 @@ package com.example.myapplication;
 
 import java.util.Random;
 
-public class ParticipantAccount {
-
-    String username;
-    String password;
-    int accountID;
+public class ParticipantAccount extends Account{
 
     public ParticipantAccount(String username, String password) {
         this.username = username;
