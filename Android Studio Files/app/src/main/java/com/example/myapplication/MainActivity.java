@@ -40,13 +40,6 @@ public class MainActivity extends AppCompatActivity {
             adminPassword.setHintTextColor(rgb(255,0,0));
         }
     }
-    public void Login(View view) {
-
-        //Application Context and Activity
-        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-        startActivityForResult (intent,0);
-
-    }
 
     public void CreateAccountLink(View view) {
 
