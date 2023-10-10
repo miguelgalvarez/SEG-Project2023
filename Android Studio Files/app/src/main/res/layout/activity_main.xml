@@ -91,18 +91,5 @@
             android:layout_width="match_parent"
             android:layout_height="36dp" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="#F66335"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:onClick="TestingButton"
-            android:text="testing"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:cornerRadius="20sp" />
-
     </LinearLayout>
 </RelativeLayout>

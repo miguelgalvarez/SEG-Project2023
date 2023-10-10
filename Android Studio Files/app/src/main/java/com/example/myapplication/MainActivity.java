@@ -50,10 +50,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void TestingButton(View view) {
-
-        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-        startActivityForResult(intent, 0);
-    }
 
 }
