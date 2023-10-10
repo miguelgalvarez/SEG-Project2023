@@ -65,7 +65,7 @@
             android:layout_gravity="center"
             android:backgroundTint="#F66335"
             android:fontFamily="@font/darker_grotesque_light"
-            android:onClick="Login"
+            android:onClick="AdminLogin"
             android:text="@string/button_text_admin"
             android:textSize="22sp"
             android:textStyle="bold"

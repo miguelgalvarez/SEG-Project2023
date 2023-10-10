@@ -11,15 +11,22 @@ import android.widget.ImageView;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+    public void AdminLogin(View view) {
 
+        EditText adminPassword = (EditText) findViewById(R.id.usernameHint);
+        EditText adminUsername = (EditText) findViewById(R.id.passwordHint);
+
+        //Application Context and Activity
+        if (adminPassword.getText().toString().equals("Admin") && adminUsername.getText().toString().equals("Admin")) {
+            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+            startActivityForResult (intent,0);
+        }
+    }
     public void Login(View view) {
 
         //Application Context and Activity
