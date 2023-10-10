@@ -14,24 +14,24 @@
     <string name="username_display_welcome_page">username</string>
     <string name="typeUser_display_welcome_page">user_type</string>
     <string name="nameOfProj_display_welcome_page">smth</string>
-<string name="event_text_display">Here is a new event happening!</string>
+    <string name="event_text_display">Here is a new event happening!</string>
 
     <string name="register_account">Register</string>
 
     <string name="register_account_text">Register for an account</string>
 
     //CreateAccountActivity
-    <string name = "First_Name_input_field">First Name</string>
+    <string name="First_Name_input_field">First Name</string>
 
-    <string name = "Last_Name_input_field">Last Name</string>
+    <string name="Last_Name_input_field">Last Name</string>
 
-    <string name = "email_input_field">Email</string>
+    <string name="email_input_field">Email</string>
 
     //drop down menu
     <string-array name="dropdown_menu">
         <item>Club Manager</item>
         <item>Participant</item>
     </string-array>
-    
+
 
 </resources>

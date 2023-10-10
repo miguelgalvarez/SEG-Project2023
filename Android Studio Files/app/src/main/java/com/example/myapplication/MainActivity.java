@@ -45,17 +45,15 @@ public class MainActivity extends AppCompatActivity {
     public void CreateAccountLink(View view) {
         //Application Context and Activity
         Log.d("Testing", "right method was run");
-        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CreatingAccountActivity.class);
         startActivityForResult (intent,0);
 
     }
 
     public void TestingButton(View view) {
 
-        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
         startActivityForResult(intent, 0);
     }
 
-    public void createAccount(String email, String username, String Password) {
-    }
 }
