@@ -36,6 +36,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createAccount(String email, String username, String Password) {
-
     }
 }

@@ -11,13 +11,17 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="321dp" />
+
         <TextView
             android:id="@+id/welcomePageTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity="center|center_vertical"
             android:text="@string/welcome_page"
-            android:textSize="40sp"
-            android:translationX="100dp"
-            android:translationY="350dp" />
+            android:textSize="40sp" />
     </LinearLayout>
 </RelativeLayout>
