@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         EditText adminPassword = (EditText) findViewById(R.id.passwordHint);
 
         //Application Context and Activity
-        if (adminPassword.getText().toString().equals("Admin") && adminUsername.getText().toString().equals("Admin")) {
+        if (adminPassword.getText().toString().equals("admin") && adminUsername.getText().toString().equals("admin")) {
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             startActivityForResult (intent,0);
         }

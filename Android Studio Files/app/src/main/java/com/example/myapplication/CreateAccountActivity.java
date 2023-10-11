@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.util.Patterns;
+import android.widget.RadioGroup;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText firstName;
@@ -14,6 +15,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText email;
     private EditText username;
     private EditText password;
+    //private EditText radiogroup;
+    private String accountType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextTextEmailAddress);
         username = findViewById(R.id.usernameField);
         password = findViewById(R.id.passwordField);
+        //radiogroup = findViewById(R.id.radioGroup);
     }
 
     public boolean validate(View view) {
@@ -100,15 +104,24 @@ public class CreateAccountActivity extends AppCompatActivity {
             flag = false;
         }
 
+        if (isClubAccount == false && isParticipantAccount == false) {
+            flag = false;
+        }
+
         if (flag == true) {
 
             if (isClubAccount == true) {
-                ClubManagerAccount managerAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), "Club Manager");
+                accountType = "Club Manager";
+                ClubManagerAccount managerAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), accountType);
             } else if (isParticipantAccount == true) {
-                ParticipantAccount participantAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), "Club Manager");
+                accountType = "Participant";
+                ParticipantAccount participantAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), accountType);
             }
 
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
+            intent.putExtra("username", (CharSequence) username);
+            intent.putExtra("account type", (CharSequence) accountType);
+
             startActivityForResult (intent,0);
         }
 
