@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Testing", "right method was run");
         Intent intent = new Intent(getApplicationContext(), CreatingAccountActivity.class);
         startActivityForResult (intent,0);
-
     }
-
-
+    
 }
