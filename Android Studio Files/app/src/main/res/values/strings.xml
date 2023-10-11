@@ -33,4 +33,9 @@
     </string-array>
 
 
+    <string name="participant_account">Create a participant account</string>
+
+    <string name="club_account">Create a club account</string>
+
+
 </resources>

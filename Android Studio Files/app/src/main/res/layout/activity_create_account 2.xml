@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreatingAccountActivity">
+    tools:context=".CreateAccountActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_height="31dp" />
 
         <EditText
-            android:id="@+id/idFirstName"
+            android:id="@+id/firstNamefield"
             android:layout_width="match_parent"
             android:layout_height="48sp"
             android:ems="10"
@@ -43,7 +43,7 @@
             android:layout_height="51dp" />
 
         <EditText
-            android:id="@+id/idLastName"
+            android:id="@+id/lastNameField"
             android:layout_width="match_parent"
             android:layout_height="48sp"
             android:ems="10"
@@ -55,7 +55,7 @@
             android:layout_height="51dp" />
 
         <EditText
-            android:id="@+id/idEmail"
+            android:id="@+id/editTextTextEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="48sp"
             android:ems="10"
@@ -67,7 +67,7 @@
             android:layout_height="51dp" />
 
         <EditText
-            android:id="@+id/idUserName"
+            android:id="@+id/usernameField"
             android:layout_width="match_parent"
             android:layout_height="48sp"
             android:ems="10"
@@ -79,7 +79,7 @@
             android:layout_height="51dp" />
 
         <EditText
-            android:id="@+id/idUserPassword"
+            android:id="@+id/passwordField"
             android:layout_width="match_parent"
             android:layout_height="48sp"
             android:ems="10"
@@ -90,14 +90,35 @@
             android:layout_width="match_parent"
             android:layout_height="35dp" />
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RadioButton
+                android:id="@+id/participant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="CreateParticipantAccount"
+                android:text="@string/participant_account" />
+
+
+            <RadioButton
+                android:id="@+id/club"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="CreateClubAccount"
+                android:text="@string/club_account" />
+        </RadioGroup>
+
         <Button
-            android:id="@+id/idRegisterButton"
+            android:id="@+id/button2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="#F66335"
             android:fontFamily="@font/darker_grotesque_light"
-            android:onClick="CreateAccount"
+            android:onClick="createAccountPress"
             android:text="@string/button_text_register"
             android:textSize="22sp"
             android:textStyle="bold"

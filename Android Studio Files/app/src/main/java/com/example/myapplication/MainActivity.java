@@ -44,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void CreateAccountLink(View view) {
         //Application Context and Activity
-        Log.d("Testing", "right method was run");
-        Intent intent = new Intent(getApplicationContext(), CreatingAccountActivity.class);
+        Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
         startActivityForResult (intent,0);
     }
     
