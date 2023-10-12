@@ -118,11 +118,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                 ParticipantAccount participantAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), accountType);
             }
 
-            Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-            intent.putExtra("username", (CharSequence) username);
-            intent.putExtra("account type", (CharSequence) accountType);
-
-            startActivityForResult (intent,0);
+            Intent intent = new Intent(this, WelcomeActivity.class);
+            intent.putExtra("username", username.getText().toString());
+            intent.putExtra("accountType", accountType);
+            startActivity(intent);
         }
 
 
