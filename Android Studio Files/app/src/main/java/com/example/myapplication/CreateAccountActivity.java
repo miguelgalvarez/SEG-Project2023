@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 //import com.google.firebase.database.FireBaseDatabase;
@@ -127,6 +128,19 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
 
             FirebaseDatabase database = FirebaseDatabase.getInstance(); //get instance of our database so we can read/write
+
+            DatabaseReference newUserTypeRef = database.getReference("users/" + username + "usertype/");
+            DatabaseReference newUserEmailRef = database.getReference("users/" + username + "email/");
+            DatabaseReference newUserPasswordRef = database.getReference("users/" + username + "password/");
+            DatabaseReference newUserUsernameRef = database.getReference("users/" + username + "username/");
+
+            newUserTypeRef.setValue(accountType);
+            newUserEmailRef.setValue(email);
+            newUserPasswordRef.setValue(password);
+            newUserUsernameRef.setValue(username);
+
+
+
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("username", username.getText().toString());
             intent.putExtra("accountType", accountType);
