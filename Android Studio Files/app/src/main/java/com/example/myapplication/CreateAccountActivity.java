@@ -23,7 +23,6 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText email;
     private EditText username;
     private EditText password;
-    //private EditText radiogroup;
     private String accountType;
 
     @Override
@@ -72,6 +71,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public void writeDatabase() {
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("users");
 
@@ -170,7 +170,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
 
-            } else /*if (isParticipantAccount == true)*/ {
+            } else {
 
                 newAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.PARTICIPANT);
 
@@ -180,7 +180,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("username", newAccount.getUsername());
-            intent.putExtra("accountType", newAccount.getAccountType());
+            intent.putExtra("accountType", newAccount.getAccountType().toString());
             startActivity(intent);
         }
 
