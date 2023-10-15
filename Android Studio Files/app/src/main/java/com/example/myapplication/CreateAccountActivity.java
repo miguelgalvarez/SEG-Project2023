@@ -36,7 +36,6 @@ public class CreateAccountActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextTextEmailAddress);
         username = findViewById(R.id.usernameField);
         password = findViewById(R.id.passwordField);
-        //radiogroup = findViewById(R.id.radioGroup);
     }
 
     public boolean validate(View view) {
@@ -120,7 +119,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         if (flag == true) {
 
             if (isClubAccount == true) {
-                accountType = "Club Manager";
+                AccountType accountType = AccountType.CLUB_MANAGER;
                 ClubManagerAccount managerAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), accountType);
             } else if (isParticipantAccount == true) {
                 accountType = "Participant";

@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Application Context and Activity
         if (adminPassword.getText().toString().equals("admin") && adminUsername.getText().toString().equals("admin")) {
-            String accountType = "administrator";
+            AccountType accountType = AccountType.ADMINISTRATOR;
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             intent.putExtra("username", adminUsername.getText().toString());
             intent.putExtra("accountType", accountType);

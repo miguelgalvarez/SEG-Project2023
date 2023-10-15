@@ -7,11 +7,11 @@ public class Account {
     String firstName;
     String lastName;
     String email;
-    String accountType;
+    AccountType accountType;
 
 
 
-    public Account(String username, String password, String firstName, String lastName, String email, String accountType) {
+    public Account(String username, String password, String firstName, String lastName, String email, AccountType accountType) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -45,7 +45,7 @@ public class Account {
         return this.email;
     }
 
-    public String getAccountType() {
+    public AccountType getAccountType() {
         return accountType;
     }
 }
