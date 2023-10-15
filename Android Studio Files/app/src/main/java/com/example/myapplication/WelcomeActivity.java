@@ -24,7 +24,7 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView accountTypeTextView = findViewById(R.id.userRole);
 
         usernameTextView.setText(username);
-        accountTypeTextView.setText(accountType);
+        accountTypeTextView.setText(accountType.toString());
 
 
     }

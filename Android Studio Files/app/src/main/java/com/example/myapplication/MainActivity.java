@@ -22,15 +22,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public void AdminLogin(View view) {
 
+        Account newAccount = new AdministratorAccount("admin", "admin", "ADMIN", "ADMIN", "ADMIN@admin.com", AccountType.ADMINISTRATOR);
         EditText adminUsername = (EditText) findViewById(R.id.usernameHint);
         EditText adminPassword = (EditText) findViewById(R.id.passwordHint);
 
         //Application Context and Activity
         if (adminPassword.getText().toString().equals("admin") && adminUsername.getText().toString().equals("admin")) {
-            AccountType accountType = AccountType.ADMINISTRATOR;
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
-            intent.putExtra("username", adminUsername.getText().toString());
-            intent.putExtra("accountType", accountType);
+            intent.putExtra("username", newAccount.getUsername());
+            intent.putExtra("accountType", newAccount.getAccountType());
             startActivity(intent);
         } else {
             Toast toast = Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT);
