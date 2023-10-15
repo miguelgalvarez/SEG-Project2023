@@ -19,5 +19,33 @@ public class Account {
         this.email = email;
         this.accountType = accountType;
     }
-    
+
+    public String getUsername() {
+
+        return this.username;
+    }
+
+    public String getPassword() {
+
+        return this.password;
+    }
+
+    public String getFirstName() {
+
+        return this.firstName;
+    }
+
+    public String getLastName() {
+
+        return this.lastName;
+    }
+
+    public String getEmail() {
+
+        return this.email;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
 }
