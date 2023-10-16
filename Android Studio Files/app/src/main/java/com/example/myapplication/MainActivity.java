@@ -28,21 +28,25 @@ public class MainActivity extends AppCompatActivity {
 
         //Application Context and Activity
         if (adminPassword.getText().toString().equals("admin") && adminUsername.getText().toString().equals("admin")) {
+
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             intent.putExtra("username", newAccount.getUsername());
             intent.putExtra("accountType", newAccount.getAccountType());
+
             startActivity(intent);
+
         } else {
+
             Toast toast = Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT);
             toast.show();
         }
 
-        if (adminUsername.getText().toString().equals("")) {
+        if (adminUsername.getText().toString().isEmpty()) {
             adminUsername.setError("Please enter a username");
 
         }
 
-        if (adminPassword.getText().toString().equals("")) {
+        if (adminPassword.getText().toString().isEmpty()) {
             adminPassword.setError("Please enter a password");
         }
     }
@@ -50,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public void CreateAccountLink(View view) {
         //Application Context and Activity
         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
-        startActivityForResult (intent,0);
+        startActivity(intent);
     }
     
 }

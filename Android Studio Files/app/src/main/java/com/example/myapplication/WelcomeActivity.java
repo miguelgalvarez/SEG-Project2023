@@ -1,7 +1,5 @@
 package com.example.myapplication;
 
-import static com.example.myapplication.R.id.usernameText;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;

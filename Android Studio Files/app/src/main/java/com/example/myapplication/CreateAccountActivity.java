@@ -19,7 +19,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText email;
     private EditText username;
     private EditText password;
-    private String accountType;
+
+    private Account newAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         DatabaseReference newUserRef = usersRef.child(username.getText().toString());
 
-        newUserRef.child("usertype").setValue(accountType, new DatabaseReference.CompletionListener() {
+        newUserRef.child("usertype").setValue(newAccount.getAccountType().toString(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) {
@@ -154,7 +155,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         if (flag == true) {
 
-            Account newAccount;
             if (isClubAccount == true) {
 
                 newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
@@ -165,8 +165,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             }
 
-            //writing new account to database
-            writeDatabase();
+            writeDatabase(); //writing new account to database
 
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("username", newAccount.getUsername());
