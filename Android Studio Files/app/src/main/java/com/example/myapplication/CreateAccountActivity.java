@@ -7,15 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.util.Patterns;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-//import com.google.firebase.database.FireBaseDatabase;
-//import com.google.firebase.database.DataBaseReference;
 
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText firstName;
@@ -30,19 +26,12 @@ public class CreateAccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
-        // Initialize your EditText views inside the onCreate method
+        // Initialize EditText views
         firstName = findViewById(R.id.firstNamefield);
         lastName = findViewById(R.id.lastNameField);
         email = findViewById(R.id.editTextTextEmailAddress);
         username = findViewById(R.id.usernameField);
         password = findViewById(R.id.passwordField);
-    }
-
-    public boolean validate(View view) {
-        if (!email.getText().toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
-            return true;
-        }
-        return false;
     }
 
     public boolean CreateAccount(View view) {
@@ -176,6 +165,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             }
 
+            //writing new account to database
             writeDatabase();
 
             Intent intent = new Intent(this, WelcomeActivity.class);

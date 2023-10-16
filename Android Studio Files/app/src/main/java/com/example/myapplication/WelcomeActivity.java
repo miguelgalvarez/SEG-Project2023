@@ -23,6 +23,7 @@ public class WelcomeActivity extends AppCompatActivity {
         TextView usernameTextView = findViewById(R.id.usernameText);
         TextView accountTypeTextView = findViewById(R.id.userRole);
 
+        //setting the TextViews to display the username and password
         usernameTextView.setText(username);
         accountTypeTextView.setText(accountType);
 
