@@ -1,5 +1,11 @@
 package com.example.myapplication;
 
+/**
+ * Enumeration class for the 3 types of accounts
+ *
+ * @author Zachary Sikka
+ * @version 1.0
+ */
 public enum AccountType {
 
     ADMINISTRATOR("Admin"),
@@ -16,11 +22,21 @@ public enum AccountType {
 
     }
 
+    /**
+     * Getter method for returning the account type
+     *
+     * @return the String representation of the account type
+     */
     public String getName() {
 
         return this.name;
     }
 
+    /**
+     * toString method for returning the account type
+     *
+     * @return the String representation of the account type
+     */
     @Override
     public String toString() {
 

@@ -13,14 +13,23 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
+/**
+ * Create Account Activity that displays the main signup screen for users to create an account
+ *
+ * @author Android Studio, Zachary Sikka, Zachary Kranabetter, Migeul Alvarez
+ * @version 1.0
+ */
+
 public class CreateAccountActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private EditText email;
     private EditText username;
     private EditText password;
-
     private Account newAccount;
+    boolean isClubAccount = false;
+    boolean isParticipantAccount = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +44,10 @@ public class CreateAccountActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordField);
     }
 
-    public boolean CreateAccount(View view) {
-        if (firstName.getText().toString().isEmpty()) {
-            firstName.setError("Please enter a first name");
-            return false;
-        }
-
-        if (lastName.getText().toString().isEmpty()) {
-            lastName.setError("Please enter a last name");
-            return false;
-        }
-
-        if (username.getText().toString().isEmpty()) {
-            username.setError("Please enter a username");
-            return false;
-        }
-
-        if (!(!email.getText().toString().isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches())) {
-            email.setError("Please enter a valid email");
-            return false;
-        }
-
-        // If all fields are valid, return true
-        return true;
-    }
-
+    /**
+     * Method that handles writing the new account to the firebase database
+     *
+     */
     public void writeDatabase() {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -108,21 +96,32 @@ public class CreateAccountActivity extends AppCompatActivity {
         });
     }
 
-
-    boolean isClubAccount = false;
-    boolean isParticipantAccount = false;
-
+    /**
+     * Method that is mapped to the create club account radio button
+     *
+     * @param view gives information about the UI components
+     */
     public void CreateClubAccount(View view) {
         isClubAccount = true;
         isParticipantAccount = false;
 
     }
 
+    /**
+     * Method that is mapped to the create participant account radio button
+     *
+     * @param view gives information about the UI components
+     */
     public void CreateParticipantAccount(View view) {
         isClubAccount = false;
         isParticipantAccount = true;
     }
 
+    /**
+     * Method that is mapped to the create account button, handles all validation of fields and navigating to welcome page
+     *
+     * @param view gives information about the UI components
+     */
     public void createAccountPress(View view) {
 
         boolean flag = true;
