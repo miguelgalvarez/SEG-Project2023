@@ -20,11 +20,6 @@
             android:text="@string/username_display_welcome_page"
             android:textSize="20sp" />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
         <TextView
             android:id="@+id/appNameWelcome"
             android:layout_width="wrap_content"
@@ -34,11 +29,6 @@
             android:gravity="center"
             android:text="@string/les_grimpeurs"
             android:textSize="24sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/userRole"
