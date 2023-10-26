@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeActivity">
+    tools:context=".EventManagement">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:id="@+id/usernameText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="left"
             android:text="@string/username_display_welcome_page"
             android:textSize="20sp" />
@@ -28,9 +29,10 @@
             android:id="@+id/appNameWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="  Les Grimpeurs"
+            android:text="@string/les_grimpeurs"
             android:textSize="24sp" />
 
         <Space
@@ -42,6 +44,7 @@
             android:id="@+id/userRole"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="right"
             android:text="@string/typeUser_display_welcome_page"
@@ -56,35 +59,39 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="60dp" />
-
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="288dp"
-            app:srcCompat="@drawable/ride" />
+            android:layout_height="84dp" />
 
         <TextView
-            android:id="@+id/welcomeAdminPageTitle"
+            android:id="@+id/accountManagementID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center|center_vertical"
-            android:text="@string/welcome_page"
-            android:textSize="40sp" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/account_management_text"
+            android:textSize="28sp" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="72dp" />
 
-        <TextView
-            android:id="@+id/eventDisplayText"
+        <Button
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/event_text_display"
-            android:textSize="20sp" />
+            android:text="@string/new_event_type_text" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_existing_event_text" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_existing_event_text" />
+
 
     </LinearLayout>
 </RelativeLayout>

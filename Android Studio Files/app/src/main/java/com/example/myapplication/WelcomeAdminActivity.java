@@ -1,25 +1,17 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.os.Bundle;
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 
-
-/**
- * Welcome Activity that displays the welcome screen when users sign up, displays their username and account type
- *
- * @author Android Studio, Zachary Sikka, Zachary Kranabetter, Miguel Alvarez
- * @version 1.0
- */
-
-public class WelcomeActivity extends AppCompatActivity {
-
+public class WelcomeAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.welcome_admin_activity);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -32,7 +24,15 @@ public class WelcomeActivity extends AppCompatActivity {
         //setting the UI components(TextViews) to display the username and account type
         usernameTextView.setText(username);
         accountTypeTextView.setText(accountType);
-
-
+    }
+    // method that will serve as the OnClick to bring the user to the delete account page
+    public void DeleteAccount(View view){
+        Intent intent = new Intent(getApplicationContext(), DeleteAccount.class);
+        startActivity(intent);
+    }
+    // method that will serve as the OnClick to bring the user to the event management page
+    public void EventManagement(View view){
+        Intent intent = new Intent(getApplicationContext(), DeleteAccount.class);
+        startActivity(intent);
     }
 }

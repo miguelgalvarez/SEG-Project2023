@@ -22,6 +22,12 @@
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
+            android:name=".WelcomeAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteAccount"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

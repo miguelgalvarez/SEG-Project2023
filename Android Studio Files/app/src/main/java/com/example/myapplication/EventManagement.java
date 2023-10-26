@@ -1,25 +1,16 @@
 package com.example.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-/**
- * Welcome Activity that displays the welcome screen when users sign up, displays their username and account type
- *
- * @author Android Studio, Zachary Sikka, Zachary Kranabetter, Miguel Alvarez
- * @version 1.0
- */
-
-public class WelcomeActivity extends AppCompatActivity {
-
+public class EventManagement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.event_management_activity);
 
         Intent intent = getIntent();
         String username = intent.getStringExtra("username");
@@ -32,7 +23,5 @@ public class WelcomeActivity extends AppCompatActivity {
         //setting the UI components(TextViews) to display the username and account type
         usernameTextView.setText(username);
         accountTypeTextView.setText(accountType);
-
-
     }
 }

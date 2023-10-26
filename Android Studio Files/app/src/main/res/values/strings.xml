@@ -10,11 +10,27 @@
     <string name="button_text_admin">Login</string>
     <string name="button_text_register">Register</string>
 
+    // admin page strings
     <string name="welcome_page">Welcome!</string>
     <string name="username_display_welcome_page">username</string>
     <string name="typeUser_display_welcome_page">user_type</string>
     <string name="nameOfProj_display_welcome_page">smth</string>
     <string name="event_text_display">Here is a new event happening!</string>
+    <string name="welcome_admin_textdisplay">Welcome Admin!</string>
+    <string name="delete_account_text">Delete a club or participant account</string>
+    <string name="event_manager_text">Event management</string>
+
+
+    // delete account activity strings
+    <string name="account_management_text">Account management</string>
+    <string name="active_clubs_text">Active Clubs</string>
+    <string name="active_accounts_text">Active Accounts</string>
+
+    // event management activity strings
+    <string name="new_event_type_text">New event type</string>
+    <string name="edit_existing_event_text">Edit existing event</string>
+    <string name="delete_existing_event_text">Delete existing event</string>
+
 
     <string name="register_account">Register</string>
 
@@ -36,6 +52,7 @@
     <string name="participant_account">Create a participant account</string>
 
     <string name="club_account">Create a club account</string>
+    <string name="les_grimpeurs">Les Grimpeurs</string>
 
 
 </resources>
