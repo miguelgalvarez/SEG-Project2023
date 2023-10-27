@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/account_management_text"
+            android:text="@string/event_manager_text"
             android:textSize="28sp" />
 
         <Space
