@@ -31,9 +31,13 @@
     <string name="edit_existing_event_text">Edit existing event</string>
     <string name="delete_existing_event_text">Delete existing event</string>
 
+    // new event activity strings
+    <string name="eventType_title">Event Type: </string>
+    <string name="newevent_activity_title">New Event Configuration</string>
+    <string name="select_required_eventdetails">Select required event details</string>
 
+    // main activity strings? whoever made this figure it out
     <string name="register_account">Register</string>
-
     <string name="register_account_text">Register for an account</string>
     //CreateAccountActivity
     <string name="First_Name_input_field">First Name</string>

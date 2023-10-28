@@ -81,9 +81,9 @@
             android:text="@string/active_clubs_text"
             android:textSize="24dp" />
 
-        <Space
+        <ListView
             android:layout_width="match_parent"
-            android:layout_height="228dp" />
+            android:layout_height="252dp" />
 
         <TextView
             android:id="@+id/activeAccountsID"
@@ -91,6 +91,10 @@
             android:layout_height="wrap_content"
             android:text="@string/active_accounts_text"
             android:textSize="24dp" />
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="257dp" />
 
 
     </LinearLayout>

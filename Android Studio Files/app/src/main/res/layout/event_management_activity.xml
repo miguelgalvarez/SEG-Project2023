@@ -68,6 +68,7 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="NewEvent"
             android:text="@string/new_event_type_text" />
 
         <Button

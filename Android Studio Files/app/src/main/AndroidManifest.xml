@@ -25,6 +25,12 @@
             android:name=".WelcomeAdminActivity"
             android:exported="false" />
         <activity
+            android:name=".EventManagement"
+            android:exported="false" />
+        <activity
+            android:name=".NewEventActivity"
+            android:exported="false" />
+        <activity
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity

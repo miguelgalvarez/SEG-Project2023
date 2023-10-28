@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,5 +24,9 @@ public class EventManagement extends AppCompatActivity {
         //setting the UI components(TextViews) to display the username and account type
         usernameTextView.setText(username);
         accountTypeTextView.setText(accountType);
+    }
+    public void NewEvent(View view){
+        Intent intent = new Intent(getApplicationContext(), NewEventActivity.class);
+        startActivity(intent);
     }
 }

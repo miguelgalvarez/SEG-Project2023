@@ -32,7 +32,7 @@ public class WelcomeAdminActivity extends AppCompatActivity {
     }
     // method that will serve as the OnClick to bring the user to the event management page
     public void EventManagement(View view){
-        Intent intent = new Intent(getApplicationContext(), DeleteAccount.class);
+        Intent intent = new Intent(getApplicationContext(), EventManagement.class);
         startActivity(intent);
     }
 }
