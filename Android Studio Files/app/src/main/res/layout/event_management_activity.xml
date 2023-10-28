@@ -52,7 +52,7 @@
             android:layout_height="84dp" />
 
         <TextView
-            android:id="@+id/accountManagementID"
+            android:id="@+id/listOfCurrentEventsID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -75,13 +75,8 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edit_existing_event_text" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_existing_event_text" />
+            android:onClick="EditEvent"
+            android:text="@string/editdelete_existing_event_text" />
 
 
     </LinearLayout>
