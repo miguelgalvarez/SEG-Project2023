@@ -51,8 +51,11 @@
 
     //drop down menu
     <string-array name="dropdown_menu">
-        <item>Club Manager</item>
-        <item>Participant</item>
+        <item>Time Trial</item>
+        <item>Hill Climb</item>
+        <item>Road Stage Race</item>
+        <item>Road Race</item>
+        <item>Group Ride</item>
     </string-array>
 
 
