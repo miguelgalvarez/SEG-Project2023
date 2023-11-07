@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 
 /**
  * Welcome Activity that displays the welcome screen when users sign up, displays their username and account type
@@ -35,4 +41,38 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     }
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference usersRef = database.getReference("users");
+
+    //DatabaseReference newUserRef = usersRef.child(username.getText().toString());
+
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+
+        databaseProducts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot datasnapshot) {
+
+                products.clear();
+
+                for(DataSnapshot postSnapshot: datasnapshot.getChildren()) {
+                    Product product = postSnapshot.getValue(Product.class);
+
+                    products.add(product);
+                }
+
+                ProductList productsAdapter = new ProductList(MainActivity.this, products);
+
+                listViewProducts.setAdapter(productsAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+    }*/
 }
