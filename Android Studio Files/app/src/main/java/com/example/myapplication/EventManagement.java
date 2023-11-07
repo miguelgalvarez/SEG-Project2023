@@ -13,7 +13,7 @@ public class EventManagement extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.event_management_activity);
 
-        Intent intent = getIntent();
+        /*Intent intent = getIntent();
         String username = intent.getStringExtra("username");
         String accountType = intent.getStringExtra("accountType");
 
@@ -23,7 +23,7 @@ public class EventManagement extends AppCompatActivity {
 
         //setting the UI components(TextViews) to display the username and account type
         usernameTextView.setText(username);
-        accountTypeTextView.setText(accountType);
+        accountTypeTextView.setText(accountType);*/
     }
     public void NewEvent(View view){
         Intent intent = new Intent(getApplicationContext(), NewEventActivity.class);
