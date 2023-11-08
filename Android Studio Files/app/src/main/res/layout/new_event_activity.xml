@@ -286,6 +286,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="#FF5722"
                 android:gravity="center"
+                android:onClick="submitButton"
                 android:text="@string/submitButton" />
 
             <Space

@@ -61,6 +61,7 @@
                 android:layout_height="18dp" />
 
             <ListView
+                android:id="@+id/eventTypeList"
                 android:layout_width="match_parent"
                 android:layout_height="620dp" />
 
