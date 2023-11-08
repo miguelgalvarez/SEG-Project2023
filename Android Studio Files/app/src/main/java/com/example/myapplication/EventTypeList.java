@@ -25,15 +25,46 @@ public class EventTypeList extends ArrayAdapter<EventType> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
+
+        View listViewItem = convertView;
+        ViewHolder viewHolder;
+
+        if (listViewItem == null) {
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_event_type_list, parent, false);
+
+            viewHolder = new ViewHolder(listViewItem);
+
+            listViewItem.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) listViewItem.getTag();
+        }
+
+        EventType eventTypeName = getItem(position);
+
+        viewHolder.eventTypeName.setText(eventTypeName.getName());
+
+        return listViewItem;
+
+
+
+
+        /*LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.activity_event_type_list, null, true);
 
         TextView textViewName = (TextView) listViewItem.findViewById(R.id.textViewName);
-        //TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
+        TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.textViewPrice);
 
         EventType eventType = eventTypes.get(position);
         textViewName.setText(eventType.getName());
-        //textViewPrice.setText(String.valueOf(product.getPrice()));
-        return listViewItem;
+        textViewPrice.setText(eventType.getName());
+        return listViewItem;*/
+    }
+
+    public class ViewHolder {
+        TextView eventTypeName;
+
+        public ViewHolder(View itemView) {
+            eventTypeName = itemView.findViewById(R.id.textViewName);
+        }
     }
 }

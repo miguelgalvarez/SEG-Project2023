@@ -67,5 +67,17 @@
 
 
         </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:src="@drawable/backarrow3"
+            app:backgroundTint="@android:color/holo_orange_dark"
+            app:fabCustomSize="40sp"
+            app:fabSize="auto"
+            app:maxImageSize="35sp" />
+
     </RelativeLayout>
 </ScrollView>
