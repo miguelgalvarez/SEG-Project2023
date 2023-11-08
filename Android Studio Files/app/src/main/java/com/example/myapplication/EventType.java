@@ -35,6 +35,15 @@ public enum EventType {
         return this.name;
     }
 
+    public static EventType fromString(String name) {
+        for (EventType eventType : EventType.values()) {
+            if (eventType.getName().equals(name)) {
+                return eventType;
+            }
+        }
+        throw new IllegalArgumentException("No such EventType: " + name);
+    }
+
     /**
      * Getter method for returning the event type
      *

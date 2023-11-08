@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:entries="@array/dropdown_menu"
+                    android:entries="@array/dropdown_menu_event_types"
                     android:minHeight="48dp" />
 
             </LinearLayout>
@@ -83,6 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="levelSpeedBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -104,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="distanceBox"
                     android:text="CheckBox" />
 
             </LinearLayout>
@@ -126,6 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="startTimeBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -147,6 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="locationBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -168,6 +172,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="routeBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -204,6 +209,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="ageBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -225,6 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="LevelSpeedParticipantBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -246,6 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="draftingBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -267,8 +275,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:onClick="accountStandingBox"
                     android:text="CheckBox" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/button9"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="#FF5722"
+                android:gravity="center"
+                android:onClick="submitButton"
+                android:text="@string/submitButton" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

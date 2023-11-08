@@ -58,11 +58,21 @@
         <item>Group Ride</item>
     </string-array>
 
+    <string name="submitButton">submit</string>
 
     <string name="participant_account">Create a participant account</string>
 
     <string name="club_account">Create a club account</string>
     <string name="les_grimpeurs">Les Grimpeurs</string>
+
+    <string-array name="dropdown_menu_event_types">
+        <item>Time Trial</item>
+        <item>Hill Climb</item>
+        <item>Road Stage Race</item>
+        <item>Road Race</item>
+        <item>Group Ride</item>
+    </string-array>
+
 
 
 </resources>

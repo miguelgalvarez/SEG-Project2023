@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             // for now will just have a static login thing
             startActivity(intent1);
 
+        } else if(adminUsername.getText().toString().equals("") && adminPassword.getText().toString().equals("")) {
+
         } else {
 
             //error message that displays at the bottom of the screen
