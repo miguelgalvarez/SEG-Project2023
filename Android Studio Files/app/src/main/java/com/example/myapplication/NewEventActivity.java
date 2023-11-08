@@ -9,8 +9,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class NewEventActivity extends AppCompatActivity {
 
+    FloatingActionButton backButton;
     boolean[] fieldList = new boolean[9];
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +22,15 @@ public class NewEventActivity extends AppCompatActivity {
         for (int i = 0; i<9;i++) {
             fieldList[i] = false;
         }
+
+        backButton = findViewById(R.id.backButtonNewEvent);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
 
