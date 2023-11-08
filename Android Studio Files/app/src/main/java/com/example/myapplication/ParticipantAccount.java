@@ -12,4 +12,9 @@ public class ParticipantAccount extends Account{
 
         super(username, password, firstName, lastName, email, accountType);
     }
+
+    public ParticipantAccount(String username) {
+        super(username);
+    }
+
 }
