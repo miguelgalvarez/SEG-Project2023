@@ -67,6 +67,46 @@ public class AdministratorAccount extends Account{
         }
     }
 
+    public static void writeDatabase(String eventType, boolean[] fieldList) {
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference eventTypeRef = database.getReference("Event Type");
+
+        DatabaseReference addedEventTypeRef = eventTypeRef.child(eventType);
+
+        DatabaseReference eventDetailsRef = addedEventTypeRef.child("eventDetails");
+
+        DatabaseReference registrationRequirementsRef = addedEventTypeRef.child("registrationRequirements");
+
+        String[] eventDetails = {"Level", "Distance", "Start Time", "Location", "Route Overview"};
+
+        String[] registrationRequirements = {"Age", "Level", "Drafting Registration", "Account Standing"};
+
+        for(int i = 0; i<5;i++) {
+            eventDetailsRef.child(eventDetails[i]).setValue(fieldList[i], new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        for(int i = 0; i<4;i++) {
+            registrationRequirementsRef.child(registrationRequirements[i]).setValue(fieldList[i+5], new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
+
     public static void addEventType(EventType eventType, boolean[] fieldList) {
 
         //hash map storing the events that can be offered and their required fields
