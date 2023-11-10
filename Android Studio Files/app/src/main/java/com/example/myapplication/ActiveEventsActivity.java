@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,12 +34,13 @@ public class ActiveEventsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.active_events_activity);
 
-        backButton = findViewById(R.id.backButton);
+        backButton = findViewById(R.id.eventListBackButton);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(getApplicationContext(), EventManagement.class);
+                startActivity(intent);
             }
         });
 
