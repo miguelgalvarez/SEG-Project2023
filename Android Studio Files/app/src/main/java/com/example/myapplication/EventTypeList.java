@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.List;
 
 public class EventTypeList extends ArrayAdapter<EventType> {
@@ -58,7 +61,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
             public void onClick(View v) {
 
                 if (viewHolder.buttonsVisible) {
-                    // Apply slide-in animation to the edit button
+                    // Apply slide-out animation to the edit button
                     Animation slideOut = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out);
 
                     viewHolder.editButton.startAnimation(slideOut);
@@ -87,6 +90,36 @@ public class EventTypeList extends ArrayAdapter<EventType> {
 
                     viewHolder.buttonsVisible = true;
                 }
+            }
+        });
+
+        // Add click listener for the edit/delete buttons
+
+        Button editButton = listViewItem.findViewById(R.id.editButton);
+        Button deleteButton = listViewItem.findViewById(R.id.deleteButton);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this gets the event in the database then deletes it
+                String name = viewHolder.eventTypeName.getText().toString();
+                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
+                dR.removeValue();
+                //Toast.makeText(getApplicationContext(), "Product Deleted", Toast.LENGTH_LONG).show();
+
+                // make buttons invisible so they don't stay open for another item
+                viewHolder.editButton.setVisibility(View.INVISIBLE);
+                viewHolder.deleteButton.setVisibility(View.INVISIBLE);
+                viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                viewHolder.buttonsVisible = false;
             }
         });
 
