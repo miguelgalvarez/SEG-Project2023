@@ -12,15 +12,15 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class EventTypeList extends ArrayAdapter<EventType> {
+public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
 
     private Activity context;
-    List<EventType> eventTypes;
+    List<ParticipantAccount> participantAccounts;
 
-    public EventTypeList(Activity context, List<EventType> eventTypes) {
-        super(context, R.layout.activity_event_type_list, eventTypes);
+    public ParticipantAccountList(Activity context, List<ParticipantAccount> participantAccounts) {
+        super(context, R.layout.activity_participant_account_list, participantAccounts);
         this.context = context;
-        this.eventTypes = eventTypes;
+        this.participantAccounts = participantAccounts;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         ViewHolder viewHolder;
 
         if (listViewItem == null) {
-            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_event_type_list, parent, false);
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_participant_account_list, parent, false);
 
             viewHolder = new ViewHolder(listViewItem);
 
@@ -39,19 +39,19 @@ public class EventTypeList extends ArrayAdapter<EventType> {
             viewHolder = (ViewHolder) listViewItem.getTag();
         }
 
-        EventType eventTypeName = getItem(position);
+        ParticipantAccount participantAccount = getItem(position);
 
-        viewHolder.eventTypeName.setText(eventTypeName.getName());
+        viewHolder.participantAccount.setText(participantAccount.getUsername());
 
         return listViewItem;
 
     }
 
     public class ViewHolder {
-        TextView eventTypeName;
+        TextView participantAccount;
 
         public ViewHolder(View itemView) {
-            eventTypeName = itemView.findViewById(R.id.textViewName);
+            participantAccount = itemView.findViewById(R.id.textViewUsername);
         }
     }
 }

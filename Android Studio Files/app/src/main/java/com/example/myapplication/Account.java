@@ -33,6 +33,10 @@ public class Account {
         this.accountType = accountType;
     }
 
+    public Account(String username) {
+        this.username = username;
+    }
+
     /**
      * Getter method for returning the username
      *
