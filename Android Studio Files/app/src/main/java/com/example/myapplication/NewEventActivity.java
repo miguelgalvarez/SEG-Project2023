@@ -35,39 +35,39 @@ public class NewEventActivity extends AppCompatActivity {
 
 
     public void levelSpeedBox(View view) {
-        fieldList[0] = true;
+        fieldList[0] = !fieldList[0];
     }
 
     public void distanceBox(View view) {
-        fieldList[1] = true;
+        fieldList[1] = !fieldList[1];
     }
 
     public void startTimeBox(View view) {
-        fieldList[2] = true;
+        fieldList[2] = !fieldList[2];
     }
 
     public void locationBox(View view) {
-        fieldList[3] = true;
+        fieldList[3] = !fieldList[3];
     }
 
     public void routeBox(View view) {
-        fieldList[4] = true;
+        fieldList[4] = !fieldList[4];
     }
 
     public void ageBox(View view) {
-        fieldList[5] = true;
+        fieldList[5] = !fieldList[5];
     }
 
     public void LevelSpeedParticipantBox(View view) {
-        fieldList[6] = true;
+        fieldList[6] = !fieldList[6];
     }
 
     public void draftingBox(View view) {
-        fieldList[7] = true;
+        fieldList[7] = !fieldList[7];
     }
 
     public void accountStandingBox(View view) {
-        fieldList[8] = true;
+        fieldList[8] = !fieldList[8];
     }
 
     public void submitButton(View view) {
