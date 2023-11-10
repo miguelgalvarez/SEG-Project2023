@@ -15,8 +15,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class EditEventTypeActivity extends AppCompatActivity {
+    FloatingActionButton backButton;
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypesRef = rootRef.child("Event Type");
     DatabaseReference eventTypeChild;
@@ -24,10 +25,19 @@ public class EditEventTypeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         setContentView(R.layout.edit_event_type_activity);
+        backButton = findViewById(R.id.backButtonEditEventType);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+
+
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         String eventTypeName = intent.getStringExtra("eventTypeName");
