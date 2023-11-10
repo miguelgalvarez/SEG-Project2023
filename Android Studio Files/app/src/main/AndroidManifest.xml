@@ -36,7 +36,7 @@
             android:name=".DeleteAccount"
             android:exported="false" />
         <activity
-            android:name=".EditEventActivity"
+            android:name=".ActiveEventsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

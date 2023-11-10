@@ -42,7 +42,7 @@ public class EventManagement extends AppCompatActivity {
     }
 
     public void EditEvent(View view){
-        Intent intent = new Intent(getApplicationContext(), EditEventActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ActiveEventsActivity.class);
         startActivity(intent);
     }
 }
