@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This makes the delete button on the event list page square and red -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF3333" />
+    <corners android:radius="0dp" />
+</shape>

@@ -31,7 +31,6 @@ public enum EventType {
      * @return the String representation of the event type
      */
     public String getName() {
-
         return this.name;
     }
 
