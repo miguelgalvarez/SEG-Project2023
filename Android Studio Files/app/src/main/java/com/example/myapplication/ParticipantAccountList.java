@@ -7,8 +7,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -43,15 +50,75 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
 
         viewHolder.participantAccount.setText(participantAccount.getUsername());
 
+        listViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (viewHolder.buttonsVisible) {
+                    // Apply slide-out animation to the edit button
+                    Animation slideOut = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out);
+
+                    viewHolder.deleteButton.startAnimation(slideOut);
+                    viewHolder.deleteButton.setVisibility(View.INVISIBLE);
+
+                    viewHolder.arrow.startAnimation(slideOut);
+                    viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                    viewHolder.buttonsVisible = false;
+                }
+
+                else {
+                    // Apply slide-in animation to the edit button
+                    Animation slideIn = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
+
+                    viewHolder.deleteButton.startAnimation(slideIn);
+                    viewHolder.deleteButton.setVisibility(View.VISIBLE);
+
+                    viewHolder.arrow.startAnimation(slideIn);
+                    viewHolder.arrow.setVisibility(View.VISIBLE);
+
+                    viewHolder.buttonsVisible = true;
+                }
+            }
+        });
+
+        // Add click listener for the delete button
+        Button deleteButton = listViewItem.findViewById(R.id.deleteButton);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // this gets the event in the database then deletes it
+                String name = viewHolder.participantAccount.getText().toString();
+                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
+                dR.removeValue();
+
+                // make button invisible so it doesn't stay open for another item
+                viewHolder.deleteButton.setVisibility(View.INVISIBLE);
+                viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                viewHolder.buttonsVisible = false;
+            }
+        });
+
         return listViewItem;
 
     }
 
-    public class ViewHolder {
+    public static class ViewHolder {
         TextView participantAccount;
+        Button deleteButton;
+        ImageView threeDots;
+        ImageView arrow;
+        Boolean buttonsVisible;
+
 
         public ViewHolder(View itemView) {
-            participantAccount = itemView.findViewById(R.id.textViewUsername);
+            participantAccount = itemView.findViewById(R.id.participantAccount);
+            deleteButton = itemView.findViewById(R.id.deleteButton);
+            threeDots = itemView.findViewById(R.id.threeDots);
+            arrow = itemView.findViewById(R.id.arrow);
+            buttonsVisible = false;
         }
     }
 }
