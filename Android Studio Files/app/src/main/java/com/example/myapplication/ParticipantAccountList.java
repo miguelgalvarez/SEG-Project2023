@@ -90,7 +90,7 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
             public void onClick(View v) {
                 // this gets the event in the database then deletes it
                 String name = viewHolder.participantAccount.getText().toString();
-                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
+                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Participant").child(name);
                 dR.removeValue();
 
                 // make button invisible so it doesn't stay open for another item
