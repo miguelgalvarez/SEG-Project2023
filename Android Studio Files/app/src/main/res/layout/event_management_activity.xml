@@ -57,6 +57,7 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:onClick="NewEvent"
             android:text="@string/new_event_type_text" />
 
@@ -64,6 +65,7 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:onClick="EditEvent"
             android:text="@string/editdelete_existing_event_text" />
 

@@ -62,6 +62,7 @@
             android:id="@+id/eventManagementBTN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:onClick="EventManagement"
             android:text="@string/event_manager_text" />
 
@@ -69,6 +70,7 @@
             android:id="@+id/deleteAccountBTN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:onClick="DeleteAccount"
             android:text="@string/delete_account_text" />
 
