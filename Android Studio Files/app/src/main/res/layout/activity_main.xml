@@ -63,7 +63,7 @@
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="#F66335"
+            android:backgroundTint="@android:color/holo_orange_dark"
             android:fontFamily="@font/darker_grotesque_light"
             android:onClick="AdminLogin"
             android:text="@string/button_text_admin"
