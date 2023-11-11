@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -92,6 +93,7 @@ public class ClubManagerAccountList extends ArrayAdapter<ClubManagerAccount> {
                 String name = viewHolder.accountName.getText().toString();
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Club Manager").child(name);
                 dR.removeValue();
+                sendToastMessage();
 
                 // make button invisible so it doesn't stay open for another item
                 viewHolder.deleteButton.setVisibility(View.INVISIBLE);
@@ -120,5 +122,9 @@ public class ClubManagerAccountList extends ArrayAdapter<ClubManagerAccount> {
             arrow = itemView.findViewById(R.id.arrow);
             buttonsVisible = false;
         }
+    }
+
+    public void sendToastMessage() {
+        Toast.makeText(getContext(), "Account Deleted!", Toast.LENGTH_SHORT).show();
     }
 }

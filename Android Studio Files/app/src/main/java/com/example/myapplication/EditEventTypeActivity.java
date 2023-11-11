@@ -139,6 +139,9 @@ public class EditEventTypeActivity extends AppCompatActivity {
 
     // submit button calls writeDatabase with a string input
     public void submitEditButton(View view) {
+
+        Toast.makeText(this, "Edit Saved!", Toast.LENGTH_SHORT).show();
+
         AdministratorAccount.writeDatabase(rootEventType.getKey(), editFieldList);
 
         // back to last page

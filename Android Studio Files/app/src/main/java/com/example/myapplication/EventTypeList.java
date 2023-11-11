@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -118,6 +119,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
             @Override
             public void onClick(View v) {
                 // this gets the event in the database then deletes it
+                sendToastMessage();
                 String name = viewHolder.eventTypeName.getText().toString();
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
                 dR.removeValue();
@@ -163,5 +165,9 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         intent1.putExtra("eventTypeName", VH.eventTypeName.getText().toString());
 
         context.startActivity(intent1);
+    }
+
+    public void sendToastMessage() {
+        Toast.makeText(getContext(), "Event Type Deleted!", Toast.LENGTH_SHORT).show();
     }
 }
