@@ -20,7 +20,7 @@ import java.util.List;
 public class DeleteAccount extends AppCompatActivity {
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference userAccountRef = rootRef.child("users");
+    DatabaseReference userAccountRef = rootRef.child("Participant");
     ListView listViewParticipants;
     List<ParticipantAccount> participantAccountList;
     DataSnapshot particpantSnapshot;
