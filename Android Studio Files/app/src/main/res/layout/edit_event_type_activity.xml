@@ -84,28 +84,6 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="88dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Level/Speed"
-                    android:textSize="16sp" />
-
-                <CheckBox
-                    android:id="@+id/editCheckBox1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="editlevelSpeedBox"
-                    android:text="CheckBox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
                     android:id="@+id/textView11"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
@@ -114,11 +92,80 @@
                     android:textSize="16sp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox2"
+                    android:id="@+id/editCheckBox1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editdistanceBox"
+                    android:onClick="editDistanceBox"
+                    android:text="CheckBox" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="88dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Level/Speed"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/editCheckBox2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="editLevelSpeedBox"
+                    android:text="CheckBox" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView16"
+                    android:layout_width="88dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Location"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/editCheckBox3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="editLocationBox"
+                    android:text="CheckBox" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView17"
+                    android:layout_width="88dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Route Overview"
+                    android:textSize="16dp" />
+
+                <CheckBox
+                    android:id="@+id/editCheckBox4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="editRouteBox"
                     android:text="CheckBox" />
 
             </LinearLayout>
@@ -137,55 +184,11 @@
                     android:textSize="16sp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox3"
+                    android:id="@+id/editCheckBox5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editstartTimeBox"
-                    android:text="CheckBox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="88dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Location"
-                    android:textSize="16sp" />
-
-                <CheckBox
-                    android:id="@+id/editcheckBox4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="editlocationBox"
-                    android:text="CheckBox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/textView17"
-                    android:layout_width="88dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Route Overview"
-                    android:textSize="16dp" />
-
-                <CheckBox
-                    android:id="@+id/editcheckBox5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:onClick="editrouteBox"
+                    android:onClick="editStartTimeBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -210,19 +213,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/ageTxtID"
+                    android:id="@+id/accountStandingTxtID"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Age"
+                    android:text="Account Standing"
                     android:textSize="16dp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox6"
+                    android:id="@+id/editCheckBox6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editageBox"
+                    android:onClick="editAccountStandingBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -232,19 +235,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/levelSpeedParticipantTxtId"
+                    android:id="@+id/ageTxtID"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Level/Speed"
+                    android:text="Age"
                     android:textSize="16dp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox7"
+                    android:id="@+id/editCheckBox7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editLevelSpeedParticipantBox"
+                    android:onClick="editAgeBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -262,11 +265,11 @@
                     android:textSize="16dp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox8"
+                    android:id="@+id/editCheckBox8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editdraftingBox"
+                    android:onClick="editDraftingBox"
                     android:text="CheckBox" />
             </LinearLayout>
 
@@ -276,19 +279,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/accountStandingTxtID"
+                    android:id="@+id/levelSpeedParticipantTxtId"
                     android:layout_width="88dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Account Standing"
+                    android:text="Level/Speed"
                     android:textSize="16dp" />
 
                 <CheckBox
-                    android:id="@+id/editcheckBox9"
+                    android:id="@+id/editCheckBox9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editaccountStandingBox"
+                    android:onClick="editLevelSpeedParticipantBox"
                     android:text="CheckBox" />
             </LinearLayout>
 

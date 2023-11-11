@@ -102,6 +102,14 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //hide buttons again
+                viewHolder.editButton.setVisibility(View.INVISIBLE);
+                viewHolder.deleteButton.setVisibility(View.INVISIBLE);
+                viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                viewHolder.buttonsVisible = false;
+
+                // opens the edit page for the current item
                 openActivityEditEventType(viewHolder);
             }
         });
@@ -113,7 +121,6 @@ public class EventTypeList extends ArrayAdapter<EventType> {
                 String name = viewHolder.eventTypeName.getText().toString();
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
                 dR.removeValue();
-                //Toast.makeText(getApplicationContext(), "Product Deleted", Toast.LENGTH_LONG).show();
 
                 // make buttons invisible so they don't stay open for another item
                 viewHolder.editButton.setVisibility(View.INVISIBLE);
@@ -146,10 +153,15 @@ public class EventTypeList extends ArrayAdapter<EventType> {
             buttonsVisible = false;
         }
     }
-    public void openActivityEditEventType(ViewHolder VH){
-        Intent intent1 = new Intent(context.getApplicationContext(), EditEventTypeActivity.class);
-        intent1.putExtra("eventTypeName", VH.eventTypeName.getText().toString());
-        context.startActivity(intent1);
 
+    // this just opens the new window for when edit is pressed on an item
+    public void openActivityEditEventType(ViewHolder VH){
+
+        Intent intent1 = new Intent(context.getApplicationContext(), EditEventTypeActivity.class);
+
+        // send the event type name to the new page
+        intent1.putExtra("eventTypeName", VH.eventTypeName.getText().toString());
+
+        context.startActivity(intent1);
     }
 }
