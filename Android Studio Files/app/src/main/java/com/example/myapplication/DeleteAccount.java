@@ -21,11 +21,15 @@ public class DeleteAccount extends AppCompatActivity {
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference userAccountRef = rootRef.child("Participant");
+    DatabaseReference clubManagerAccountRef = rootRef.child("Club Manager");
     ListView listViewParticipants;
+    ListView listViewClubManagers;
     List<ParticipantAccount> participantAccountList;
-    DataSnapshot particpantSnapshot;
+    List<ClubManagerAccount> clubManagerAccountList;
+    DataSnapshot participantSnapshot;
+    DataSnapshot clubManagerSnapshot;
     ParticipantAccountList accountAdapter;
-
+    ClubManagerAccountList accountAdapterClub;
     FloatingActionButton backButton;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +45,25 @@ public class DeleteAccount extends AppCompatActivity {
 
         participantAccountList = new ArrayList<>();
 
+        clubManagerAccountList = new ArrayList<>();
+
         listViewParticipants = findViewById(R.id.activeAccounts);
+
+        listViewClubManagers = findViewById(R.id.activeClubs);
 
         accountAdapter = new ParticipantAccountList(this, participantAccountList);
 
+        accountAdapterClub = new ClubManagerAccountList(this, clubManagerAccountList);
+
         listViewParticipants.setAdapter(accountAdapter);
+
+        listViewClubManagers.setAdapter(accountAdapterClub);
 
         listViewParticipants.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 int index = 0;
-                for (DataSnapshot childSnapshot : particpantSnapshot.getChildren()) {
+                for (DataSnapshot childSnapshot : participantSnapshot.getChildren()) {
                     if (index == position) {
                         DatabaseReference accountCurrentRef = childSnapshot.getRef();
                         accountCurrentRef.removeValue();
@@ -66,11 +78,12 @@ public class DeleteAccount extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        //getting the participant accounts from the database
         userAccountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
 
-                particpantSnapshot = datasnapshot;
+                participantSnapshot = datasnapshot;
 
                 participantAccountList.clear();
 
@@ -79,12 +92,39 @@ public class DeleteAccount extends AppCompatActivity {
                     String accountString = childSnapshot.getKey();
 
                     if (accountString != null) {
-                        //EventType eventType = EventType.fromString(accountString);
                         participantAccountList.add(new ParticipantAccount(accountString));
                     }
                 }
 
                 accountAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+
+            }
+        });
+
+        //getting the club manager accounts from the database
+        clubManagerAccountRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot datasnapshot) {
+
+                clubManagerSnapshot = datasnapshot;
+
+                clubManagerAccountList.clear();
+
+                for(DataSnapshot childSnapshot: datasnapshot.getChildren()) {
+
+                    String clubAccountString = childSnapshot.getKey();
+
+                    if (clubAccountString != null) {
+                        clubManagerAccountList.add(new ClubManagerAccount(clubAccountString));
+                    }
+                }
+
+                accountAdapterClub.notifyDataSetChanged();
 
             }
 

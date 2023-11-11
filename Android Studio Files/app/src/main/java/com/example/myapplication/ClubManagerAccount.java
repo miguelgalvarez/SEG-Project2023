@@ -12,4 +12,8 @@ public class ClubManagerAccount extends Account {
 
         super(username, password, firstName, lastName, email, accountType);
     }
+
+    public ClubManagerAccount(String username) {
+        super(username);
+    }
 }

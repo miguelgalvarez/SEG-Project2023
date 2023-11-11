@@ -74,6 +74,7 @@
             android:textSize="24dp" />
 
         <ListView
+            android:id="@+id/activeClubs"
             android:layout_width="match_parent"
             android:layout_height="252dp" />
 
