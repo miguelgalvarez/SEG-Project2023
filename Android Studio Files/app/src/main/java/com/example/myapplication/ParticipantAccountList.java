@@ -25,7 +25,7 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
     List<ParticipantAccount> participantAccounts;
 
     public ParticipantAccountList(Activity context, List<ParticipantAccount> participantAccounts) {
-        super(context, R.layout.activity_participant_account_list, participantAccounts);
+        super(context, R.layout.user_account_list_item, participantAccounts);
         this.context = context;
         this.participantAccounts = participantAccounts;
     }
@@ -37,7 +37,7 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
         ViewHolder viewHolder;
 
         if (listViewItem == null) {
-            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.activity_participant_account_list, parent, false);
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.user_account_list_item, parent, false);
 
             viewHolder = new ViewHolder(listViewItem);
 
@@ -114,7 +114,7 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
 
 
         public ViewHolder(View itemView) {
-            participantAccount = itemView.findViewById(R.id.participantAccount);
+            participantAccount = itemView.findViewById(R.id.accountName);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             threeDots = itemView.findViewById(R.id.threeDots);
             arrow = itemView.findViewById(R.id.arrow);
