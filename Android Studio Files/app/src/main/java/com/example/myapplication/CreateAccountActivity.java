@@ -48,10 +48,10 @@ public class CreateAccountActivity extends AppCompatActivity {
      * Method that handles writing the new account to the firebase database
      *
      */
-    public void writeDatabase() {
+    public void writeDatabase(String accountType) {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("users");
+        DatabaseReference usersRef = database.getReference(accountType);
 
         DatabaseReference newUserRef = usersRef.child(username.getText().toString());
 
@@ -157,14 +157,16 @@ public class CreateAccountActivity extends AppCompatActivity {
             if (isClubAccount == true) {
 
                 newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
+                writeDatabase("Club Manager");
 
             } else {
 
                 newAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.PARTICIPANT);
+                writeDatabase("Participant");
 
             }
 
-            writeDatabase(); //writing new account to database
+            //writeDatabase(); //writing new account to database
 
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("username", newAccount.getUsername());
