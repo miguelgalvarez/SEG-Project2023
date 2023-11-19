@@ -166,8 +166,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             }
 
-            //writeDatabase(); //writing new account to database
-
             Intent intent = new Intent(this, WelcomeActivity.class);
             intent.putExtra("username", newAccount.getUsername());
             intent.putExtra("accountType", newAccount.getAccountType().toString());

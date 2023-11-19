@@ -5,26 +5,23 @@ import static android.graphics.Color.rgb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.net.Uri;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 /**
- * Main Activity that display the main login/signup screen for our cycling app
+ * Login Activity that display the main login/signup screen for our cycling app
  *
  * @author Android Studio, Zachary Sikka, Zachary Kranabetter, Migeul Alvarez
  * @version 1.0
  */
-public class MainActivity extends AppCompatActivity {
+public class LoginHomePageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_home_page);
     }
 
 
@@ -43,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             // intent is for the club/participant account type
             Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
             // intent1 is for the admin account type
-            Intent intent1 = new Intent(getApplicationContext(), WelcomeAdminActivity.class);
+            Intent intent1 = new Intent(getApplicationContext(), AdminActivity.class);
             intent1.putExtra("username", newAccount.getUsername());
             intent1.putExtra("accountType", newAccount.getAccountType());
             // will redirect admin to the admin home page if the user account type is an admin

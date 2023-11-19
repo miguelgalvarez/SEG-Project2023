@@ -22,6 +22,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+/**
+ * Custom ArrayAdapter to handle the display and interaction of event types in a ListView.
+ * @author linden Sheehy
+ * @version 1.0
+ */
 public class EventTypeList extends ArrayAdapter<EventType> {
 
     private Activity context;
@@ -31,6 +36,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         super(context, R.layout.active_event_item, eventTypes);
         this.context = context;
         this.eventTypes = eventTypes;
+        this.listener = listener;
     }
 
     @Override
@@ -156,16 +162,26 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         }
     }
 
-    // this just opens the new window for when edit is pressed on an item
-    public void openActivityEditEventType(ViewHolder VH){
-
-        Intent intent1 = new Intent(context.getApplicationContext(), EditEventTypeActivity.class);
-
-        // send the event type name to the new page
-        intent1.putExtra("eventTypeName", VH.eventTypeName.getText().toString());
-
-        context.startActivity(intent1);
+    public interface EventTypeListListener {
+        void onEditEventType(String eventTypeName);
     }
+
+    private EventTypeListListener listener;
+
+    // Method to set the listener
+    public void setEventTypeListListener(EventTypeListListener listener) {
+        this.listener = listener;
+    }
+
+
+
+    // this just opens the new window for when edit is pressed on an item
+    public void openActivityEditEventType(ViewHolder VH) {
+        if (listener != null) {
+            listener.onEditEventType(VH.eventTypeName.getText().toString());
+        }
+    }
+
 
     public void sendToastMessage() {
         Toast.makeText(getContext(), "Event Type Deleted!", Toast.LENGTH_SHORT).show();

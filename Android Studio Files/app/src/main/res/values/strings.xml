@@ -19,6 +19,7 @@
     <string name="welcome_admin_textdisplay">Welcome Admin!</string>
     <string name="delete_account_text">Delete a club or participant account</string>
     <string name="event_manager_text">Event management</string>
+    <string name="logout_button">Logout</string>
 
 
     // delete account activity strings
@@ -29,6 +30,7 @@
     // event management activity strings
     <string name="new_event_type_text">New event type</string>
     <string name="editdelete_existing_event_text">Edit/Delete existing event</string>
+    <string name="new_event_type_text_button">New</string>
 
     // new event activity strings
     <string name="eventType_title">Event Type: </string>
@@ -72,6 +74,13 @@
         <item>Road Race</item>
         <item>Group Ride</item>
     </string-array>
+
+    //Drop down menu items
+    <string name="accountManagementDropDown">Account Management</string>
+    <string name="homeDropDown">Home</string>
+    <string name="eventTypeManagementDropDown">Event Management</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
