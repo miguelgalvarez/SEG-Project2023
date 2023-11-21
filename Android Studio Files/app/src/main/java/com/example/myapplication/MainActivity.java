@@ -80,7 +80,11 @@ public class MainActivity extends AppCompatActivity {
      */
     public void CreateAccountLink(View view) {
         //Application Context and Activity
+
+        //temp skip to create event
+
         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
+        //Intent intent = new Intent(getApplicationContext(), WelcomeClubManagerActivity.class);
         startActivity(intent);
     }
     

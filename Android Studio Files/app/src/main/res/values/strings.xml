@@ -73,5 +73,13 @@
         <item>Group Ride</item>
     </string-array>
 
+    //Club Manager
+    <string name="CreateEvent">Create Event</string>
+    <string name="Instagram">Instagram</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="AddEvent">Add Event</string>
+
+
+
 
 </resources>
