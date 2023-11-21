@@ -108,14 +108,11 @@ public class NewEventTypeFragment extends Fragment {
     }
 
     private void checkCurrentEventTypes(String selectedEventType, EventType addedEvent) {
-        // Firebase logic remains similar but context should be handled carefully
-        // ...
 
         eventTypesRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                // Your logic with modifications for fragment context
-                // Example: Toast.makeText(getActivity(), "Message", Toast.LENGTH_SHORT).show();
+
                 if (dataSnapshot.exists()) {
                     if (dataSnapshot.hasChild(selectedEventType)) {
 
