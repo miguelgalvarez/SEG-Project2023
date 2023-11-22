@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -39,40 +41,16 @@ public class WelcomeActivity extends AppCompatActivity {
         usernameTextView.setText(username);
         accountTypeTextView.setText(accountType);
 
+        Button logoutButton = findViewById(R.id.logoutButton2);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginHomePageActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference usersRef = database.getReference("users");
-
-    //DatabaseReference newUserRef = usersRef.child(username.getText().toString());
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-
-        databaseProducts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot datasnapshot) {
-
-                products.clear();
-
-                for(DataSnapshot postSnapshot: datasnapshot.getChildren()) {
-                    Product product = postSnapshot.getValue(Product.class);
-
-                    products.add(product);
-                }
-
-                ProductList productsAdapter = new ProductList(MainActivity.this, products);
-
-                listViewProducts.setAdapter(productsAdapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-    }*/
 }

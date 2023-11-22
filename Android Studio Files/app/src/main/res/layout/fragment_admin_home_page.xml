@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WelcomeAdminActivity">
+    tools:context=".AdminActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,20 +59,13 @@
             app:srcCompat="@drawable/ride" />
 
         <Button
-            android:id="@+id/eventManagementBTN"
-            android:layout_width="match_parent"
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:backgroundTint="@android:color/holo_orange_dark"
-            android:onClick="EventManagement"
-            android:text="@string/event_manager_text" />
-
-        <Button
-            android:id="@+id/deleteAccountBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/holo_orange_dark"
-            android:onClick="DeleteAccount"
-            android:text="@string/delete_account_text" />
+            android:text="@string/logout_button" />
 
     </LinearLayout>
+
 </RelativeLayout>

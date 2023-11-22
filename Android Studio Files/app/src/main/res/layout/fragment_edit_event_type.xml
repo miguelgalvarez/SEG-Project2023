@@ -2,7 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".EditEventTypeFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -119,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:onClick="editLevelSpeedBox"
+                    android:onClick="onCheckboxClicked"
                     android:text="CheckBox" />
 
             </LinearLayout>
@@ -300,9 +302,9 @@
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FF5722"
+                android:backgroundTint="@android:color/holo_orange_dark"
                 android:gravity="center"
-                android:onClick="submitEditButton"
+                android:onClick="submitEditButton2"
                 android:text="@string/submitButton" />
 
             <Space
