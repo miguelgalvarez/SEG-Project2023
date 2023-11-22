@@ -2,10 +2,15 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class WelcomeClubManagerActivity extends AppCompatActivity {
     @Override
@@ -18,29 +23,45 @@ public class WelcomeClubManagerActivity extends AppCompatActivity {
         String username = intent.getStringExtra("username");
         String accountType = intent.getStringExtra("accountType");
 
-        // Find the TextViews in the UI layout
-        TextView usernameTextView = findViewById(R.id.usernameText);
-        TextView accountTypeTextView = findViewById(R.id.userRole);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.clubManagerBottomNavMenu);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                Bundle args = new Bundle();
+                if (item.getItemId() == R.id.homeClubManagerBottomNavItem) {
+                    selectedFragment = new ClubManagerHomePageFragment();
+                    args.putString("username", username);
+                    args.putString("accountType", accountType);
+                    selectedFragment.setArguments(args);
 
-        //setting the UI components(TextViews) to display the username and account type
-        usernameTextView.setText(username);
-        accountTypeTextView.setText(accountType);
+                } else if (item.getItemId() == R.id.createEventBottomNavItem) {
+                    selectedFragment = new ClubManagerCreateEventFragment();
+
+                } else if (item.getItemId() == R.id.editProfileBottomNavItem) {
+                    selectedFragment = new ClubManagerEditProfileFragment();
+                    args.putString("username", username);
+                    selectedFragment.setArguments(args);
+                } else {
+                    return false;
+                }
+
+                //navigate to selected fragment screen
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolderViewClubManager, selectedFragment).commit();
+                return true;
+            }
+        });
+
+
+        ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
+        Bundle args = new Bundle();
+        args.putString("username", username);
+        args.putString("accountType", accountType);
+        fragment.setArguments(args);
+
+        //Going to the admin home page fragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentHolderViewClubManager, fragment).commit();
     }
 
-    //method that will serve as the OnClick to bring the user to the create event page
-    public void CreateEvent(View view){
-        Intent intent = new Intent(getApplicationContext(), CreateEvent.class);
-        Intent get = getIntent();
-        intent.putExtra("username", get.getStringExtra("username"));
-        startActivity(intent);
-    }
-
-    //method that will serve as the OnClick to bring the user to the Edit Profile page
-    public void EditProfile(View view){
-        Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
-        Intent get = getIntent();
-        intent.putExtra("username", get.getStringExtra("username"));
-        startActivity(intent);
-    }
 
 }

@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavMenu);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.adminBottomNavMenu);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -6,93 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".WelcomeClubManagerActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/usernameText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="@string/username_display_welcome_page"
-            android:textSize="20sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/appNameWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="  Les Grimpeurs"
-            android:textSize="24sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/userRole"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="@string/typeUser_display_welcome_page"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentHolderViewClubManager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_above="@id/clubManagerBottomNavMenu" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="60dp" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/clubManagerBottomNavMenu"
+        style="@style/BottomNavigationViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_alignParentBottom="true"
+        app:menu="@menu/club_manager_bottom_nav_menu" />
 
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="288dp"
-            app:srcCompat="@drawable/ride" />
-
-        <TextView
-            android:id="@+id/welcomeAdminPageTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:gravity="center|center_vertical"
-            android:text="@string/welcome_page"
-            android:textSize="40sp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <Button
-            android:id="@+id/CreateEventBTN"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FF9800"
-            android:onClick="CreateEvent"
-            android:text="@string/CreateEvent" />
-
-        <Button
-            android:id="@+id/EditProfile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FF9800"
-            android:onClick="EditProfile"
-            android:text="Edit Profile" />
-
-    </LinearLayout>
 </RelativeLayout>
