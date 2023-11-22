@@ -63,12 +63,12 @@ public class LoginHomePageActivity extends AppCompatActivity {
         }
 
         if (!username.isEmpty() && !password.isEmpty()) {
-            adminLogin(username, password, success -> {
-                if (!success) {
-                    clubManagerLogin(username, password, success1 -> {
-                        if (!success1) {
-                            participantLogin(username, password, success2 -> {
-                                if (!success2) {
+            adminLogin(username, password, successAdmin -> {
+                if (!successAdmin) {
+                    clubManagerLogin(username, password, successClubManager -> {
+                        if (!successClubManager) {
+                            participantLogin(username, password, successParticipant -> {
+                                if (!successParticipant) {
                                     Toast.makeText(getBaseContext(), "Invalid username or password!", Toast.LENGTH_SHORT).show();
                                 }
                             });
