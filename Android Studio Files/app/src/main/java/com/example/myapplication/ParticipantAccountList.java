@@ -20,6 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
+
+/**
+ * Custom ArrayAdapter to handle the display and interaction of participant accounts in a ListView.
+ * @author linden Sheehy
+ * @version 1.0
+ */
 public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
 
     private Activity context;
@@ -91,9 +97,9 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
             public void onClick(View v) {
                 // this gets the event in the database then deletes it
                 String name = viewHolder.participantAccount.getText().toString();
-                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Participant").child(name);
-                dR.removeValue();
-                sendToastMessage();
+
+                AdministratorAccount.removeParticipantAccount(name);
+                sendToastMessage(name);
 
                 // make button invisible so it doesn't stay open for another item
                 viewHolder.deleteButton.setVisibility(View.INVISIBLE);
@@ -124,7 +130,7 @@ public class ParticipantAccountList extends ArrayAdapter<ParticipantAccount> {
         }
     }
 
-    public void sendToastMessage() {
-        Toast.makeText(getContext(), "Account Deleted!", Toast.LENGTH_SHORT).show();
+    public void sendToastMessage(String name) {
+        Toast.makeText(getContext(), name + " Deleted!", Toast.LENGTH_SHORT).show();
     }
 }

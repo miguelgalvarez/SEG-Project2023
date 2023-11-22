@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/accountManagementBottomNavItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/account_management_icon"
+        android:title="@string/accountManagementDropDown" />
+    <item
+        android:id="@+id/homeBottomNavItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/admin_home_icon"
+        android:title="@string/homeDropDown" />
+    <item
+        android:id="@+id/eventTypeBottomNavItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@drawable/event_type_anagment2"
+        android:title="@string/eventTypeManagementDropDown" />
+</menu>

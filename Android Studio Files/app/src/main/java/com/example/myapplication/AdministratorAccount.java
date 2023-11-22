@@ -1,124 +1,100 @@
 package com.example.myapplication;
 
-import static androidx.core.content.ContentProviderCompat.requireContext;
-
-import android.content.Context;
-import android.media.metrics.Event;
-import android.widget.Toast;
-
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- * Administrator account class which is a subclass of the account class
+ * Administrator account class which is a subclass of the account class.
+ * This class contains methods specific to administrative actions such as managing event types
+ * and removing club manager or participant accounts.
  *
  * @author Linden Sheehy, Zachary Sikka
  * @version 1.0
  */
-public class AdministratorAccount extends Account{
+public class AdministratorAccount extends Account {
 
+    // Constructor for AdministratorAccount
     public AdministratorAccount(String username, String password, String firstName, String lastName, String email, AccountType accountType) {
-
         super(username, password, firstName, lastName, email, accountType);
     }
 
-
-    public static void writeDatabase(EventType eventType, boolean[] fieldList) {
-
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference eventTypeRef = database.getReference("Event Type");
-
-        DatabaseReference addedEventTypeRef = eventTypeRef.child(eventType.toString());
-
-        DatabaseReference eventDetailsRef = addedEventTypeRef.child("eventDetails");
-
-        DatabaseReference registrationRequirementsRef = addedEventTypeRef.child("registrationRequirements");
-
-        String[] eventDetails = {"Level", "Distance", "Start Time", "Location", "Route Overview"};
-
-        String[] registrationRequirements = {"Age", "Level", "Drafting Registration", "Account Standing"};
-
-        for(int i = 0; i<5;i++) {
-            eventDetailsRef.child(eventDetails[i]).setValue(fieldList[i], new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    if (databaseError != null) {
-                        // Handle the error
-                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-
-        for(int i = 0; i<4;i++) {
-            registrationRequirementsRef.child(registrationRequirements[i]).setValue(fieldList[i+5], new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                    if (databaseError != null) {
-                        // Handle the error
-                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }
-    }
-
+    /**
+     * Writes event details and registration requirements to the database.
+     * @param eventType The type of event to add or modify in the database.
+     * @param fieldList An array of boolean values representing various attributes of the event type.
+     */
     public static void writeDatabase(String eventType, boolean[] fieldList) {
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference eventTypeRef = database.getReference("Event Type");
 
+        // Reference to the specific event type
         DatabaseReference addedEventTypeRef = eventTypeRef.child(eventType);
 
+        // Separate references for event details and registration requirements
         DatabaseReference eventDetailsRef = addedEventTypeRef.child("eventDetails");
-
         DatabaseReference registrationRequirementsRef = addedEventTypeRef.child("registrationRequirements");
 
-        String[] eventDetails = {"Level", "Distance", "Start Time", "Location", "Route Overview"};
+        // Arrays to define the fields of event details and registration requirements
+        String[] eventDetails = {"Distance", "Level", "Location", "Route Overview", "Start Time"};
+        String[] registrationRequirements = {"Account Standing", "Age", "Drafting Registration", "Level"};
 
-        String[] registrationRequirements = {"Age", "Level", "Drafting Registration", "Account Standing"};
-
-        for(int i = 0; i<5;i++) {
+        // Writing event details to the database
+        for(int i = 0; i < 5; i++) {
             eventDetailsRef.child(eventDetails[i]).setValue(fieldList[i], new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        // Handle the error
-                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        // Code to handle the error case
                     }
                 }
             });
         }
 
-        for(int i = 0; i<4;i++) {
+        // Writing registration requirements to the database
+        for(int i = 0; i < 4; i++) {
             registrationRequirementsRef.child(registrationRequirements[i]).setValue(fieldList[i+5], new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        // Handle the error
-                        //Toast.makeText(requireContext(), "Failed to write usertype: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                        // Code to handle the error case
                     }
                 }
             });
         }
     }
 
+    /**
+     * Adds a new event type with specified fields to the database.
+     * @param eventType The event type to be added.
+     * @param fieldList The attributes of the event type.
+     */
     public static void addEventType(EventType eventType, boolean[] fieldList) {
-
-        //hash map storing the events that can be offered and their required fields
-        //HashMap<EventType, boolean[]> eventsOffered = new HashMap<>();
-
-        //ArrayList<String> requiredFields = new ArrayList<>();
-
-        writeDatabase(eventType, fieldList);
+        writeDatabase(eventType.toString(), fieldList);
     }
 
-
-    public Account removeAccount() {
-        return null;
+    /**
+     * Removes a club manager account from the database.
+     * @param username The username of the club manager account to be removed.
+     * @return The removed club manager account.
+     */
+    public static ClubManagerAccount removeClubManagerAccount(String username) {
+        ClubManagerAccount account = new ClubManagerAccount(username);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Club Manager").child(username);
+        dR.removeValue();
+        return account;
     }
+
+    /**
+     * Removes a participant account from the database.
+     * @param username The username of the participant account to be removed.
+     * @return The removed participant account.
+     */
+    public static ParticipantAccount removeParticipantAccount(String username) {
+        ParticipantAccount account = new ParticipantAccount(username);
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Participant").child(username);
+        dR.removeValue();
+        return account;
+    }
+
 }
