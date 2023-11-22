@@ -14,10 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,12 +35,10 @@ import java.util.List;
 
 
 public class CreateEvent extends AppCompatActivity {
+
     FloatingActionButton backButton;
+    LinearLayout layout;
 
-
-    //LinearLayout layout = findViewById(R.id.layout);
-
-    //Spinner spinner = (Spinner) findViewById(R.id.ddMenu);
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypeRef = rootRef.child("Event Type");
 
@@ -47,6 +47,7 @@ public class CreateEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event_activity);
 
+        layout = findViewById(R.id.layout);
 
         backButton = findViewById(R.id.backButtonCreateEvent);
 
@@ -56,30 +57,56 @@ public class CreateEvent extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        // Find the Spinner by ID
+        Spinner spinner = findViewById(R.id.ddMenu);
+
+        // Set up the OnItemSelectedListener
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                layout.removeAllViews();
+                // Item selected from the Spinner
+                String eventType = (String) parentView.getItemAtPosition(position);
+
+                Toast.makeText(getApplicationContext(), "Selected Event Type: " + eventType, Toast.LENGTH_SHORT).show();
+
+                //chage to real check
+                if (1==1) {
+                    EditText distanceText = new EditText(CreateEvent.this);
+                    distanceText.setHint("Distance");
+                    layout.addView(distanceText);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Do nothing here if nothing is selected
+            }
+        });
     }
-    //Spinner spinner = (Spinner) findViewById(R.id.dropdownMenuCE);
-    //String eventType = spinner.getSelectedItem().toString();
-
-    /*public void select(View view) {
-
-        //check whats selected
-        DatabaseReference currentEvent = eventTypeRef.child(spinner.getSelectedItem().toString());
-
-        DatabaseReference currentEventDetails = currentEvent.child("eventDetails");
+    public void submitButton(View view) {
 
 
-        //check if it has distance true
-        //create a distance text field
+        //does not work rn
 
-        if (currentEventDetails.child("Distance").toString().equals("true")) {
-            TextView distanceTextView = new TextView(CreateEvent.this);
-            distanceTextView.setText("Distance: ");
-            layout.addView(distanceTextView);
-        }
+        /*FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference usersRef = database.getReference("Club Manager");
+        Intent intent = getIntent();
 
-        DataSnapshot eventSnapshot;
 
-        List<EventTypeList> eventList;
-    }*/
+        DatabaseReference newUserRef = usersRef.child(intent.getStringExtra("username"));
 
+        newUserRef.child("Event").setValue(instagram.getText().toString(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    // Handle the error
+                    Toast.makeText(CreateEvent.this, "Failed to write Event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });*/
+        // back to last page
+        onBackPressed();
+    }
 }

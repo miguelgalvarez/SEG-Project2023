@@ -11,13 +11,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:contentDescription="TODO"
         android:src="@drawable/backarrow3"
         android:visibility="visible"
         app:backgroundTint="@android:color/holo_orange_dark"
         app:fabCustomSize="40sp"
         app:fabSize="auto"
-        app:maxImageSize="35sp"
-        android:contentDescription="TODO" />
+        app:maxImageSize="35sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,11 +63,36 @@
                 android:id="@+id/ddMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:entries="@array/dropdown_menu" />
 
         </LinearLayout>
 
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/submitB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF9800"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/submitButton"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </RelativeLayout>

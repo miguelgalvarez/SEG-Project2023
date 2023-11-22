@@ -44,7 +44,7 @@ public class EditProfileActivity extends AppCompatActivity{
     public void submitButton(View view) {
 
 
-        //gotta add some error checking
+        //gotta add some valid checking
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("Club Manager");
