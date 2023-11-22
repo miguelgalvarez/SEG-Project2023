@@ -32,8 +32,18 @@
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
+            android:name=".WelcomeClubManagerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CreateEvent"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginHomePageActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
