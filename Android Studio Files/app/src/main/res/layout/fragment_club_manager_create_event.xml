@@ -30,7 +30,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="65dp" />
+            android:layout_height="259dp"
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,31 +56,69 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/submit_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF9800"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="@string/submitButton" />
+
 
     </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="vertical">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="155dp" />
+
+        <EditText
+            android:id="@+id/distanceText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Distance"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/levelText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Level"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/LocationText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Location"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/routeText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Route"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/startTimeText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Start Time"
+            android:inputType="text" />
+
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/submit_button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FF9800"
-        android:gravity="center_horizontal|center_vertical"
-        android:text="@string/submitButton" />
 
 </RelativeLayout>

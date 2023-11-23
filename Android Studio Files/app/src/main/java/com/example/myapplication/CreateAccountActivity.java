@@ -94,6 +94,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Create a new "Events" node under the user's node
+        newUserRef.child("Events").setValue("", new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    // Handle the error
+                    Toast.makeText(CreateAccountActivity.this, "Failed to write events: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**

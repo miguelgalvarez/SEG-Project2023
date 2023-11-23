@@ -15,9 +15,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ClubManagerCreateEventFragment extends Fragment {
 
@@ -40,7 +42,9 @@ public class ClubManagerCreateEventFragment extends Fragment {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                layout.removeAllViews();
+
+                //Next step is to set each text view to be invisible if its not in the data base
+                layout.setVisibility(View.INVISIBLE);
                 // Item selected from the Spinner
                 eventType = (String) parentView.getItemAtPosition(position);
 
@@ -65,31 +69,57 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
     }
     public void submitButton() {
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference usersRef = database.getReference("Club Manager");
+        DatabaseReference clubManagerRef = database.getReference("Club Manager");
 
         String username = getArguments().getString("username");
+        DatabaseReference userRef = clubManagerRef.child(username);
 
-        DatabaseReference newUserRef = usersRef.child(username);
+        DatabaseReference eventsRef = userRef.child("Events");
 
-        newUserRef.child("Event").setValue(eventType, new DatabaseReference.CompletionListener() {
+        // Check if the event type already exists
+        eventsRef.orderByValue().equalTo(eventType).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Event type already exists, handle accordingly (e.g., show an error message)
+                    Toast.makeText(getContext(), "Event type already exists!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // Event type does not exist, add a new child to the "Events" node
+                    addNewEvent(eventsRef);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error if the database query is canceled
+                Toast.makeText(getContext(), "Error checking event type: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void addNewEvent(DatabaseReference eventsRef) {
+        // Add a new child to the "Events" node with the event type
+        eventsRef.push().setValue(eventType, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) {
                     // Handle the error
                     Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Event Updated!: ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Event Updated!", Toast.LENGTH_SHORT).show();
+                    // Navigate to the home page or perform other actions as needed
+                    if (isAdded()) {
+                        getParentFragmentManager().beginTransaction()
+                                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                                .replace(R.id.fragmentHolderViewClubManager, new ClubManagerHomePageFragment())
+                                .addToBackStack(null)
+                                .commit();
+                    }
                 }
             }
         });
-
-        if (isAdded()) { // Check if fragment is currently added to its activity
-            getParentFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.fragmentHolderViewClubManager, new ClubManagerHomePageFragment())
-                    .addToBackStack(null)
-                    .commit();
-        }
     }
+
 }
