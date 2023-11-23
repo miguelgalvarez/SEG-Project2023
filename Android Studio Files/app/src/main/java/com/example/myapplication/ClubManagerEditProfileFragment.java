@@ -41,7 +41,20 @@ public class ClubManagerEditProfileFragment extends Fragment {
     }
 
     public void submitButton() {
+        String inputPhoneNumber = phoneNumber.getText().toString().trim();
+        String inputInstagram = instagram.getText().toString().trim();
 
+        // Validate phone number
+        if (!isValidPhoneNumber(inputPhoneNumber)) {
+            Toast.makeText(getContext(), "Invalid Phone Number", Toast.LENGTH_SHORT).show();
+            return; // Stop further processing if validation fails
+        }
+
+        // Validate Instagram name
+        if (!isValidInstagramName(inputInstagram)) {
+            Toast.makeText(getContext(), "Invalid Instagram Name", Toast.LENGTH_SHORT).show();
+            return; // Stop further processing if validation fails
+        }
         // Your existing logic, adapted for fragment
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference usersRef = database.getReference("Club Manager");
@@ -84,6 +97,16 @@ public class ClubManagerEditProfileFragment extends Fragment {
         }
 
     }
+    // Helper method to validate phone numbers
+    private boolean isValidPhoneNumber(String phoneNumber) {
+        // For simplicity, let's assume a valid phone number should contain only digits and have a length of at least 10
+        return phoneNumber.matches("^\\d{10,15}$");
+    }
 
+    // Helper method to validate Instagram names
+    private boolean isValidInstagramName(String instagramName) {
+        // For simplicity, let's assume a valid Instagram name should start with a letter, followed by letters, numbers, or underscores
+        return instagramName.matches("[a-zA-Z][a-zA-Z0-9_]*");
+    }
 
 }
