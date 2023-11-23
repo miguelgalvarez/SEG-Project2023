@@ -99,14 +99,14 @@ public class ClubManagerEditProfileFragment extends Fragment {
     }
     // Helper method to validate phone numbers
     private boolean isValidPhoneNumber(String phoneNumber) {
-        // For simplicity, let's assume a valid phone number should contain only digits and have a length of at least 10
         return phoneNumber.matches("^\\d{10,15}$");
     }
 
     // Helper method to validate Instagram names
     private boolean isValidInstagramName(String instagramName) {
-        // For simplicity, let's assume a valid Instagram name should start with a letter, followed by letters, numbers, or underscores
-        return instagramName.matches("[a-zA-Z][a-zA-Z0-9_]*");
+
+        return instagramName.matches("^[a-zA-Z][a-zA-Z0-9_.]*$");
+
     }
 
 }
