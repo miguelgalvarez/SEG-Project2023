@@ -38,6 +38,7 @@ public class WelcomeClubManagerActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.createEventBottomNavItem) {
                     args.putString("username", username);
                     selectedFragment = new ClubManagerCreateEventFragment();
+                    selectedFragment.setArguments(args);
 
                 } else if (item.getItemId() == R.id.editProfileBottomNavItem) {
                     selectedFragment = new ClubManagerEditProfileFragment();
