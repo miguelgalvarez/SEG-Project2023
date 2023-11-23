@@ -35,12 +35,6 @@
             android:name=".WelcomeClubManagerActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateEvent"
-            android:exported="false" />
-        <activity
-            android:name=".EditProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginHomePageActivity"
             android:exported="true">
 
