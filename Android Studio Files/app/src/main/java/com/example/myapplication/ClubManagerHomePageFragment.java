@@ -42,12 +42,6 @@ public class ClubManagerHomePageFragment extends Fragment {
 
         Bundle args = getArguments();
 
-        // Create the dynamic list of active events
-        activeEvents = new ArrayList<ActiveEvent>();
-        listActiveEvents = view.findViewById(R.id.activeEventsList);
-        eventAdapter = new ActiveEventList(getActivity(), activeEvents);
-        listActiveEvents.setAdapter(eventAdapter);
-
         //get arguments from previous activity
         if (args != null) {
             String username = args.getString("username");
@@ -73,6 +67,12 @@ public class ClubManagerHomePageFragment extends Fragment {
                 managerAccountRef = null;
                 managerAccountActiveEvents = null;
             }
+
+            // Create the dynamic list of active events
+            activeEvents = new ArrayList<ActiveEvent>();
+            listActiveEvents = view.findViewById(R.id.activeEventsList);
+            eventAdapter = new ActiveEventList(getActivity(), activeEvents, username);
+            listActiveEvents.setAdapter(eventAdapter);
         }
 
         logoutBtn = view.findViewById(R.id.logoutClubPage);
