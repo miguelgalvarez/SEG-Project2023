@@ -231,15 +231,18 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
     private void addNewEvent(DatabaseReference eventsRef) {
         // Add a new child to the "Events" node with the event type
-        eventsRef.push().setValue(eventType, new DatabaseReference.CompletionListener() {
+
+        eventsRef.child(eventType);
+
+        DatabaseReference fieldsRef = eventsRef.child(eventType);
+
+        fieldsRef.child("Distance").setValue(distance.getText().toString(), new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                 if (databaseError != null) {
                     // Handle the error
                     Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
-                    eventsRef.child("Distance").setValue(distance.getText().toString());
-
                     Toast.makeText(getContext(), "Event Updated!", Toast.LENGTH_SHORT).show();
                     // Navigate to the home page or perform other actions as needed
                     if (isAdded()) {
@@ -253,5 +256,6 @@ public class ClubManagerCreateEventFragment extends Fragment {
             }
         });
     }
+
 
 }
