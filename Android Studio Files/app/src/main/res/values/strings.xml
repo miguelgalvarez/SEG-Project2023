@@ -87,6 +87,7 @@
     <string name="Instagram">Instagram</string>
     <string name="PhoneNumber">Phone Number</string>
     <string name="AddEvent">Add Event</string>
+    <string name="Participants">Number of Participants</string>
 
     //Club Manager Bottom nav menu items
     <string name="createEventBottomNav">Create Event</string>

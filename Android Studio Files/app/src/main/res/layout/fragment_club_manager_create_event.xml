@@ -88,14 +88,6 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/levelText"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8"
-            android:hint="Level"
-            android:inputType="text" />
-
-        <EditText
             android:id="@+id/LocationText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -117,6 +109,38 @@
             android:layout_height="0dp"
             android:layout_weight="0.8"
             android:hint="Start Time"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/levelText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Level"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/ageText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Age"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/participantsText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="@string/Participants"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/dateText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:hint="Date"
             android:inputType="text" />
 
     </LinearLayout>

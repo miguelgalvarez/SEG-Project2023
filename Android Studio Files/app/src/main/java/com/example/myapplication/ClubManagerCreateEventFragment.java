@@ -27,6 +27,16 @@ public class ClubManagerCreateEventFragment extends Fragment {
     Spinner spinner;
     private Button submitButton;
     private String eventType;
+
+    private EditText distance;
+    private EditText level;
+    private EditText location;
+    private EditText route;
+    private EditText start;
+    private EditText age;
+    private EditText particpants;
+    private EditText date;
+
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypeRef = rootRef.child("Event Type");
 
@@ -37,6 +47,15 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
         layout = view.findViewById(R.id.layout);
         spinner = view.findViewById(R.id.ddMenu);
+        distance = view.findViewById(R.id.distanceText);
+        level = view.findViewById(R.id.levelText);
+        location = view.findViewById(R.id.LocationText);
+        route = view.findViewById(R.id.routeText);
+        start = view.findViewById(R.id.startTimeText);
+        age = view.findViewById(R.id.ageText);
+        particpants = view.findViewById(R.id.participantsText);
+        date = view.findViewById(R.id.dateText);
+
 
         // Set up the OnItemSelectedListener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -44,11 +63,122 @@ public class ClubManagerCreateEventFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
                 //Next step is to set each text view to be invisible if its not in the data base
-                layout.setVisibility(View.INVISIBLE);
+                //layout.setVisibility(View.INVISIBLE);
                 // Item selected from the Spinner
-                eventType = (String) parentView.getItemAtPosition(position);
 
-                Toast.makeText(getContext(), "Selected Event Type: " + eventType, Toast.LENGTH_SHORT).show();
+                distance.setVisibility(View.VISIBLE);
+                location.setVisibility(View.VISIBLE);
+                route.setVisibility(View.VISIBLE);
+                start.setVisibility(View.VISIBLE);
+                level.setVisibility(View.VISIBLE);
+                age.setVisibility(View.VISIBLE);
+
+                eventType = (String) parentView.getItemAtPosition(position);
+                eventTypeRef.child(eventType).child("eventDetails").child("Distance").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            distance.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
+
+                eventTypeRef.child(eventType).child("eventDetails").child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            location.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                eventTypeRef.child(eventType).child("eventDetails").child("Route Overview").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            route.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                eventTypeRef.child(eventType).child("eventDetails").child("Start Time").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            start.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                eventTypeRef.child(eventType).child("registrationRequirements").child("Level").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            level.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                eventTypeRef.child(eventType).child("registrationRequirements").child("Age").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+
+                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                        } else {
+                            age.setVisibility(View.INVISIBLE);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
             }
 
