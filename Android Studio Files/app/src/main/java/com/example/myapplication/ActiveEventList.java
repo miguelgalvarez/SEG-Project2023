@@ -31,11 +31,13 @@ public class ActiveEventList extends ArrayAdapter<ActiveEvent> {
 
     private Activity context;
     List<ActiveEvent> activeEvent;
+    private String accountName;
 
-    public ActiveEventList(Activity context, List<ActiveEvent> activeEvent) {
+    public ActiveEventList(Activity context, List<ActiveEvent> activeEvent, String accountName) {
         super(context, R.layout.active_event_item, activeEvent);
         this.context = context;
         this.activeEvent = activeEvent;
+        this.accountName = accountName;
         this.listener = listener;
     }
 
@@ -101,8 +103,11 @@ public class ActiveEventList extends ArrayAdapter<ActiveEvent> {
             }
         });
 
-        // Add click listener for the edit/delete buttons
+        // Get database references to be used for the edit/delete buttons
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference eventsRef = rootRef.child("Club Manager").child(this.accountName).child("Events");
 
+        // Add click listener for the edit/delete buttons
         Button editButton = listViewItem.findViewById(R.id.editButton);
         Button deleteButton = listViewItem.findViewById(R.id.deleteButton);
 
@@ -127,8 +132,8 @@ public class ActiveEventList extends ArrayAdapter<ActiveEvent> {
                 // this gets the event in the database then deletes it
                 sendToastMessage();
                 String name = viewHolder.activeEventName.getText().toString();
-                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("Event Type").child(name);
-                dR.removeValue();
+                DatabaseReference valueToRemove = eventsRef.child(name);
+                valueToRemove.removeValue();
 
                 // make buttons invisible so they don't stay open for another item
                 viewHolder.editButton.setVisibility(View.INVISIBLE);
