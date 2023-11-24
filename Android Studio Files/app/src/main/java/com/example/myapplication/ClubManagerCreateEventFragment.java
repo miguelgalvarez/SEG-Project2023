@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ClubManagerCreateEventFragment extends Fragment {
 
-    LinearLayout layout;
+    ConstraintLayout layout;
     Spinner spinner;
     private Button submitButton;
     private String eventType;
@@ -47,6 +48,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
         layout = view.findViewById(R.id.layout);
         spinner = view.findViewById(R.id.ddMenu);
+
         distance = view.findViewById(R.id.distanceText);
         level = view.findViewById(R.id.levelText);
         location = view.findViewById(R.id.LocationText);
@@ -56,6 +58,8 @@ public class ClubManagerCreateEventFragment extends Fragment {
         particpants = view.findViewById(R.id.participantsText);
         date = view.findViewById(R.id.dateText);
 
+        EditText[] eventDetailTextViews = {distance, location, route, start};
+        EditText[] registrationRequirementsTextView = {level, age};
 
         // Set up the OnItemSelectedListener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -74,115 +78,51 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 age.setVisibility(View.VISIBLE);
 
                 String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"};
-                //String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"}
-
+                String[] registrationRequirements = {"Level", "Age"};
 
                 eventType = (String) parentView.getItemAtPosition(position);
-                eventTypeRef.child(eventType).child("eventDetails").child("Distance").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
 
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+                for (int i = 0; i < 4; i++) {
+                    int finalI = i;
+                    eventTypeRef.child(eventType).child("eventDetails").child(eventDetails[i]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
 
-                        } else {
-                            distance.setVisibility(View.INVISIBLE);
+                            if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+
+                            } else {
+                                eventDetailTextViews[finalI].setVisibility(View.GONE);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-
-
-
-                eventTypeRef.child(eventType).child("eventDetails").child("Location").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
-
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
-
-                        } else {
-                            location.setVisibility(View.INVISIBLE);
                         }
-                    }
+                    });
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                for (int i = 0; i<2; i++) {
+                    int finalI = i;
+                    eventTypeRef.child(eventType).child("registrationRequirements").child(registrationRequirements[i]).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
 
-                    }
-                });
-                eventTypeRef.child(eventType).child("eventDetails").child("Route Overview").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+                            if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
 
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
-
-                        } else {
-                            route.setVisibility(View.INVISIBLE);
+                            } else {
+                                registrationRequirementsTextView[finalI].setVisibility(View.GONE);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
-                eventTypeRef.child(eventType).child("eventDetails").child("Start Time").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
-
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
-
-                        } else {
-                            start.setVisibility(View.INVISIBLE);
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                eventTypeRef.child(eventType).child("registrationRequirements").child("Level").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
-
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
-
-                        } else {
-                            level.setVisibility(View.INVISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                eventTypeRef.child(eventType).child("registrationRequirements").child("Age").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
-
-                        if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
-
-                        } else {
-                            age.setVisibility(View.INVISIBLE);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                    });
+                }
 
             }
 
