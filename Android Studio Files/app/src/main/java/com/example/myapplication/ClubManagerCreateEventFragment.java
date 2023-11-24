@@ -238,6 +238,8 @@ public class ClubManagerCreateEventFragment extends Fragment {
                     // Handle the error
                     Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
+                    eventsRef.child("Distance").setValue(distance.getText().toString());
+
                     Toast.makeText(getContext(), "Event Updated!", Toast.LENGTH_SHORT).show();
                     // Navigate to the home page or perform other actions as needed
                     if (isAdded()) {
