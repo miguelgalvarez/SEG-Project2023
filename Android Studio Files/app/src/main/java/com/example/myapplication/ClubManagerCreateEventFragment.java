@@ -73,6 +73,10 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 level.setVisibility(View.VISIBLE);
                 age.setVisibility(View.VISIBLE);
 
+                String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"};
+                //String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"}
+
+
                 eventType = (String) parentView.getItemAtPosition(position);
                 eventTypeRef.child(eventType).child("eventDetails").child("Distance").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
