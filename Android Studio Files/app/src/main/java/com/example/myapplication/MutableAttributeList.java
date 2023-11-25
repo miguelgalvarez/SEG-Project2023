@@ -6,6 +6,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,24 +49,47 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
         ViewHolder viewHolder;
 
         if (listViewItem == null) {
+            // Open the custom list item
             listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.event_attribute_mutable, parent, false);
 
+            // Create a ViewHolder
             viewHolder = new ViewHolder(listViewItem);
 
+            // Set a unique tag for each item
             listViewItem.setTag(viewHolder);
+
         } else {
             viewHolder = (ViewHolder) listViewItem.getTag();
         }
 
+        // Gets the current attribute object
         MutableAttribute currentAttribute = getItem(position);
 
         try {
             viewHolder.attributeType.setText(currentAttribute.getType());
             viewHolder.attributeValue.setText(currentAttribute.getValue());
+            viewHolder.attributeValue.setTag(position);
             currentAttribute.setItemView(viewHolder);
         } catch (Exception E) {
             E.printStackTrace();
         }
+
+
+        // Updates the Item when the text is changed
+        viewHolder.attributeValue.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Update the data in the object when the EditText field changes
+                int position = (int) viewHolder.attributeValue.getTag();
+                activeEvent.get(position).setValue(editable.toString());
+            }
+        });
 
         return listViewItem;
     }

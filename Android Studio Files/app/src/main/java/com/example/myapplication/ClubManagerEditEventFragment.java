@@ -161,12 +161,11 @@ public class ClubManagerEditEventFragment extends Fragment {
 
         for (int i = 0; i < childCodes.size(); i++) {
 
-            EditText valueField = mutableAttributes.get(i).viewHolder.attributeValue;
-            String valueFieldString = valueField.getText().toString();
+            String valueField = mutableAttributes.get(i).getValue();
 
-            Log.d("debug", valueFieldString);
+            Log.d("debug", valueField);
 
-            eventRef.child(childCodes.get(i)).setValue(valueFieldString,
+            eventRef.child(childCodes.get(i)).setValue(valueField,
                             new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
