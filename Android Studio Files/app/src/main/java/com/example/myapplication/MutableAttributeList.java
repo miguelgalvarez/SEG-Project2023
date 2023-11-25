@@ -65,17 +65,19 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
         // Gets the current attribute object
         MutableAttribute currentAttribute = getItem(position);
 
+        if (viewHolder.textWatcher != null) {
+            viewHolder.attributeValue.removeTextChangedListener(viewHolder.textWatcher);
+        }
+
         try {
             viewHolder.attributeType.setText(currentAttribute.getType());
             viewHolder.attributeValue.setText(currentAttribute.getValue());
             viewHolder.attributeValue.setTag(position);
+            Log.d("debugType", currentAttribute.getType());
+            Log.d("debugPos", String.valueOf(position));
             currentAttribute.setItemView(viewHolder);
         } catch (Exception E) {
             E.printStackTrace();
-        }
-
-        if (viewHolder.textWatcher != null) {
-            viewHolder.attributeValue.removeTextChangedListener(viewHolder.textWatcher);
         }
 
 
@@ -85,14 +87,16 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {}
-
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 // Update the data in the object when the EditText field changes
                 int position = (int) viewHolder.attributeValue.getTag();
                 Log.d("debug", String.valueOf(position));
-                activeEvent.get(position).setValue(editable.toString());
+                activeEvent.get(position).setValue(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         };
 
