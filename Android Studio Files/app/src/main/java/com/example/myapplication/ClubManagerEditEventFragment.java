@@ -181,11 +181,7 @@ public class ClubManagerEditEventFragment extends Fragment {
 
 
         if (isAdded()) { // Check if fragment is currently added to its activity
-            getParentFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.fragmentHolderViewClubManager, new ClubManagerHomePageFragment())
-                    .addToBackStack(null)
-                    .commit();
+            getParentFragmentManager().popBackStack();
         }
     }
 
