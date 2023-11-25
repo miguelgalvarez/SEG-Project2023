@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -74,6 +75,9 @@ public class ClubManagerCreateEventFragment extends Fragment {
         allTextViews = new ArrayList<>();
         allFields = new ArrayList<>();
 
+        populateDropdownMenu();
+
+
         // Set up the OnItemSelectedListener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -82,6 +86,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 //Next step is to set each text view to be invisible if its not in the data base
                 //layout.setVisibility(View.INVISIBLE);
                 // Item selected from the Spinner
+                //populateDropdownMenu();
 
                 distance.setVisibility(View.VISIBLE);
                 location.setVisibility(View.VISIBLE);
@@ -94,7 +99,6 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 String[] registrationRequirements = {"Level", "Age"};
 
                 eventType = (String) parentView.getItemAtPosition(position);
-
                 for (int i = 0; i < eventDetails.length; i++) {
                     int finalI = i;
                     eventTypeRef.child(eventType).child("eventDetails").child(eventDetails[i]).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -159,7 +163,35 @@ public class ClubManagerCreateEventFragment extends Fragment {
         return view;
 
     }
+    private void populateDropdownMenu() {
+        // Clear existing items
+        spinner.setAdapter(null);
 
+        // Retrieve items from the database
+        eventTypeRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    List<String> eventTypes = new ArrayList<>();
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String eventType = snapshot.getKey();
+                        eventTypes.add(eventType);
+                    }
+
+                    // Populate the spinner with items from the database
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, eventTypes);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle the error
+                Toast.makeText(getContext(), "Error retrieving event types: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     public void getOtherFields() {
         //String participantValue = participants.getText().toString();
         //String dateValue = date.getText().toString();
@@ -240,8 +272,5 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 }
             });
         }
-
     }
-
-
 }
