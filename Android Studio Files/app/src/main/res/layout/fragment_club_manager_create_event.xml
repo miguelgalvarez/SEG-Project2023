@@ -29,8 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/linearLayout1"
         android:orientation="horizontal"
-        android:paddingStart="20sp"
-        android:paddingEnd="20sp">
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp">
 
         <TextView
             android:id="@+id/eventTypetxtID"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/eventType_title"
-            android:textSize="20sp" />
+            android:textSize="18dp" />
 
         <Spinner
             android:id="@+id/ddMenu"

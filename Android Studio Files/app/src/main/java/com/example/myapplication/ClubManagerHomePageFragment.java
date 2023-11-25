@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class ClubManagerHomePageFragment extends Fragment {
 
         //get arguments from previous activity
         if (args != null) {
+            Log.d("DEBUG", "arguments were passed!");
             String username = args.getString("username");
             String accountType = args.getString("accountType");
 

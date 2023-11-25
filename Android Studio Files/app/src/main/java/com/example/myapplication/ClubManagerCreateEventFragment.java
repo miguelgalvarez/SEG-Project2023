@@ -38,6 +38,8 @@ public class ClubManagerCreateEventFragment extends Fragment {
     private EditText particpants;
     private EditText date;
 
+    private String username;
+
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypeRef = rootRef.child("Event Type");
 
@@ -147,7 +149,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference clubManagerRef = database.getReference("Club Manager");
 
-        String username = getArguments().getString("username");
+        username = getArguments().getString("username");
         DatabaseReference userRef = clubManagerRef.child(username);
 
         DatabaseReference eventsRef = userRef.child("Events");
@@ -188,17 +190,25 @@ public class ClubManagerCreateEventFragment extends Fragment {
                     Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getContext(), "Event Updated!", Toast.LENGTH_SHORT).show();
-                    // Navigate to the home page or perform other actions as needed
+
+                    // Navigate back to the home page
+                    ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
+                    Bundle args = new Bundle();
+                    args.putString("username", username);
+                    args.putString("accountType", "Club Manager");
+                    fragment.setArguments(args);
+
                     if (isAdded()) {
                         getParentFragmentManager().beginTransaction()
-                                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                                .replace(R.id.fragmentHolderViewClubManager, new ClubManagerHomePageFragment())
+                                .replace(R.id.fragmentHolderViewClubManager, fragment)
                                 .addToBackStack(null)
                                 .commit();
                     }
                 }
             }
         });
+
+
     }
 
 

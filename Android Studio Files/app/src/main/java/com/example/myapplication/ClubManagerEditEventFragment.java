@@ -180,8 +180,16 @@ public class ClubManagerEditEventFragment extends Fragment {
         childCodes = null;
 
 
-        if (isAdded()) { // Check if fragment is currently added to its activity
-            getParentFragmentManager().popBackStack();
+        ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
+        Bundle args = new Bundle();
+        args.putString("username", managerUsername);
+        args.putString("accountType", "Club Manager");
+        fragment.setArguments(args);
+        if (isAdded()) {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentHolderViewClubManager, fragment)
+                    .addToBackStack(null)
+                    .commit();
         }
     }
 
