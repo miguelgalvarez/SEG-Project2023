@@ -74,9 +74,13 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
             E.printStackTrace();
         }
 
+        if (viewHolder.textWatcher != null) {
+            viewHolder.attributeValue.removeTextChangedListener(viewHolder.textWatcher);
+        }
+
 
         // Updates the Item when the text is changed
-        viewHolder.attributeValue.addTextChangedListener(new TextWatcher() {
+        viewHolder.textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {}
 
@@ -87,9 +91,12 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
             public void afterTextChanged(Editable editable) {
                 // Update the data in the object when the EditText field changes
                 int position = (int) viewHolder.attributeValue.getTag();
+                Log.d("debug", String.valueOf(position));
                 activeEvent.get(position).setValue(editable.toString());
             }
-        });
+        };
+
+        viewHolder.attributeValue.addTextChangedListener(viewHolder.textWatcher);
 
         return listViewItem;
     }
@@ -99,6 +106,8 @@ public class MutableAttributeList extends ArrayAdapter<MutableAttribute> {
         TextView attributeType;
 
         EditText attributeValue;
+
+        TextWatcher textWatcher;
 
         public ViewHolder(View itemView) {
             this.attributeType = itemView.findViewById(R.id.attributeType);
