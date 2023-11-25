@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.util.Log;
+
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -36,11 +38,11 @@ public class AdministratorAccount extends Account {
         DatabaseReference registrationRequirementsRef = addedEventTypeRef.child("registrationRequirements");
 
         // Arrays to define the fields of event details and registration requirements
-        String[] eventDetails = {"Distance", "Level", "Location", "Route Overview", "Start Time"};
-        String[] registrationRequirements = {"Account Standing", "Age", "Drafting Registration", "Level"};
+        String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"};
+        String[] registrationRequirements = {"Age", "Level"};
 
         // Writing event details to the database
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < eventDetails.length; i++) {
             eventDetailsRef.child(eventDetails[i]).setValue(fieldList[i], new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
@@ -52,8 +54,8 @@ public class AdministratorAccount extends Account {
         }
 
         // Writing registration requirements to the database
-        for(int i = 0; i < 4; i++) {
-            registrationRequirementsRef.child(registrationRequirements[i]).setValue(fieldList[i+5], new DatabaseReference.CompletionListener() {
+        for(int i = 0; i < registrationRequirements.length; i++) {
+            registrationRequirementsRef.child(registrationRequirements[i]).setValue(fieldList[i+4], new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {

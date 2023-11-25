@@ -82,7 +82,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
                 eventType = (String) parentView.getItemAtPosition(position);
 
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < eventDetails.length; i++) {
                     int finalI = i;
                     eventTypeRef.child(eventType).child("eventDetails").child(eventDetails[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -103,7 +103,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
                     });
                 }
 
-                for (int i = 0; i<2; i++) {
+                for (int i = 0; i<registrationRequirements.length; i++) {
                     int finalI = i;
                     eventTypeRef.child(eventType).child("registrationRequirements").child(registrationRequirements[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
