@@ -3,7 +3,7 @@ package com.example.myapplication;
 /**
  * Enumeration class for the 5 types of events
  *
- * @author Zachary Sikka
+ * @author Linden Sheehy
  * @version 1.0
  */
 public class ActiveEvent {

@@ -89,6 +89,19 @@ public class ClubManagerHomePageFragment extends Fragment {
             }
         });
 
+        eventAdapter.setActiveEventListListener(activeEventName -> {
+            ClubManagerEditEventFragment fragment = new ClubManagerEditEventFragment();
+            Bundle args2 = new Bundle();
+            args2.putString("eventTypeName", activeEventName);
+            args2.putString("managerAccountName", managerAccountRef.getKey());
+            fragment.setArguments(args2);
+
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragmentHolderViewClubManager, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         return view;
     }
 
