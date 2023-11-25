@@ -22,6 +22,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClubManagerCreateEventFragment extends Fragment {
 
     ConstraintLayout layout;
@@ -35,13 +39,17 @@ public class ClubManagerCreateEventFragment extends Fragment {
     private EditText route;
     private EditText start;
     private EditText age;
-    private EditText particpants;
+    private EditText participants;
     private EditText date;
 
     private String username;
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypeRef = rootRef.child("Event Type");
+
+    List<String> allFields;
+
+    List<EditText> allTextViews;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,11 +65,14 @@ public class ClubManagerCreateEventFragment extends Fragment {
         route = view.findViewById(R.id.routeText);
         start = view.findViewById(R.id.startTimeText);
         age = view.findViewById(R.id.ageText);
-        particpants = view.findViewById(R.id.participantsText);
+        participants = view.findViewById(R.id.participantsText);
         date = view.findViewById(R.id.dateText);
 
         EditText[] eventDetailTextViews = {distance, location, route, start};
         EditText[] registrationRequirementsTextView = {level, age};
+
+        allTextViews = new ArrayList<>();
+        allFields = new ArrayList<>();
 
         // Set up the OnItemSelectedListener
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -92,6 +103,8 @@ public class ClubManagerCreateEventFragment extends Fragment {
                             Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
 
                             if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+                                allFields.add(eventDetails[finalI]);
+                                allTextViews.add(eventDetailTextViews[finalI]);
 
                             } else {
                                 eventDetailTextViews[finalI].setVisibility(View.GONE);
@@ -113,6 +126,8 @@ public class ClubManagerCreateEventFragment extends Fragment {
                             Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
 
                             if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+                                allFields.add(registrationRequirements[finalI]);
+                                allTextViews.add(eventDetailTextViews[finalI]);
 
                             } else {
                                 registrationRequirementsTextView[finalI].setVisibility(View.GONE);
@@ -144,6 +159,15 @@ public class ClubManagerCreateEventFragment extends Fragment {
         return view;
 
     }
+
+    public void getOtherFields() {
+        //String participantValue = participants.getText().toString();
+        //String dateValue = date.getText().toString();
+        allFields.add("Participants");
+        allFields.add("Date");
+        allTextViews.add(participants);
+        allTextViews.add(date);
+    }
     public void submitButton() {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -155,15 +179,19 @@ public class ClubManagerCreateEventFragment extends Fragment {
         DatabaseReference eventsRef = userRef.child("Events");
 
         // Check if the event type already exists
-        eventsRef.orderByValue().equalTo(eventType).addListenerForSingleValueEvent(new ValueEventListener() {
+        eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    // Event type already exists, handle accordingly (e.g., show an error message)
-                    Toast.makeText(getContext(), "Event type already exists!", Toast.LENGTH_SHORT).show();
+                    if (dataSnapshot.hasChild(eventType)) {
+                        // Event type already exists, handle accordingly (e.g., show an error message)
+                        Toast.makeText(getContext(), eventType +" already exists!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Event type does not exist, add a new child to the "Events" node
+                        addNewEvent(eventsRef);
+                    }
                 } else {
-                    // Event type does not exist, add a new child to the "Events" node
-                    addNewEvent(eventsRef);
+                    Toast.makeText(getContext(), "Error reading from DB", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -178,36 +206,40 @@ public class ClubManagerCreateEventFragment extends Fragment {
     private void addNewEvent(DatabaseReference eventsRef) {
         // Add a new child to the "Events" node with the event type
 
+        //gets the text views, participants and date
+        getOtherFields();
+
         eventsRef.child(eventType);
 
         DatabaseReference fieldsRef = eventsRef.child(eventType);
 
-        fieldsRef.child("Distance").setValue(distance.getText().toString(), new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    // Handle the error
-                    Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), "Event Updated!", Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < allFields.size(); i++) {
+            fieldsRef.child(allFields.get(i)).setValue(allTextViews.get(i).getText().toString(), new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Event Created!", Toast.LENGTH_SHORT).show();
 
-                    // Navigate back to the home page
-                    ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
-                    Bundle args = new Bundle();
-                    args.putString("username", username);
-                    args.putString("accountType", "Club Manager");
-                    fragment.setArguments(args);
+                        // Navigate back to the home page
+                        ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
+                        Bundle args = new Bundle();
+                        args.putString("username", username);
+                        args.putString("accountType", "Club Manager");
+                        fragment.setArguments(args);
 
-                    if (isAdded()) {
-                        getParentFragmentManager().beginTransaction()
-                                .replace(R.id.fragmentHolderViewClubManager, fragment)
-                                .addToBackStack(null)
-                                .commit();
+                        if (isAdded()) {
+                            getParentFragmentManager().beginTransaction()
+                                    .replace(R.id.fragmentHolderViewClubManager, fragment)
+                                    .addToBackStack(null)
+                                    .commit();
+                        }
                     }
                 }
-            }
-        });
-
+            });
+        }
 
     }
 

@@ -88,10 +88,15 @@ public class ClubManagerEditProfileFragment extends Fragment {
             }
         });
 
+        ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
+        Bundle args = new Bundle();
+        args.putString("username",username);
+        args.putString("accountType", "Club Manager");
+        fragment.setArguments(args);
         if (isAdded()) { // Check if fragment is currently added to its activity
             getParentFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .replace(R.id.fragmentHolderViewClubManager, new ClubManagerHomePageFragment())
+                    .replace(R.id.fragmentHolderViewClubManager, fragment)
                     .addToBackStack(null)
                     .commit();
         }
