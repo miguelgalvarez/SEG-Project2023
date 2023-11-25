@@ -85,10 +85,7 @@ public class EditEventTypeFragment extends Fragment {
                 view.findViewById(R.id.editCheckBox3),
                 view.findViewById(R.id.editCheckBox4),
                 view.findViewById(R.id.editCheckBox5),
-                view.findViewById(R.id.editCheckBox6),
-                view.findViewById(R.id.editCheckBox7),
-                view.findViewById(R.id.editCheckBox8),
-                view.findViewById(R.id.editCheckBox9)
+                view.findViewById(R.id.editCheckBox6)
         };
 
         int i = 0;

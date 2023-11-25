@@ -30,12 +30,12 @@ public class NewEventTypeFragment extends Fragment {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference eventTypesRef = rootRef.child("Event Type");
     FloatingActionButton backButton;
-    boolean[] fieldList = new boolean[9];
+    boolean[] fieldList = new boolean[6];
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_new_event_type, container, false);
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < fieldList.length; i++) {
             fieldList[i] = false;
         }
 
@@ -65,10 +65,7 @@ public class NewEventTypeFragment extends Fragment {
                     view.findViewById(R.id.checkBox3),
                     view.findViewById(R.id.checkBox4),
                     view.findViewById(R.id.checkBox5),
-                    view.findViewById(R.id.checkBox6),
-                    view.findViewById(R.id.checkBox7),
-                    view.findViewById(R.id.checkBox8),
-                    view.findViewById(R.id.checkBox9)
+                    view.findViewById(R.id.checkBox6)
             };
 
             CheckBox checkBox = checkBoxes[i];
