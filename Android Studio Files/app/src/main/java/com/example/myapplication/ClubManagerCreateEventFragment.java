@@ -88,12 +88,9 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 // Item selected from the Spinner
                 //populateDropdownMenu();
 
-                distance.setVisibility(View.VISIBLE);
-                location.setVisibility(View.VISIBLE);
-                route.setVisibility(View.VISIBLE);
-                start.setVisibility(View.VISIBLE);
-                level.setVisibility(View.VISIBLE);
-                age.setVisibility(View.VISIBLE);
+                //clear lists if a new event type is selected from the spinner
+                allFields.clear();
+                allTextViews.clear();
 
                 String[] eventDetails = {"Distance", "Location", "Route Overview", "Start Time"};
                 String[] registrationRequirements = {"Level", "Age"};
@@ -104,9 +101,10 @@ public class ClubManagerCreateEventFragment extends Fragment {
                     eventTypeRef.child(eventType).child("eventDetails").child(eventDetails[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+                            Boolean value = dataSnapshot.getValue(Boolean.class);
 
-                            if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+                            if (value != null && value.equals(Boolean.TRUE)) {
+                                eventDetailTextViews[finalI].setVisibility(View.VISIBLE);
                                 allFields.add(eventDetails[finalI]);
                                 allTextViews.add(eventDetailTextViews[finalI]);
 
@@ -127,9 +125,10 @@ public class ClubManagerCreateEventFragment extends Fragment {
                     eventTypeRef.child(eventType).child("registrationRequirements").child(registrationRequirements[i]).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Boolean distanceValue = dataSnapshot.getValue(Boolean.class);
+                            Boolean value = dataSnapshot.getValue(Boolean.class);
 
-                            if (distanceValue != null && distanceValue.equals(Boolean.TRUE)) {
+                            if (value != null && value.equals(Boolean.TRUE)) {
+                                registrationRequirementsTextView[finalI].setVisibility(View.VISIBLE);
                                 allFields.add(registrationRequirements[finalI]);
                                 allTextViews.add(eventDetailTextViews[finalI]);
 
