@@ -36,7 +36,21 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="170dp"
+                android:layout_height="33dp"
+                android:layout_weight="1" />
+
+            <EditText
+                android:id="@+id/editContact"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Main Contact (optional)"
+                android:inputType="text" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
                 android:layout_weight="1" />
 
             <EditText
@@ -64,7 +78,49 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="119dp"
+                android:layout_height="33dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Choose Logo (optional)"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="134dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/logo1" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/logo2" />
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="134dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/logo3" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
                 android:layout_weight="1" />
 
             <Button
@@ -77,6 +133,7 @@
                 android:gravity="center"
                 android:onClick="submitButton"
                 android:text="@string/submitButton" />
+
         </LinearLayout>
     </RelativeLayout>
 </ScrollView>

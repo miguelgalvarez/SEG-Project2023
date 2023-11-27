@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +32,9 @@ public class ClubManagerHomePageFragment extends Fragment {
     DatabaseReference managerAccountActiveEvents;
 
     DataSnapshot activeEventSnapshot;
+    int logoNumber;
 
+    ImageView logo;
     Button logoutBtn;
     List<ActiveEvent> activeEvents;
     ListView listActiveEvents;
@@ -40,7 +44,6 @@ public class ClubManagerHomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_club_manager_home_page, container, false);
-
         Bundle args = getArguments();
 
         //get arguments from previous activity
@@ -57,6 +60,8 @@ public class ClubManagerHomePageFragment extends Fragment {
             usernameTextView.setText(username);
             accountTypeTextView.setText(accountType);
 
+
+
             /*
                 References the specific manager account
                 Will Catch if either the username is null or the manager account contains no 'Events' child
@@ -65,7 +70,49 @@ public class ClubManagerHomePageFragment extends Fragment {
             try {
                 managerAccountRef = managerAccountRef.child(username);
                 managerAccountActiveEvents = managerAccountRef.child("Events");
+
+                try {
+                    managerAccountRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            try {
+                                if (dataSnapshot.exists()) {
+                                    Long logoNumberObject = dataSnapshot.child("Logo Number").getValue(Long.class);
+                                    logoNumber = Math.toIntExact(logoNumberObject);
+                                    Toast.makeText(getContext(), "logo number is" + logoNumber, Toast.LENGTH_SHORT).show();
+
+                                    if (logoNumber == 1) {
+                                        logo.setImageResource(R.drawable.logo1);
+                                        logo.setVisibility(View.VISIBLE);
+                                    } else if (logoNumber == 2) {
+                                        logo.setImageResource(R.drawable.logo2);
+                                        logo.setVisibility(View.VISIBLE);
+                                    } else if (logoNumber == 3) {
+                                        logo.setImageResource(R.drawable.logo3);
+                                        logo.setVisibility(View.VISIBLE);
+                                    } else {
+                                        Toast.makeText(getContext(), "did not get logo", Toast.LENGTH_SHORT).show();
+                                        logo.setVisibility(View.INVISIBLE);
+                                    }
+                                }
+                            } catch (Exception e) {
+                                //No logo
+                                logo.setVisibility(View.INVISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                } catch (Exception e) {
+                    //logo has not been made
+                }
+
+
             } catch(Exception e) {
+                // Handle the exception
                 managerAccountRef = null;
                 managerAccountActiveEvents = null;
             }
@@ -78,6 +125,11 @@ public class ClubManagerHomePageFragment extends Fragment {
         }
 
         logoutBtn = view.findViewById(R.id.logoutClubPage);
+
+        logo = view.findViewById(R.id.logoImage);
+
+        //set the logo if one was in the database
+
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

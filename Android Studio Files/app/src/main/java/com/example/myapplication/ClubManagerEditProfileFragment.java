@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +20,14 @@ public class ClubManagerEditProfileFragment extends Fragment {
 
     private EditText phoneNumber;
     private EditText instagram;
-
+    private EditText contact;
+    private int logoNumber;
     private Button submitButton;
+
+    private ImageView logo1;
+    private ImageView logo2;
+    private ImageView logo3;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +35,7 @@ public class ClubManagerEditProfileFragment extends Fragment {
 
         instagram = view.findViewById(R.id.instagram);
         phoneNumber = view.findViewById(R.id.editPhoneNumber);
+        contact = view.findViewById(R.id.editContact);
 
         submitButton = view.findViewById(R.id.submit_button);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +45,46 @@ public class ClubManagerEditProfileFragment extends Fragment {
             }
         });
 
+        // create onClick for logos
+        logo1 = view.findViewById(R.id.imageView5);
+        logo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage1();
+            }
+        });
+
+        logo2 = view.findViewById(R.id.imageView4);
+        logo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage2();
+            }
+        });
+        logo3 = view.findViewById(R.id.imageView3);
+        logo3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImage3();
+            }
+        });
+
+
         return view;
+    }
+    public void setImage1() {
+        logoNumber = 1;
+        Toast.makeText(getContext(), "Selected Logo 1", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setImage2() {
+        logoNumber = 2;
+        Toast.makeText(getContext(), "Selected Logo 2", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setImage3() {
+        logoNumber = 3;
+        Toast.makeText(getContext(), "Selected Logo 3", Toast.LENGTH_SHORT).show();
     }
 
     public void submitButton() {
@@ -87,6 +134,33 @@ public class ClubManagerEditProfileFragment extends Fragment {
                 }
             }
         });
+
+        newUserRef.child("Main Contact").setValue(contact.getText().toString(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    // Handle the error
+                    Toast.makeText(getContext(), "Failed to update Main Contact: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Main Contact Updated!: ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        //add logo if the user chose one
+        if (logoNumber!=0){
+            newUserRef.child("Logo Number").setValue(logoNumber, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        Toast.makeText(getContext(), "Failed to create Logo: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getContext(), "Logo Updated!: ", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
         ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
         Bundle args = new Bundle();
