@@ -134,7 +134,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
                             if (value != null && value.equals(Boolean.TRUE)) {
                                 registrationRequirementsTextView[finalI].setVisibility(View.VISIBLE);
                                 allFields.add(registrationRequirements[finalI]);
-                                allTextViews.add(eventDetailTextViews[finalI]);
+                                allTextViews.add(registrationRequirementsTextView[finalI]);
 
                             } else {
                                 registrationRequirementsTextView[finalI].setVisibility(View.GONE);
