@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,7 +32,6 @@ public class ClubManagerHomePageFragment extends Fragment {
 
     DataSnapshot activeEventSnapshot;
     int logoNumber;
-
     ImageView logo;
     Button logoutBtn;
     List<ActiveEvent> activeEvents;
@@ -61,6 +59,9 @@ public class ClubManagerHomePageFragment extends Fragment {
             accountTypeTextView.setText(accountType);
 
 
+            logo = view.findViewById(R.id.logoImage);
+
+            logo.setVisibility(View.INVISIBLE);
 
             /*
                 References the specific manager account
@@ -124,9 +125,7 @@ public class ClubManagerHomePageFragment extends Fragment {
             listActiveEvents.setAdapter(eventAdapter);
         }
 
-        logoutBtn = view.findViewById(R.id.logoutClubPage);
-
-        logo = view.findViewById(R.id.logoImage);
+        logoutBtn = view.findViewById(R.id.logoutButtonParticipant);
 
         //set the logo if one was in the database
 
@@ -151,7 +150,7 @@ public class ClubManagerHomePageFragment extends Fragment {
             fragment.setArguments(args2);
 
             getParentFragmentManager().beginTransaction()
-                    .replace(R.id.fragmentHolderViewClubManager, fragment)
+                    .replace(R.id.fragmentHolderViewParticipant, fragment)
                     .addToBackStack(null)
                     .commit();
         });

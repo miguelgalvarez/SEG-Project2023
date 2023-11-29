@@ -4,20 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminActivity">
+    tools:context=".ParticipantActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentHolderView"
+        android:id="@+id/fragmentHolderViewParticipant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/adminBottomNavMenu" />
+        android:layout_above="@id/participantBottomNavMenu" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/adminBottomNavMenu"
+        android:id="@+id/participantBottomNavMenu"
+        style="@style/BottomNavigationViewStyle"
         android:layout_width="match_parent"
         android:layout_height="50sp"
         android:layout_alignParentBottom="true"
-        style="@style/BottomNavigationViewStyle"
-        app:menu="@menu/admin_bottom_nav_menu" />
+        app:menu="@menu/participant_bottom_nav_menu" />
 
 </RelativeLayout>

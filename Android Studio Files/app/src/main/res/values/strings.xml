@@ -79,8 +79,6 @@
     <string name="accountManagementDropDown">Account Management</string>
     <string name="homeDropDown">Home</string>
     <string name="eventTypeManagementDropDown">Event Management</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     //Club Manager
     <string name="CreateEvent">Create Event</string>
@@ -92,6 +90,12 @@
     //Club Manager Bottom nav menu items
     <string name="createEventBottomNav">Create Event</string>
     <string name="editProfileBottomNav">Edit Profile</string>
+
+    //Participant Bottom nav menu items
+    <string name="clubsBottomNav">Clubs</string>
+    <string name="eventsBottomNav">Events</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

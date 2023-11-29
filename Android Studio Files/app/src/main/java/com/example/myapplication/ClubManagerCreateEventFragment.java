@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.sql.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -341,7 +338,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
 
                         if (isAdded()) {
                             getParentFragmentManager().beginTransaction()
-                                    .replace(R.id.fragmentHolderViewClubManager, fragment)
+                                    .replace(R.id.fragmentHolderViewParticipant, fragment)
                                     .addToBackStack(null)
                                     .commit();
                         }

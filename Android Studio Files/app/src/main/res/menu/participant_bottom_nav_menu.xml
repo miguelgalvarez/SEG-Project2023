@@ -5,8 +5,8 @@
         android:id="@+id/clubsBottomNavItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/create_event_icon"
-        android:title="@string/createEventBottomNav" />
+        android:icon="@drawable/club_group"
+        android:title="@string/clubsBottomNav" />
     <item
         android:id="@+id/homeParticipantBottomNavItem"
         android:layout_width="wrap_content"
@@ -17,6 +17,6 @@
         android:id="@+id/eventsBottomNavItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:icon="@drawable/edit_profile_icon"
-        android:title="@string/editProfileBottomNav" />
+        android:icon="@drawable/events"
+        android:title="@string/eventsBottomNav" />
 </menu>

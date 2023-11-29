@@ -26,13 +26,13 @@
             android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".ParticipantActivity"
             android:exported="false" />
         <activity
             android:name=".AdminActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeClubManagerActivity"
+            android:name=".ClubManagerActivity"
             android:exported="false" />
         <activity
             android:name=".LoginHomePageActivity"

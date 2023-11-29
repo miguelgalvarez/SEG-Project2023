@@ -2,8 +2,6 @@ package com.example.myapplication;
 
 import static android.graphics.Color.rgb;
 
-import static java.security.AccessController.getContext;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -165,9 +163,9 @@ public class LoginHomePageActivity extends AppCompatActivity {
     public void login(String username, String accountType) {
         Intent intent;
         if (accountType.equals("Club Manager")) {
-            intent = new Intent(this, WelcomeClubManagerActivity.class);
+            intent = new Intent(this, ClubManagerActivity.class);
         } else if (accountType.equals("Participant")){
-            intent = new Intent(this, WelcomeActivity.class);
+            intent = new Intent(this, ParticipantActivity.class);
         } else {
             intent = new Intent(this, AdminActivity.class);
         }

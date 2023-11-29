@@ -169,7 +169,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
                 writeDatabase("Club Manager");
-                Intent intent = new Intent(this, WelcomeClubManagerActivity.class);
+                Intent intent = new Intent(this, ClubManagerActivity.class);
                 intent.putExtra("username", newAccount.getUsername());
                 intent.putExtra("accountType", newAccount.getAccountType().toString());
                 startActivity(intent);
@@ -179,7 +179,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
                 newAccount = new ParticipantAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.PARTICIPANT);
                 writeDatabase("Participant");
-                Intent intent = new Intent(this, WelcomeActivity.class);
+                Intent intent = new Intent(this, ParticipantActivity.class);
                 intent.putExtra("username", newAccount.getUsername());
                 intent.putExtra("accountType", newAccount.getAccountType().toString());
                 startActivity(intent);
