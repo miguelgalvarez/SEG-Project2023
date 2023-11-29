@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.sql.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClubManagerCreateEventFragment extends Fragment {
@@ -155,13 +159,18 @@ public class ClubManagerCreateEventFragment extends Fragment {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitButton();
+                try {
+                    submitButton();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
         return view;
 
     }
+    // end of the onCreateView method ^
     private void populateDropdownMenu() {
         // Clear existing items
         spinner.setAdapter(null);
@@ -199,7 +208,12 @@ public class ClubManagerCreateEventFragment extends Fragment {
         allTextViews.add(participants);
         allTextViews.add(date);
     }
-    public void submitButton() {
+
+    public void submitButton() throws ParseException {
+        if (!validateFields()) {
+            Toast.makeText(getContext(), "Validation failed!", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference clubManagerRef = database.getReference("Club Manager");
@@ -213,16 +227,12 @@ public class ClubManagerCreateEventFragment extends Fragment {
         eventsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    if (dataSnapshot.hasChild(eventType)) {
-                        // Event type already exists, handle accordingly (e.g., show an error message)
-                        Toast.makeText(getContext(), eventType +" already exists!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // Event type does not exist, add a new child to the "Events" node
-                        addNewEvent(eventsRef);
-                    }
+                if (dataSnapshot.exists() && dataSnapshot.hasChild(eventType)) {
+                    // Event type already exists
+                    Toast.makeText(getContext(), eventType + " already exists!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getContext(), "Error reading from DB", Toast.LENGTH_SHORT).show();
+                    // Event type does not exist or the events section is empty, add a new event
+                    addNewEvent(eventsRef);
                 }
             }
 
@@ -232,6 +242,74 @@ public class ClubManagerCreateEventFragment extends Fragment {
                 Toast.makeText(getContext(), "Error checking event type: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private boolean validateFields() throws ParseException {
+        if (!TextUtils.isDigitsOnly(distance.getText().toString())) {
+            distance.setError("Invalid distance");
+            return false;
+        }
+        if (!isValidLocationInput(location.getText().toString())) {
+            location.setError("Invalid location");
+            return false;
+        }
+        if (route.getText().toString().isEmpty()) {
+            route.setError("Invalid route");
+            return false;
+        }
+        if (!isValidTime(start.getText().toString())) {
+            start.setError("Invalid start time");
+            return false;
+        }
+        String levelInput = level.getText().toString();
+        if (!(levelInput.equals("beginner") || levelInput.equals("intermediate") || levelInput.equals("elite"))) {
+            level.setError("Invalid level");
+            return false;
+        }
+        if (!isValidNumber(age.getText().toString())) {
+            age.setError("Invalid age");
+            return false;
+        }
+        if (!isValidNumber(participants.getText().toString())) {
+            participants.setError("Invalid number of participants");
+            return false;
+        }
+        if (!isValidFutureDate(date.getText().toString())) {
+            date.setError("Invalid date");
+            return false;
+        }
+        return true;
+    }
+    private boolean isValidLocationInput(String input) {
+        // Regex to check if the input is numbers followed by strings
+        String regex = "^\\d+\\s+.*$";
+        return input != null && input.matches(regex);
+    }
+    private boolean isValidTime(String time) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        try {
+            format.parse(time);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidNumber(String number) {
+        try {
+            return Integer.parseInt(number) > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidFutureDate(String dateString) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = format.parse(dateString);
+            return date != null && date.after(new Date());
+        } catch (ParseException e) {
+            return false;
+        }
     }
 
     private void addNewEvent(DatabaseReference eventsRef) {

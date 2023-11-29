@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -90,7 +94,11 @@ public class ClubManagerEditEventFragment extends Fragment {
         myButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitFragment();
+                try {
+                    submitFragment();
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -155,10 +163,81 @@ public class ClubManagerEditEventFragment extends Fragment {
         );
     }
 
-    public void submitFragment() {
+    private boolean isValidTime(String time) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm");
+        try {
+            format.parse(time);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 
+    private boolean isValidNumber(String number) {
+        try {
+            return Integer.parseInt(number) > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private boolean isValidFutureDate(String dateString) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            Date date = format.parse(dateString);
+            return date != null && date.after(new Date());
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    private boolean isValidLocationInput(String input) {
+        // Regex to check if the input is numbers followed by strings
+        String regex = "^\\d+\\s+.*$";
+        return input != null && input.matches(regex);
+    }
+
+    public void submitFragment() throws ParseException {
+        boolean allInputsValid = true;
+
+        for(MutableAttribute att : mutableAttributes) {
+            String type = att.getType();
+            String value = att.getValue();
+
+
+            switch (type) {
+                case "Date":
+                    if (!isValidFutureDate(value)) {
+                        Toast.makeText(getActivity(), "Invalid Date", Toast.LENGTH_SHORT).show();
+                        allInputsValid = false;
+                    }
+                    break;
+                case "Location":
+                    if (!isValidLocationInput(value)) {
+                        Toast.makeText(getActivity(), "Invalid location input", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    break;
+                case "Distance":
+                    if (!isValidNumber(value)) {
+                        Toast.makeText(getActivity(), "Invalid Distance", Toast.LENGTH_SHORT).show();
+                        allInputsValid = false;
+                    }
+                    break;
+                case "Start Time":
+                    if (!isValidTime(value)) {
+                        Toast.makeText(getActivity(), "Invalid Start Time", Toast.LENGTH_SHORT).show();
+                        allInputsValid = false;
+                    }
+                    break;
+            }
+
+            if (!allInputsValid) {
+                return; // Stop further processing if any validation fails
+            }
+        }
         Toast.makeText(getActivity(), "Edit Saved!", Toast.LENGTH_SHORT).show();
 
+        // writing to the database
         for (int i = 0; i < childCodes.size(); i++) {
 
             String valueField = mutableAttributes.get(i).getValue();
@@ -177,7 +256,6 @@ public class ClubManagerEditEventFragment extends Fragment {
         }
 
         childCodes = null;
-
 
         ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
         Bundle args = new Bundle();
