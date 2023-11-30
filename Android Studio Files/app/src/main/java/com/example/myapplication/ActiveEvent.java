@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 /**
- * Enumeration class for the 5 types of events
+ * class for the active event items which display on club manager home page
  *
  * @author Linden Sheehy
  * @version 1.0

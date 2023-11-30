@@ -6,16 +6,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Welcome Fragment that displays the welcome screen when users sign up, displays their username and account type
  */
 public class ParticipantHomePageFragment extends Fragment {
+
+    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference participantAccountRef = rootRef.child("Participant");
+    DatabaseReference participantAccountEvents;
+    DataSnapshot eventSnapshot;
+
+    List<ActiveEvent> participantEvents;
+    ListView listParticipantEvents;
+    ParticipantEventList participantEventAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +67,59 @@ public class ParticipantHomePageFragment extends Fragment {
             }
         });
 
+        // Try and find the database reference to the Participant account
+        try {
+            participantAccountRef = participantAccountRef.child(username);
+            participantAccountEvents = participantAccountRef.child("Events");
+        } catch(Exception e) {
+            // Handle the exception
+            participantAccountRef = null;
+            participantAccountEvents = null;
+        }
+
+        // Create the dynamic list of active events the participant has joined
+        // This just reuses the ActiveEvent class which was used for the club manager home page
+        participantEvents = new ArrayList<ActiveEvent>();
+        listParticipantEvents = view.findViewById(R.id.participantActiveEventsList);
+        participantEventAdapter = new ParticipantEventList(getActivity(), participantEvents, username);
+        listParticipantEvents.setAdapter(participantEventAdapter);
+
         return view;
+    }
+
+    public void onStart() {
+        super.onStart();
+
+        // If the database references failed, skip displaying the active event list
+        if (participantAccountRef == null || participantAccountEvents == null) {
+            return;
+        }
+
+        // Attach ValueEventListener to active events under the manager account in Firebase
+        participantAccountEvents.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot datasnapshot) {
+                eventSnapshot = datasnapshot;
+                participantEvents.clear();
+                for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
+                    String eventTypeString = childSnapshot.getKey();
+                    if (eventTypeString != null) {
+                        try {
+                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString);
+                            participantEvents.add(activeEvent);
+                        } catch (Exception e) {
+                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString, true);
+                            participantEvents.add(activeEvent);
+                        }
+                    }
+                }
+                participantEventAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Handle potential errors
+            }
+        });
     }
 }

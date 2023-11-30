@@ -96,5 +96,20 @@
             android:layout_height="2sp"
             android:background="#555555"/>
 
+        <TextView
+            android:id="@+id/participantWelcomeActiveEventsTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:gravity=""
+            android:text="Your Events"
+            android:textSize="24sp"
+            android:padding="10sp"/>
+
+        <ListView
+            android:id="@+id/participantActiveEventsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 </RelativeLayout>
