@@ -5,6 +5,7 @@
     <string name="admin_title">Administrator</string>
     <string name="Club_manager_title">Club Manager</string>
     <string name="participant_title">Participant</string>
+    <string name="join_event_page_title">Join Events</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="button_text_admin">Login</string>
