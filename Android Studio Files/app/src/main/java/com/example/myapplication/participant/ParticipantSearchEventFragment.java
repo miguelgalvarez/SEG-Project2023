@@ -13,12 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-<<<<<<< HEAD:Android Studio Files/app/src/main/java/com/example/myapplication/ParticipantSearchEventFragement.java
-import com.example.myapplication.admin.EditEventTypeFragment;
-import com.example.myapplication.participant.ParticipantJoinEventFragment;
-=======
 import com.example.myapplication.R;
->>>>>>> 1923af95dca473cbf3085f3679e9ad6c85b8f688:Android Studio Files/app/src/main/java/com/example/myapplication/participant/ParticipantSearchEventFragement.java
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipantSearchEventFragement extends Fragment {
+public class ParticipantSearchEventFragment extends Fragment {
 
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ClubsRef = rootRef.child("Club Manager");
@@ -40,7 +35,7 @@ public class ParticipantSearchEventFragement extends Fragment {
     ListView listSearchEvents;
     SearchEventList searchEventAdapter;
 
-    public ParticipantSearchEventFragement() {
+    public ParticipantSearchEventFragment() {
 
     }
 

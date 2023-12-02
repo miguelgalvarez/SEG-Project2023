@@ -8,20 +8,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-<<<<<<< HEAD:Android Studio Files/app/src/main/java/com/example/myapplication/SearchEventList.java
-import androidx.fragment.app.Fragment;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
-
-=======
->>>>>>> 1923af95dca473cbf3085f3679e9ad6c85b8f688:Android Studio Files/app/src/main/java/com/example/myapplication/participant/SearchEventList.java
 import java.util.List;
 
 public class SearchEventList extends ArrayAdapter<SearchEvent> {

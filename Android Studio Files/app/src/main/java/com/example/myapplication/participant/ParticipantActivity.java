@@ -48,7 +48,7 @@ public class ParticipantActivity extends AppCompatActivity {
                     selectedFragment.setArguments(args);
 
                 } else if (item.getItemId() == R.id.eventsBottomNavItem) {
-                    selectedFragment = new ParticipantSearchEventFragement();
+                    selectedFragment = new ParticipantSearchEventFragment();
                     args.putString("username", username);
                     selectedFragment.setArguments(args);
                 } else {
