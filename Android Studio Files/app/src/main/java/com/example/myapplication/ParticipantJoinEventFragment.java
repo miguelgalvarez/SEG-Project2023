@@ -53,7 +53,7 @@ public class ParticipantJoinEventFragment extends Fragment {
         // Create the dynamic list of Clubs the participant is part of
         participantClubs = new ArrayList<ParticipantClub>();
         listParticipantClubs = view.findViewById(R.id.participantClubsList);
-        //participantClubAdapter = new ParticipantClubList(getActivity(), participantClubs, username);
+        participantClubAdapter = new ParticipantClubList(getActivity(), participantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
 
         return view;
