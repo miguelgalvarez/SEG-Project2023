@@ -3,6 +3,8 @@ package com.example.myapplication.participant;
 import com.example.myapplication.R;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD:Android Studio Files/app/src/main/java/com/example/myapplication/SearchEventList.java
+import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
+
+=======
+>>>>>>> 1923af95dca473cbf3085f3679e9ad6c85b8f688:Android Studio Files/app/src/main/java/com/example/myapplication/participant/SearchEventList.java
 import java.util.List;
 
 public class SearchEventList extends ArrayAdapter<SearchEvent> {
@@ -17,6 +29,8 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
     private Activity context;
     List<SearchEvent> searchEvents;
     private String accountName;
+    private SearchEventList.EventListListener listener;
+
 
     public SearchEventList(Activity context, List<SearchEvent> searchEvents, String accountName) {
         super(context, R.layout.search_event_item, searchEvents);
@@ -57,8 +71,48 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
             @Override
             public void onClick(View v) {
 
-                // Open join event page
+                if (viewHolder.buttonsVisible) {
+                    // Apply slide-out animation to the edit button
+                    Animation slideOut = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out);
 
+                    viewHolder.joinButton.startAnimation(slideOut);
+                    viewHolder.joinButton.setVisibility(View.INVISIBLE);
+
+                    viewHolder.arrow.startAnimation(slideOut);
+                    viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                    viewHolder.buttonsVisible = false;
+                }
+
+                else {
+                    // Apply slide-in animation to the edit button
+                    Animation slideIn = AnimationUtils.loadAnimation(getContext(), R.anim.slide_in);
+
+                    viewHolder.joinButton.startAnimation(slideIn);
+                    viewHolder.joinButton.setVisibility(View.VISIBLE);
+
+                    viewHolder.arrow.startAnimation(slideIn);
+                    viewHolder.arrow.setVisibility(View.VISIBLE);
+
+                    viewHolder.buttonsVisible = true;
+                }
+            }
+        });
+
+        // Add click listener for the join button
+        viewHolder.joinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //hide buttons again
+                viewHolder.joinButton.setVisibility(View.INVISIBLE);
+                viewHolder.arrow.setVisibility(View.INVISIBLE);
+
+                Log.d("debug", "clicked join");
+
+                viewHolder.buttonsVisible = false;
+
+                // Open join event page
+                openEventJoinFragment(viewHolder);
             }
         });
 
@@ -70,28 +124,34 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         public TextView eventName;
         public TextView eventType;
         public TextView clubName;
-
+        public Button joinButton;
+        public ImageView arrow;
+        public Boolean buttonsVisible;
 
         public ViewHolder(View itemView) {
             this.eventName = itemView.findViewById(R.id.textViewEventName);
             this.eventType = itemView.findViewById(R.id.textViewEventType);
             this.clubName = itemView.findViewById(R.id.textViewClubName);
+            this.joinButton = itemView.findViewById(R.id.joinButton);
+            this.arrow = itemView.findViewById(R.id.arrow);
+            this.buttonsVisible = false;
         }
     }
 
-    public interface ActiveEventListListener {
-        void onEditActiveEvent(String activeEventName);
+    public interface EventListListener {
+        void onEditEventType(SearchEventList.ViewHolder viewHolder);
     }
 
-    private ActiveEventList.ActiveEventListListener listener;
-
     // Method to set the listener
-    public void setActiveEventListListener(ActiveEventList.ActiveEventListListener listener) {
+    public void setEventJoinListener(SearchEventList.EventListListener listener) {
         this.listener = listener;
     }
 
-    public void sendToastMessage() {
-        Toast.makeText(getContext(), "Event Left!", Toast.LENGTH_SHORT).show();
+    // this just opens the new window for when edit is pressed on an item
+    public void openEventJoinFragment(SearchEventList.ViewHolder viewHolder) {
+        if (listener != null) {
+            listener.onEditEventType(viewHolder);
+        }
     }
 
 }
