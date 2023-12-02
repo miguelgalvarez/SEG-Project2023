@@ -42,7 +42,7 @@ public class ParticipantActivity extends AppCompatActivity {
                     selectedFragment.setArguments(args);
 
                 } else if (item.getItemId() == R.id.clubsBottomNavItem) {
-                    selectedFragment = new ParticipantClubSearchFragment();
+                    selectedFragment = new ParticipantClubView();
                     args.putString("username", username);
                     selectedFragment.setArguments(args);
 
