@@ -25,7 +25,7 @@ import java.util.List;
 
 public class ParticipantClubView extends Fragment {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    DatabaseReference participantAccountRef = rootRef.child("Club Manager");
+    DatabaseReference clubAccountRef = rootRef.child("Club Manager");
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
     List<Club> participantClubs;
@@ -58,13 +58,13 @@ public class ParticipantClubView extends Fragment {
         super.onStart();
 
         // If the database references failed, skip displaying the active event list
-        if (participantAccountRef == null) {
+        if (clubAccountRef == null) {
             Log.d("debug", "failed to load db");
             return;
         }
 
         // Attach ValueEventListener to active events under the manager account in Firebase
-        participantAccountRef.addValueEventListener(new ValueEventListener() {
+        clubAccountRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
                 eventSnapshot = datasnapshot;
@@ -72,7 +72,7 @@ public class ParticipantClubView extends Fragment {
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String clubNameString = childSnapshot.child("clubname").getValue(String.class);
                     if (clubNameString != null) {
-                        Club activeClub = new Club(clubNameString);
+                        Club activeClub = new Club(clubNameString, childSnapshot);
                         participantClubs.add(activeClub);
                     }
                 }
