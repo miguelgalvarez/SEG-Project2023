@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.participant;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.myapplication.R;
+import com.example.myapplication.participant.Club;
+import com.example.myapplication.participant.ClubList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

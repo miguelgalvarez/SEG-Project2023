@@ -1,22 +1,14 @@
-package com.example.myapplication;
+package com.example.myapplication.participant;
 
-import com.example.myapplication.participant.ActiveEventList;
+import com.example.myapplication.R;
+
 import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
