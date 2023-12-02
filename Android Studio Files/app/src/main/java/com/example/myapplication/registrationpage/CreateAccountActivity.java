@@ -1,10 +1,13 @@
 package com.example.myapplication.registrationpage;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.util.Patterns;
 import android.widget.Toast;
@@ -174,6 +177,7 @@ public class CreateAccountActivity extends AppCompatActivity {
 
             if (isClubAccount == true) {
 
+                showManagerNameDialog();
                 newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
                 writeDatabase("Club Manager");
                 Intent intent = new Intent(this, ClubManagerActivity.class);
@@ -197,6 +201,36 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
 
     }
+
+    // In your activity or fragment
+    public void showManagerNameDialog() {
+        // Inflate the layout for the dialog
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.club_name_popup_window, null);
+
+        // Create the AlertDialog
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setView(dialogView);
+
+        // Get the EditText and Button from the dialog layout
+        final EditText managerNameInput = dialogView.findViewById(R.id.managerNameInput);
+        Button confirmButton = dialogView.findViewById(R.id.confirmButton);
+
+        // Create and show the dialog
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.show();
+
+        // Set click listener for the confirm button
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String managerName = managerNameInput.getText().toString();
+                // Handle the inputted manager name here
+                dialog.dismiss();
+            }
+        });
+    }
+
 
 
 }
