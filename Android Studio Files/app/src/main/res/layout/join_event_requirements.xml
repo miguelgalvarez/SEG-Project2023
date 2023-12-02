@@ -19,8 +19,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/AddEvent"
-            android:textSize="24sp" />
+            android:text="@string/join_event_requirements_title"
+            android:textSize="34sp" />
 
     </LinearLayout>
 
@@ -31,7 +31,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="35dp" />
+            android:layout_height="45dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout"
