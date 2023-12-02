@@ -6,6 +6,7 @@
     <string name="Club_manager_title">Club Manager</string>
     <string name="participant_title">Participant</string>
     <string name="join_event_page_title">Join Events</string>
+    <string name="event_search_page_title">Search For Events</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="button_text_admin">Login</string>
@@ -54,6 +55,16 @@
 
     //drop down menu
     <string-array name="dropdown_menu">
+        <item>Time Trial</item>
+        <item>Hill Climb</item>
+        <item>Road Stage Race</item>
+        <item>Road Race</item>
+        <item>Group Ride</item>
+    </string-array>
+
+    //drop down menu for event search
+    <string-array name="dropdown_menu_event_search">
+        <item>Event Type</item>
         <item>Time Trial</item>
         <item>Hill Climb</item>
         <item>Road Stage Race</item>
