@@ -14,12 +14,12 @@ import java.util.List;
 // This class just reuses the ActiveEvent objects instead of creating a new one
 public class ParticipantClubList extends ArrayAdapter<ParticipantClub> {
 
-    private Activity context;
+    private final Activity context;
     List<ParticipantClub> clubs;
-    private String clubName;
+    private final String clubName;
 
     public ParticipantClubList(Activity context, List<ParticipantClub> clubs, String clubName) {
-        super(context, R.layout.participant_club_item, clubs);
+        super(context,R.layout.participant_club_item,clubs);
         this.context = context;
         this.clubs = clubs;
         this.clubName = clubName;
@@ -33,7 +33,7 @@ public class ParticipantClubList extends ArrayAdapter<ParticipantClub> {
         ParticipantClubList.ViewHolder viewHolder;
 
         if (listViewItem == null) {
-            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.participant_club_item, parent, false);
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.participant_club_item,parent, false);
 
             viewHolder = new ParticipantClubList.ViewHolder(listViewItem);
 

@@ -109,5 +109,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    // Strings for fragment participant club view
+    <string name="participantclubview_title">Active Clubs</string>
+
+    // Strings for join_event_requirements
+    <string name="join_event_requirements_title">Registration</string>
 
 </resources>
