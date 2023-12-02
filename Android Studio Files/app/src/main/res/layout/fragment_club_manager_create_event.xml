@@ -54,6 +54,16 @@
         android:layout_below="@id/linearLayout3"
         android:padding="16dp">
 
+        <!-- Event Name EditText -->
+        <EditText
+            android:id="@+id/eventNameText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Event Name"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!-- Distance EditText -->
         <EditText
             android:id="@+id/distanceText"
@@ -63,7 +73,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/eventNameText" />
 
         <!-- Location EditText -->
         <EditText

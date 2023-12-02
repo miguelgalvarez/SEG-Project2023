@@ -35,7 +35,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
     Spinner spinner;
     private Button submitButton;
     private String eventType;
-
+    private EditText eventName;
     private EditText distance;
     private EditText level;
     private EditText location;
@@ -62,6 +62,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
         layout = view.findViewById(R.id.layout);
         spinner = view.findViewById(R.id.ddMenu);
 
+        eventName = view.findViewById(R.id.eventNameText);
         distance = view.findViewById(R.id.distanceText);
         level = view.findViewById(R.id.levelText);
         location = view.findViewById(R.id.LocationText);
@@ -203,8 +204,10 @@ public class ClubManagerCreateEventFragment extends Fragment {
         //String dateValue = date.getText().toString();
         allFields.add("Participants");
         allFields.add("Date");
+        allFields.add("Event Name");
         allTextViews.add(participants);
         allTextViews.add(date);
+        allTextViews.add(eventName);
     }
 
     public void submitButton() throws ParseException {
@@ -242,28 +245,35 @@ public class ClubManagerCreateEventFragment extends Fragment {
         });
     }
     private boolean validateFields() throws ParseException {
-        if (!TextUtils.isDigitsOnly(distance.getText().toString())) {
+
+        if (eventName.getText().toString().isEmpty()) {
+            eventName.setError("Invalid eventName");
+            return false;
+        }
+
+        if (distance.getVisibility() == View.VISIBLE && !TextUtils.isDigitsOnly(distance.getText().toString())) {
             distance.setError("Invalid distance");
             return false;
         }
-        if (!isValidLocationInput(location.getText().toString())) {
+        if (location.getVisibility() == View.VISIBLE && !isValidLocationInput(location.getText().toString())) {
             location.setError("Invalid location");
             return false;
         }
-        if (route.getText().toString().isEmpty()) {
+        if (route.getVisibility() == View.VISIBLE && route.getText().toString().isEmpty()) {
             route.setError("Invalid route");
             return false;
         }
-        if (!isValidTime(start.getText().toString())) {
+        if (start.getVisibility() == View.VISIBLE && !isValidTime(start.getText().toString())) {
             start.setError("Invalid start time");
             return false;
         }
         String levelInput = level.getText().toString();
-        if (!(levelInput.equals("beginner") || levelInput.equals("intermediate") || levelInput.equals("elite"))) {
+
+        if (level.getVisibility() == View.VISIBLE && !(levelInput.equals("beginner") || levelInput.equals("intermediate") || levelInput.equals("elite"))) {
             level.setError("Invalid level");
             return false;
         }
-        if (!isValidNumber(age.getText().toString())) {
+        if (age.getVisibility() == View.VISIBLE && !isValidNumber(age.getText().toString())) {
             age.setError("Invalid age");
             return false;
         }
@@ -271,7 +281,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
             participants.setError("Invalid number of participants");
             return false;
         }
-        if (!isValidFutureDate(date.getText().toString())) {
+        if (date.getVisibility() == View.VISIBLE && !isValidFutureDate(date.getText().toString())) {
             date.setError("Invalid date");
             return false;
         }
@@ -328,7 +338,6 @@ public class ClubManagerCreateEventFragment extends Fragment {
                         // Handle the error
                         Toast.makeText(getContext(), "Failed to write event: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getContext(), "Event Created!", Toast.LENGTH_SHORT).show();
 
                         // Navigate back to the home page
                         ClubManagerHomePageFragment fragment = new ClubManagerHomePageFragment();
@@ -338,6 +347,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
                         fragment.setArguments(args);
 
                         if (isAdded()) {
+                            Toast.makeText(getContext(), "Event Created!", Toast.LENGTH_SHORT).show();
                             getParentFragmentManager().beginTransaction()
                                     .replace(R.id.fragmentHolderViewParticipant, fragment)
                                     .addToBackStack(null)
