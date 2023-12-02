@@ -25,9 +25,9 @@ public class ParticipantClubView extends Fragment {
     DatabaseReference participantAccountRef = rootRef.child("Club Manager");
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
-    List<ParticipantClub> participantClubs;
+    List<Club> participantClubs;
     ListView listParticipantClubs;
-    ParticipantClubList participantClubAdapter;
+    ClubList participantClubAdapter;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,9 +42,9 @@ public class ParticipantClubView extends Fragment {
         String username = args != null ? args.getString("username") : "N/A";
 
         // Create the dynamic list of Clubs the participant is part of
-        participantClubs = new ArrayList<ParticipantClub>();
+        participantClubs = new ArrayList<Club>();
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
-        participantClubAdapter = new ParticipantClubList(getActivity(), participantClubs, username);
+        participantClubAdapter = new ClubList(getActivity(), participantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
 
         return view;
@@ -68,9 +68,8 @@ public class ParticipantClubView extends Fragment {
                 participantClubs.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String clubNameString = childSnapshot.child("clubname").getValue(String.class);
-                    Log.d("debug",clubNameString);
                     if (clubNameString != null) {
-                        ParticipantClub activeClub = new ParticipantClub(clubNameString);
+                        Club activeClub = new Club(clubNameString);
                         participantClubs.add(activeClub);
                     }
                 }
