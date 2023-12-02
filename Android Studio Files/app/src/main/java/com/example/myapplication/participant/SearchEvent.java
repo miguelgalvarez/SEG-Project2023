@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.participant;
 
 /**
  * class for the active event items which display on club manager home page

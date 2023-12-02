@@ -1,23 +1,24 @@
-package com.example.myapplication;
+package com.example.myapplication.participant;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+<<<<<<< HEAD:Android Studio Files/app/src/main/java/com/example/myapplication/ParticipantSearchEventFragement.java
 import com.example.myapplication.admin.EditEventTypeFragment;
 import com.example.myapplication.participant.ParticipantJoinEventFragment;
+=======
+import com.example.myapplication.R;
+>>>>>>> 1923af95dca473cbf3085f3679e9ad6c85b8f688:Android Studio Files/app/src/main/java/com/example/myapplication/participant/ParticipantSearchEventFragement.java
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

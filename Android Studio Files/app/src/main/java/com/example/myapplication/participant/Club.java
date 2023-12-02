@@ -1,11 +1,16 @@
-package com.example.myapplication;
+package com.example.myapplication.participant;
+
+import com.google.firebase.database.DataSnapshot;
 
 public class Club {
 
     private String clubName;
 
-    Club(String clubName) {
+    private DataSnapshot clubManager;
+    Club(String clubName, DataSnapshot clubManager) {
         this.clubName = clubName;
+        this.clubManager = clubManager;
+
     }
 
     /**
