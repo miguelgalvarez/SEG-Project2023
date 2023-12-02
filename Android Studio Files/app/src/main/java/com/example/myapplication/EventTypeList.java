@@ -31,6 +31,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
 
     private Activity context;
     List<EventType> eventTypes;
+    private EventTypeListListener listener;
 
     public EventTypeList(Activity context, List<EventType> eventTypes) {
         super(context, R.layout.active_event_item, eventTypes);
@@ -165,8 +166,6 @@ public class EventTypeList extends ArrayAdapter<EventType> {
     public interface EventTypeListListener {
         void onEditEventType(String eventTypeName);
     }
-
-    private EventTypeListListener listener;
 
     // Method to set the listener
     public void setEventTypeListListener(EventTypeListListener listener) {

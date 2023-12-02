@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.admin.EditEventTypeFragment;
+import com.example.myapplication.participant.ParticipantJoinEventFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,7 +60,20 @@ public class ParticipantSearchEventFragement extends Fragment {
         searchEventAdapter = new SearchEventList(getActivity(), searchEvents, username);
         listSearchEvents.setAdapter(searchEventAdapter);
 
+        // Setup listener for editing event types
+        searchEventAdapter.setEventJoinListener(viewHolder -> {
+            ParticipantJoinEventFragment fragment = new ParticipantJoinEventFragment();
+            Bundle outArgs = new Bundle();
+            outArgs.putString("eventName", viewHolder.eventName.getText().toString());
+            outArgs.putString("eventType", viewHolder.eventType.getText().toString());
+            outArgs.putString("clubName", viewHolder.clubName.getText().toString());
+            fragment.setArguments(args);
 
+            getParentFragmentManager().beginTransaction()
+                .replace(R.id.fragmentHolderView, fragment)
+                .addToBackStack(null)
+                .commit();
+        });
 
         populateDropDown();
 
