@@ -37,6 +37,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private EditText email;
     private EditText username;
     private EditText password;
+    private EditText clubName;
     private Account newAccount;
     boolean isClubAccount = false;
     boolean isParticipantAccount = false;
@@ -115,6 +116,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Create a new "club name" node under the user's node
+        newUserRef.child("clubname").setValue(clubName.getText().toString(), new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    // Handle the error
+                    Toast.makeText(CreateAccountActivity.this, "Failed to write events: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     /**
@@ -178,13 +190,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             if (isClubAccount == true) {
 
                 showManagerNameDialog();
-                newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
-                writeDatabase("Club Manager");
-                Intent intent = new Intent(this, ClubManagerActivity.class);
-                intent.putExtra("username", newAccount.getUsername());
-                intent.putExtra("accountType", newAccount.getAccountType().toString());
-                startActivity(intent);
-
 
             } else {
 
@@ -195,41 +200,50 @@ public class CreateAccountActivity extends AppCompatActivity {
                 intent.putExtra("accountType", newAccount.getAccountType().toString());
                 startActivity(intent);
 
-
             }
 
         }
 
     }
 
-    // In your activity or fragment
     public void showManagerNameDialog() {
-        // Inflate the layout for the dialog
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.club_name_popup_window, null);
 
-        // Create the AlertDialog
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setView(dialogView);
-
-        // Get the EditText and Button from the dialog layout
-        final EditText managerNameInput = dialogView.findViewById(R.id.managerNameInput);
+        clubName = dialogView.findViewById(R.id.managerNameInput);
         Button confirmButton = dialogView.findViewById(R.id.confirmButton);
 
-        // Create and show the dialog
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        dialogBuilder.setView(dialogView);
         AlertDialog dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Prevents dismissing the dialog on back press or touch outside
         dialog.show();
 
-        // Set click listener for the confirm button
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String managerName = managerNameInput.getText().toString();
-                // Handle the inputted manager name here
-                dialog.dismiss();
+                String managerName = clubName.getText().toString();
+                if (!managerName.isEmpty()) {
+                    displayToast();
+                    // Proceed with account creation and start the next activity
+                    newAccount = new ClubManagerAccount(username.getText().toString(), password.getText().toString(), firstName.getText().toString(), lastName.getText().toString(), email.getText().toString(), AccountType.CLUB_MANAGER);
+                    writeDatabase("Club Manager");
+                    Intent intent = new Intent(CreateAccountActivity.this, ClubManagerActivity.class);
+                    intent.putExtra("username", newAccount.getUsername());
+                    intent.putExtra("accountType", newAccount.getAccountType().toString());
+                    startActivity(intent);
+                    dialog.dismiss();
+                } else {
+                    clubName.setError("Please enter a club manager name");
+                }
             }
         });
     }
+
+    public void displayToast() {
+        Toast.makeText(this, "Club Account Created!", Toast.LENGTH_SHORT).show();
+    }
+
 
 
 
