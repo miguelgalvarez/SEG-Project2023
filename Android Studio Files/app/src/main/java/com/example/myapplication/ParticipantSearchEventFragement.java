@@ -112,7 +112,7 @@ public class ParticipantSearchEventFragement extends Fragment {
         // Clear existing items
         spinnerClubNames.setAdapter(null);
 
-        spinnerClubNames.setAdapter(null);
+        //spinnerClubNames.setAdapter(null);
 
         ClubsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -128,7 +128,9 @@ public class ParticipantSearchEventFragement extends Fragment {
                     // Populate drop down from database
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String clubName = snapshot.child("clubname").getValue(String.class);
-                        clubNames.add(clubName);
+                        if (clubName != null) {
+                            clubNames.add(clubName);
+                        }
                     }
 
                     // Populate the spinner with items from the database
