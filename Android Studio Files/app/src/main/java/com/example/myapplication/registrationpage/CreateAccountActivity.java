@@ -41,6 +41,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private Account newAccount;
     boolean isClubAccount = false;
     boolean isParticipantAccount = false;
+    Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextTextEmailAddress);
         username = findViewById(R.id.usernameField);
         password = findViewById(R.id.passwordField);
+        registerButton = findViewById(R.id.registerButton);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAccountPress(v);
+            }
+        });
     }
 
     /**
@@ -65,6 +74,31 @@ public class CreateAccountActivity extends AppCompatActivity {
         DatabaseReference usersRef = database.getReference(accountType);
 
         DatabaseReference newUserRef = usersRef.child(username.getText().toString());
+
+        if (accountType.equals("Participant")) {
+            newUserRef.child("Joined Club").setValue("No club", new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        Toast.makeText(CreateAccountActivity.this, "Failed to write: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+
+        if (accountType.equals(AccountType.CLUB_MANAGER)) {
+            // Create a new "club name" node under the user's node
+            newUserRef.child("clubname").setValue(clubName.getText().toString(), new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                    if (databaseError != null) {
+                        // Handle the error
+                        Toast.makeText(CreateAccountActivity.this, "Failed to write events: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
 
         newUserRef.child("usertype").setValue(newAccount.getAccountType().toString(), new DatabaseReference.CompletionListener() {
             @Override
@@ -117,16 +151,6 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
-        // Create a new "club name" node under the user's node
-        newUserRef.child("clubname").setValue(clubName.getText().toString(), new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    // Handle the error
-                    Toast.makeText(CreateAccountActivity.this, "Failed to write events: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     /**
@@ -155,6 +179,8 @@ public class CreateAccountActivity extends AppCompatActivity {
      *
      * @param view gives information about the UI components
      */
+
+
     public void createAccountPress(View view) {
 
         boolean flag = true;
