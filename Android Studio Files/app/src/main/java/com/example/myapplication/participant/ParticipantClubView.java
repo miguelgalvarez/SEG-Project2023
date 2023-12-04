@@ -46,6 +46,7 @@ public class ParticipantClubView extends Fragment {
 
         // Create the dynamic list of Clubs the participant is part of
         participantClubs = new ArrayList<Club>();
+        // list in the fragment_participant_club_view
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
         participantClubAdapter = new ClubList(getActivity(), participantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
