@@ -30,7 +30,7 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         this.context = context;
         this.searchEvents = searchEvents;
         this.accountName = accountName;
-        this.listener = listener;
+        //this.listener = listener;
     }
 
     @Override
@@ -55,6 +55,7 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
             viewHolder.eventName.setText(activeEventName.getEventName());
             viewHolder.eventType.setText(activeEventName.getEventType());
             viewHolder.clubName.setText(activeEventName.getClubName());
+            viewHolder.clubUsername = activeEventName.getClubUsername();
         } catch (Exception E) {
             E.printStackTrace();
         }
@@ -121,6 +122,8 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         public ImageView arrow;
         public Boolean buttonsVisible;
 
+        public String clubUsername;
+
         public ViewHolder(View itemView) {
             this.eventName = itemView.findViewById(R.id.textViewEventName);
             this.eventType = itemView.findViewById(R.id.textViewEventType);
@@ -129,21 +132,22 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
             this.arrow = itemView.findViewById(R.id.arrow);
             this.buttonsVisible = false;
         }
+
     }
 
     public interface EventListListener {
-        void onEditEventType(SearchEventList.ViewHolder viewHolder);
+        void onEditEventType(ViewHolder VH);
     }
 
     // Method to set the listener
-    public void setEventJoinListener(SearchEventList.EventListListener listener) {
+    public void setEventJoinListener(EventListListener listener) {
         this.listener = listener;
     }
 
     // this just opens the new window for when edit is pressed on an item
-    public void openEventJoinFragment(SearchEventList.ViewHolder viewHolder) {
+    public void openEventJoinFragment(ViewHolder VH) {
         if (listener != null) {
-            listener.onEditEventType(viewHolder);
+            listener.onEditEventType(VH);
         }
     }
 

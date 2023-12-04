@@ -11,11 +11,13 @@ public class SearchEvent {
     private final String eventName;
     private final String eventType;
     private final String clubName;
+    private final String clubUsername;
 
-    SearchEvent(String eventName, String eventType, String clubName) {
+    SearchEvent(String eventName, String eventType, String clubName, String clubUsername) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.clubName = clubName;
+        this.clubUsername = clubUsername;
     }
 
     /**
@@ -31,5 +33,9 @@ public class SearchEvent {
 
     public String getClubName() {
         return this.clubName;
+    }
+
+    public String getClubUsername() {
+        return this.clubUsername;
     }
 }

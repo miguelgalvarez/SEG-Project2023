@@ -67,16 +67,18 @@ public class ParticipantSearchEventFragment extends Fragment {
         listSearchEvents.setAdapter(searchEventAdapter);
 
         // Setup listener for editing event types
-        searchEventAdapter.setEventJoinListener(viewHolder -> {
+        searchEventAdapter.setEventJoinListener(viewHolder  -> {
             ParticipantJoinEventFragment fragment = new ParticipantJoinEventFragment();
             Bundle outArgs = new Bundle();
             outArgs.putString("eventName", viewHolder.eventName.getText().toString());
             outArgs.putString("eventType", viewHolder.eventType.getText().toString());
             outArgs.putString("clubName", viewHolder.clubName.getText().toString());
-            fragment.setArguments(args);
+            outArgs.putString("clubUsername", viewHolder.clubUsername);
+            outArgs.putString("username", username);
+            fragment.setArguments(outArgs);
 
             getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragmentHolderView, fragment)
+                .replace(R.id.fragmentHolderViewParticipant, fragment)
                 .addToBackStack(null)
                 .commit();
         });
@@ -170,6 +172,8 @@ public class ParticipantSearchEventFragment extends Fragment {
                 allSearchEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
 
+                    String clubUsername = childSnapshot.getKey();
+                    Log.d("DEBUG", "username is " + clubUsername);
                     // Load the events from the club account
                     DataSnapshot clubEventsRef = childSnapshot.child("Events");
                     String clubName = childSnapshot.child("clubname").getValue(String.class);
@@ -182,7 +186,7 @@ public class ParticipantSearchEventFragment extends Fragment {
 
                         // Try and add the event to the allSearchEvents list
                         if (eventTypeString != null) {
-                            SearchEvent activeEvent = new SearchEvent(eventName, eventTypeString, clubName);
+                            SearchEvent activeEvent = new SearchEvent(eventName, eventTypeString, clubName, clubUsername);
                             allSearchEvents.add(activeEvent);
                         }
                     }

@@ -170,7 +170,7 @@ public class ClubList extends ArrayAdapter<Club> {
     // this just opens the new window for when edit is pressed on an item
     public void openActivityEditActiveEvent(ClubList.ViewHolder VH) {
         if (listener != null) {
-            listener.onEditActiveEvent(VH.clubName.getText().toString());
+            //listener.onEditActiveEvent(VH.clubName.getText().toString());
         }
     }
 

@@ -65,7 +65,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
         eventName = view.findViewById(R.id.eventNameText);
         distance = view.findViewById(R.id.distanceText);
         level = view.findViewById(R.id.levelText);
-        location = view.findViewById(R.id.LocationText);
+        location = view.findViewById(R.id.locationText);
         route = view.findViewById(R.id.routeText);
         start = view.findViewById(R.id.startTimeText);
         age = view.findViewById(R.id.ageText);
@@ -154,7 +154,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
             }
         });
 
-        submitButton = view.findViewById(R.id.submit_button2);
+        submitButton = view.findViewById(R.id.submitButtonJoinEvent);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".clubmanager.ClubManagerCreateEventFragment">
+    tools:context=".participant.ParticipantJoinEventFragment">
 
     <!-- Top Title Layout -->
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/AddEvent"
+            android:text="Join Event"
             android:textSize="24sp" />
     </LinearLayout>
 
@@ -37,15 +37,31 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/eventType_title"
+            android:text="Event Name"
             android:textSize="18dp" />
 
-        <Spinner
-            android:id="@+id/ddMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/eventTypeView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Event Type"
+            android:textColor="@color/grey"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/clubNameView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Club Name"
+            android:textColor="#FF9800"
+            android:textSize="18dp" />
+
+
     </LinearLayout>
+
+    <!-- Dividing Line -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout"
@@ -54,70 +70,98 @@
         android:layout_below="@id/linearLayout3"
         android:padding="16dp">
 
-        <!-- Event Name EditText -->
-        <EditText
-            android:id="@+id/eventNameText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Event Name"
-            android:inputType="text"
+        <!-- Dividing Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-        <!-- Distance EditText -->
-        <EditText
+
+        <!-- Distance TextView -->
+        <TextView
             android:id="@+id/distanceText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Distance"
-            android:inputType="text"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
+            android:text="Distance"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/eventNameText" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Location EditText -->
-        <EditText
+        <!-- Location TextView -->
+
+        <TextView
             android:id="@+id/locationText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Location (ex 25 Wellington ave)"
-            android:inputType="text"
+            android:paddingBottom="10sp"
+            android:text="Location (ex 25 Wellington ave)"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/distanceText" />
 
-        <!-- Route EditText -->
-        <EditText
+        <!-- Route TextView -->
+        <TextView
             android:id="@+id/routeText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Route (start location, end location)"
-            android:inputType="text"
+            android:paddingBottom="10sp"
+            android:text="Route (start location, end location)"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/locationText" />
 
-        <!-- Start Time EditText -->
-        <EditText
+        <!-- Start Time TextView -->
+        <TextView
             android:id="@+id/startTimeText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Start Time (HH:MM)"
-            android:inputType="text"
+            android:paddingBottom="10sp"
+            android:text="Start Time (HH:MM)"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/routeText" />
+
+        <!-- Date TextView -->
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10sp"
+            android:text="Date (dd/mm/year)"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/startTimeText" />
+
+        <!-- Dividing Line -->
+        <View
+            android:id="@+id/divdingLine"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dateText" />
 
         <!-- Level EditText -->
         <EditText
             android:id="@+id/levelText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:paddingTop="10sp"
             android:hint="Level (beginner, intermediate, elite)"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/startTimeText" />
+            app:layout_constraintTop_toBottomOf="@id/divdingLine" />
 
         <!-- Age EditText -->
         <EditText
@@ -130,27 +174,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/levelText" />
 
-        <!-- Participants EditText -->
-        <EditText
-            android:id="@+id/participantsText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/Participants"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ageText" />
-
-        <!-- Date EditText -->
-        <EditText
-            android:id="@+id/dateText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Date (dd/mm/year)"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/participantsText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
