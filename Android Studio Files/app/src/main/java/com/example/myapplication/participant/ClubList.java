@@ -123,7 +123,7 @@ public class ClubList extends ArrayAdapter<Club> {
         participantRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getValue(String.class) == "No club"){
+                if(snapshot.getValue(String.class).equals("No club")){
                     participantRef.setValue(name);
                     Toast.makeText(context, "You have joined: " + name, Toast.LENGTH_SHORT).show();
                 }

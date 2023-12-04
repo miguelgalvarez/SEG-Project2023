@@ -89,7 +89,7 @@ public class ParticipantClubView extends Fragment {
         DatabaseReference clubNameRef = rootRef.child("Participant").child(username).child("Joined Club");
         // adding club name to page from database
         clubIdName = view.findViewById(R.id.clubNameTextID);
-        clubNameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        clubNameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 clubIdName.setText(snapshot.getValue(String.class));
