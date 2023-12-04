@@ -29,16 +29,16 @@ public class ClubList extends ArrayAdapter<Club> {
     private static String accountName;
     Button leaveClubButton;
 
-    public ClubList(Activity context, List<Club> activeEvent, String accountName) {
+    public ClubList(Activity context, List<Club> activeEvent, String accountName, Button leaveClubButton) {
         super(context, R.layout.club_view_item_layout, activeEvent);
         this.context = context;
         this.activeEvent = activeEvent;
         this.accountName = accountName;
         this.listener = listener;
+        this.leaveClubButton = leaveClubButton;
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        leaveClubButton = convertView.findViewById(R.id.leaveClubButtonID);
         View listViewItem = convertView;
         ClubList.ViewHolder viewHolder;
 

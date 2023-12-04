@@ -33,7 +33,7 @@ public class ParticipantClubView extends Fragment {
     DatabaseReference clubAccountRef = rootRef.child("Club Manager");
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
-    Button leaveClubButton;
+    private Button leaveClubButton;
     public String username;
 
     // Stuff for the dynamic list
@@ -99,7 +99,7 @@ public class ParticipantClubView extends Fragment {
         allParticipantClubs = new ArrayList<Club>();
         shownParticipantClubs = new ArrayList<Club>();
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
-        participantClubAdapter = new ClubList(getActivity(), shownParticipantClubs, username);
+        participantClubAdapter = new ClubList(getActivity(), shownParticipantClubs, username, leaveClubButton);
         listParticipantClubs.setAdapter(participantClubAdapter);
         // adding club name to page from database
         clubIdName = view.findViewById(R.id.clubNameTextID);
