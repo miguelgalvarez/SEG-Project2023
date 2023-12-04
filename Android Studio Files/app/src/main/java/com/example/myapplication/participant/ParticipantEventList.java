@@ -92,7 +92,7 @@ public class ParticipantEventList extends ArrayAdapter<ActiveEvent> {
 
         // Get database references to be used for the leave button
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference eventsRef = rootRef.child("Participant").child(this.accountName).child("Events");
+        DatabaseReference eventsRef = rootRef.child("Participant").child(this.accountName).child("JoinedEvents");
 
         // Add click listener for the leave button
         Button leaveButton = listViewItem.findViewById(R.id.leaveButton);

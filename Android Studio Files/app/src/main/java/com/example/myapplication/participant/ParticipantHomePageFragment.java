@@ -2,6 +2,7 @@ package com.example.myapplication.participant;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class ParticipantHomePageFragment extends Fragment {
         // Try and find the database reference to the Participant account
         try {
             participantAccountRef = participantAccountRef.child(username);
-            participantAccountEvents = participantAccountRef.child("Events");
+            participantAccountEvents = participantAccountRef.child("JoinedEvents");
         } catch(Exception e) {
             // Handle the exception
             participantAccountRef = null;
@@ -103,13 +104,13 @@ public class ParticipantHomePageFragment extends Fragment {
                 eventSnapshot = datasnapshot;
                 participantEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
-                    String eventTypeString = childSnapshot.getKey();
-                    if (eventTypeString != null) {
+                    String eventNameString = childSnapshot.getKey();
+                    if (eventNameString != null) {
                         try {
-                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString);
+                            ActiveEvent activeEvent = new ActiveEvent(eventNameString);
                             participantEvents.add(activeEvent);
                         } catch (Exception e) {
-                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString, true);
+                            ActiveEvent activeEvent = new ActiveEvent(eventNameString, true);
                             participantEvents.add(activeEvent);
                         }
                     }
