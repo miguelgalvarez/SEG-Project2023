@@ -5,8 +5,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -28,12 +30,22 @@ public class ParticipantSearchEventFragment extends Fragment {
     DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
     DatabaseReference ClubsRef = rootRef.child("Club Manager");
 
-    Spinner spinnerClubNames; // Stores the drop down for club name filter
+    Spinner clubNameSpinner; // Stores the drop down for club name filter
+    List<String> clubNames; // Stores the options for the club name drop down
+    Spinner eventTypeSpinner; // Stores the drop down for event type filter
+    List<String> eventTypes; // Stores the options for the event type drop down
 
     // Stuff for the dynamic event list
-    List<SearchEvent> searchEvents;
+    List<SearchEvent> allSearchEvents;
+    List<SearchEvent> shownSearchEvents;
     ListView listSearchEvents;
     SearchEventList searchEventAdapter;
+
+    // Holds the current search fields
+    String searchFilter;
+    String clubNameFilter;
+    String eventTypeFilter;
+
 
     public ParticipantSearchEventFragment() {
 
@@ -46,14 +58,12 @@ public class ParticipantSearchEventFragment extends Fragment {
         Bundle args = getArguments();
         String username = args != null ? args.getString("username") : "N/A";
 
-        // Find drop down element from xml
-        spinnerClubNames = view.findViewById(R.id.ClubDropDown);
-
         // Create the dynamic list of joinable events
         // This just reuses the ActiveEvent class which was used for the club manager home page
-        searchEvents = new ArrayList<SearchEvent>();
+        allSearchEvents = new ArrayList<SearchEvent>();
+        shownSearchEvents = new ArrayList<SearchEvent>();
         listSearchEvents = view.findViewById(R.id.eventSearchList);
-        searchEventAdapter = new SearchEventList(getActivity(), searchEvents, username);
+        searchEventAdapter = new SearchEventList(getActivity(), shownSearchEvents, username);
         listSearchEvents.setAdapter(searchEventAdapter);
 
         // Setup listener for editing event types
@@ -71,7 +81,75 @@ public class ParticipantSearchEventFragment extends Fragment {
                 .commit();
         });
 
-        populateDropDown();
+        // Set up for the search bar functionality
+        SearchView searchView = view.findViewById(R.id.searchbar);
+        searchFilter = "";
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Called when the user submits the query
+                // Nothing right now
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Called when the query text changes
+                // newText contains the updated query text
+
+                searchFilter = newText;
+
+                populateList();
+
+                return true; // Return true to indicate that the query text change event has been handled
+            }
+        });
+
+        // Set up the drop down menus
+        clubNameSpinner = view.findViewById(R.id.ClubDropDown);
+        eventTypeSpinner = view.findViewById(R.id.EventTypeDropDown);
+
+        populateDropDowns();
+
+        clubNameFilter = "Club Name";
+        eventTypeFilter = "Event Type";
+
+        clubNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Called when an item is selected
+                // position is the index of the selected item in the spinnerOptions array
+
+                clubNameFilter = clubNames.get(position);
+
+                populateList();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Called when nothing is selected
+            }
+        });
+
+        eventTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Called when an item is selected
+                // position is the index of the selected item in the spinnerOptions array
+
+                eventTypeFilter = eventTypes.get(position);
+
+                populateList();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // Called when nothing is selected
+            }
+        });
 
         return view;
     }
@@ -89,7 +167,7 @@ public class ParticipantSearchEventFragment extends Fragment {
         ClubsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
-                searchEvents.clear();
+                allSearchEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
 
                     // Load the events from the club account
@@ -102,14 +180,16 @@ public class ParticipantSearchEventFragment extends Fragment {
                         String eventTypeString = clubEvent.getKey();
                         String eventName = clubEvent.child("Name").getValue(String.class);
 
-                        // Try and add the event to the dynamic list
+                        // Try and add the event to the allSearchEvents list
                         if (eventTypeString != null) {
                             SearchEvent activeEvent = new SearchEvent(eventName, eventTypeString, clubName);
-                            searchEvents.add(activeEvent);
+                            allSearchEvents.add(activeEvent);
                         }
                     }
                 }
-                searchEventAdapter.notifyDataSetChanged();
+
+                // Call the populate list function when the data is fetched
+                populateList();
             }
 
             @Override
@@ -119,11 +199,102 @@ public class ParticipantSearchEventFragment extends Fragment {
         });
     }
 
-    public void populateDropDown() {
-        // Clear existing items
-        spinnerClubNames.setAdapter(null);
+    public void populateList() {
 
-        //spinnerClubNames.setAdapter(null);
+        // Reset the list
+        shownSearchEvents.clear();
+
+        // Conditionally add all the search events to the shown list
+        for (SearchEvent event : allSearchEvents) {
+
+            if (!clubNameFilter.equals("Club Name")) {
+                try {
+                    if (!event.getClubName().equals(clubNameFilter)) {
+                        continue;
+                    }
+
+                // Happens when the event has no club name, shouldn't happen in actual use
+                } catch (Exception e) {
+                    shownSearchEvents.add(event);
+                    continue;
+                }
+            }
+
+            if (!eventTypeFilter.equals("Event Type")) {
+                try {
+                    if (!event.getEventType().equals(eventTypeFilter)) {
+                        continue;
+                    }
+
+                // Happens when the event has no event type, shouldn't happen in actual use
+                } catch (Exception e) {
+                    shownSearchEvents.add(event);
+                    continue;
+                }
+            }
+
+            Log.d("debug", searchFilter);
+
+            // If theres nothing in the search, add the item and skip the rest of the loop code
+            if (searchFilter.length() == 0) {
+                shownSearchEvents.add(event);
+                continue;
+            }
+
+            char[] eventNameChars;
+            char[] searchFieldChars;
+
+            try {
+                eventNameChars = event.getEventName().toCharArray();
+                searchFieldChars = searchFilter.toCharArray();
+
+            // This happens when the event doesn't have a name, so just show it anyway
+            // This shouldn't ever happen unless the event was added manually in the database
+            } catch (Exception e) {
+                shownSearchEvents.add(event);
+                continue;
+            }
+
+            // Search cannot be valid if its longer than the result
+            if (searchFieldChars.length > eventNameChars.length) continue;
+
+            // The search must check every char where the search string can fit
+            int iterations = eventNameChars.length - searchFieldChars.length;
+
+            // Need to check this many chars per iteration
+            int subIterations = searchFieldChars.length;
+
+            for (int i = 0; i < iterations; i++) {
+                Boolean containsSearch = true;
+
+                // Check each char of the search against each char of the event name ( from a different offset every outer loop iteration )
+                // If anything isn't equal, skip this iteration ( the iteration of the changing offset, so move to a different offset )
+                for (int j = i; j < (i + subIterations); j++) {
+                    if (eventNameChars[j] != searchFieldChars[j - i]) {
+                        containsSearch = false;
+                        break;
+                    }
+                }
+                
+                if (containsSearch) {
+                    shownSearchEvents.add(event);
+                    break;
+                }
+            }
+
+            Log.d("debug", "Reached end of loop");
+            Log.d("event name ->", event.getEventName());
+        }
+
+        // Update UI list
+        searchEventAdapter.notifyDataSetChanged();
+    }
+
+    public void populateDropDowns() {
+
+        /* ----- For club name drop down ----- */
+        // Clear existing items
+        clubNameSpinner.setAdapter(null);
 
         ClubsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -131,12 +302,12 @@ public class ParticipantSearchEventFragment extends Fragment {
                 if (dataSnapshot.exists()) {
 
                     // List to hold drop down items
-                    List<String> clubNames = new ArrayList<String>();
+                    clubNames = new ArrayList<String>();
 
                     // give it a default String of "Club Name"
                     clubNames.add("Club Name");
 
-                    // Populate drop down from database
+                    // Populate list from database
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         String clubName = snapshot.child("clubname").getValue(String.class);
                         if (clubName != null) {
@@ -144,10 +315,10 @@ public class ParticipantSearchEventFragment extends Fragment {
                         }
                     }
 
-                    // Populate the spinner with items from the database
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, clubNames);
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinnerClubNames.setAdapter(adapter);
+                    // Populate the spinner with items from the list
+                    ArrayAdapter<String> clubNameAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, clubNames);
+                    clubNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    clubNameSpinner.setAdapter(clubNameAdapter);
                 }
             }
 
@@ -157,6 +328,23 @@ public class ParticipantSearchEventFragment extends Fragment {
                 Toast.makeText(getContext(), "Error retrieving event types: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        /* ----- For event type drop down ----- */
+
+        eventTypeSpinner.setAdapter(null);
+
+        eventTypes = new ArrayList<String>();
+
+        eventTypes.add("Event Type"); // Default option, filters nothing
+        eventTypes.add("Time Trial");
+        eventTypes.add("Hill Climb");
+        eventTypes.add("Road Stage Race");
+        eventTypes.add("Road Race");
+        eventTypes.add("Group Ride");
+
+        ArrayAdapter<String> eventTypeAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, eventTypes);
+        eventTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        eventTypeSpinner.setAdapter(eventTypeAdapter);
 
     }
 
