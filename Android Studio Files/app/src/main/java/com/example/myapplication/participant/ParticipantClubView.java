@@ -3,6 +3,7 @@ package com.example.myapplication.participant;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.SearchView;
 
 import com.example.myapplication.R;
@@ -35,6 +38,7 @@ public class ParticipantClubView extends Fragment {
     List<Club> shownParticipantClubs;
     ListView listParticipantClubs;
     ClubList participantClubAdapter;
+    TextView clubIdName;
 
     // Stores the search string
     String searchFilter;
@@ -82,7 +86,20 @@ public class ParticipantClubView extends Fragment {
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
         participantClubAdapter = new ClubList(getActivity(), shownParticipantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
+        DatabaseReference clubNameRef = rootRef.child("Participant").child(username).child("Joined Club");
+        // adding club name to page from database
+        clubIdName = view.findViewById(R.id.clubNameTextID);
+        clubNameRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                clubIdName.setText(snapshot.getValue(String.class));
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return view;
 
     }
