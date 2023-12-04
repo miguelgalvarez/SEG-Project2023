@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.myapplication.R;
 import com.example.myapplication.participant.Club;
@@ -28,9 +29,15 @@ public class ParticipantClubView extends Fragment {
     DatabaseReference clubAccountRef = rootRef.child("Club Manager");
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
-    List<Club> participantClubs;
+
+    // Stuff for the dynamic list
+    List<Club> allParticipantClubs;
+    List<Club> shownParticipantClubs;
     ListView listParticipantClubs;
     ClubList participantClubAdapter;
+
+    // Stores the search string
+    String searchFilter;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -44,11 +51,36 @@ public class ParticipantClubView extends Fragment {
         Bundle args = getArguments();
         String username = args != null ? args.getString("username") : "N/A";
 
+        // Set up for the search bar functionality
+        SearchView searchView = view.findViewById(R.id.searchbar);
+        searchFilter = "";
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // Called when the user submits the query
+                // Nothing right now
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // Called when the query text changes
+                // newText contains the updated query text
+
+                searchFilter = newText;
+
+                populateList();
+
+                return true; // Return true to indicate that the query text change event has been handled
+            }
+        });
+
         // Create the dynamic list of Clubs the participant is part of
-        participantClubs = new ArrayList<Club>();
-        // list in the fragment_participant_club_view
+        allParticipantClubs = new ArrayList<Club>();
+        shownParticipantClubs = new ArrayList<Club>();
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
-        participantClubAdapter = new ClubList(getActivity(), participantClubs, username);
+        participantClubAdapter = new ClubList(getActivity(), shownParticipantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
 
         return view;
@@ -69,15 +101,17 @@ public class ParticipantClubView extends Fragment {
             @Override
             public void onDataChange(DataSnapshot datasnapshot) {
                 eventSnapshot = datasnapshot;
-                participantClubs.clear();
+                allParticipantClubs.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String clubNameString = childSnapshot.child("clubname").getValue(String.class);
                     if (clubNameString != null) {
                         Club activeClub = new Club(clubNameString, childSnapshot);
-                        participantClubs.add(activeClub);
+                        allParticipantClubs.add(activeClub);
                     }
                 }
-                participantClubAdapter.notifyDataSetChanged();
+
+                // Fill the UI list
+                populateList();
             }
 
             @Override
@@ -85,5 +119,65 @@ public class ParticipantClubView extends Fragment {
                 // Handle potential errors
             }
         });
+    }
+
+    public void populateList() {
+
+        // Reset the list
+        shownParticipantClubs.clear();
+
+        // Conditionally add all the search events to the shown list
+        for (Club club : allParticipantClubs) {
+
+            // If theres nothing in the search, add the item and skip the rest of the loop code
+            if (searchFilter.length() == 0) {
+                shownParticipantClubs.add(club);
+                continue;
+            }
+
+            char[] clubNameChars;
+            char[] searchFieldChars;
+
+            try {
+                clubNameChars = club.getName().toCharArray();
+                searchFieldChars = searchFilter.toCharArray();
+
+                // This happens when the event doesn't have a name, so just show it anyway
+                // This shouldn't ever happen unless the event was added manually in the database
+            } catch (Exception e) {
+                shownParticipantClubs.add(club);
+                continue;
+            }
+
+            // Search cannot be valid if its longer than the result
+            if (searchFieldChars.length > clubNameChars.length) continue;
+
+            // The search must check every char where the search string can fit
+            int iterations = clubNameChars.length - searchFieldChars.length;
+
+            // Need to check this many chars per iteration
+            int subIterations = searchFieldChars.length;
+
+            for (int i = 0; i <= iterations; i++) {
+                Boolean containsSearch = true;
+
+                // Check each char of the search against each char of the event name ( from a different offset every outer loop iteration )
+                // If anything isn't equal, skip this iteration ( the iteration of the changing offset, so move to a different offset )
+                for (int j = i; j < (i + subIterations); j++) {
+                    if (clubNameChars[j] != searchFieldChars[j - i]) {
+                        containsSearch = false;
+                        break;
+                    }
+                }
+
+                if (containsSearch) {
+                    shownParticipantClubs.add(club);
+                    break;
+                }
+            }
+        }
+
+        // Update UI list
+        participantClubAdapter.notifyDataSetChanged();
     }
 }

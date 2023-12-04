@@ -233,8 +233,6 @@ public class ParticipantSearchEventFragment extends Fragment {
                 }
             }
 
-            Log.d("debug", searchFilter);
-
             // If theres nothing in the search, add the item and skip the rest of the loop code
             if (searchFilter.length() == 0) {
                 shownSearchEvents.add(event);
@@ -264,7 +262,7 @@ public class ParticipantSearchEventFragment extends Fragment {
             // Need to check this many chars per iteration
             int subIterations = searchFieldChars.length;
 
-            for (int i = 0; i < iterations; i++) {
+            for (int i = 0; i <= iterations; i++) {
                 Boolean containsSearch = true;
 
                 // Check each char of the search against each char of the event name ( from a different offset every outer loop iteration )
@@ -275,15 +273,12 @@ public class ParticipantSearchEventFragment extends Fragment {
                         break;
                     }
                 }
-                
+
                 if (containsSearch) {
                     shownSearchEvents.add(event);
                     break;
                 }
             }
-
-            Log.d("debug", "Reached end of loop");
-            Log.d("event name ->", event.getEventName());
         }
 
         // Update UI list

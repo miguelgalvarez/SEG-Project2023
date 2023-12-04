@@ -27,6 +27,24 @@
             android:layout_width="match_parent"
             android:layout_height="20dp" />
 
+        <!-- Dividing Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"/>
+
+        <SearchView
+            android:id="@+id/searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="60sp">
+        </SearchView>
+
+        <!-- Dividing Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"/>
+
         <ListView
             android:id="@+id/clubListParticipantViewID"
             android:layout_width="match_parent"
