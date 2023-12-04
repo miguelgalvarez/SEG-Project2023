@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ public class ParticipantClubView extends Fragment {
     DatabaseReference clubAccountRef = rootRef.child("Club Manager");
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
+    Button leaveClubButton;
+    public String username;
 
     // Stuff for the dynamic list
     List<Club> allParticipantClubs;
@@ -53,11 +56,23 @@ public class ParticipantClubView extends Fragment {
 
         // Fetch args from ParticipantActivity
         Bundle args = getArguments();
-        String username = args != null ? args.getString("username") : "N/A";
+        username = args != null ? args.getString("username") : "N/A";
 
         // Set up for the search bar functionality
         SearchView searchView = view.findViewById(R.id.searchbar);
         searchFilter = "";
+
+        // leave club button
+        DatabaseReference clubNameRef = rootRef.child("Participant").child(username).child("Joined Club");
+        leaveClubButton = view.findViewById(R.id.leaveClubButtonID);
+        leaveClubButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clubNameRef.setValue("No club");
+                Toast.makeText(getContext(),"Successfully left club!",Toast.LENGTH_SHORT);
+                leaveClubButton.setVisibility(View.INVISIBLE);
+            }
+        });
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -86,7 +101,6 @@ public class ParticipantClubView extends Fragment {
         listParticipantClubs = view.findViewById(R.id.clubListParticipantViewID);
         participantClubAdapter = new ClubList(getActivity(), shownParticipantClubs, username);
         listParticipantClubs.setAdapter(participantClubAdapter);
-        DatabaseReference clubNameRef = rootRef.child("Participant").child(username).child("Joined Club");
         // adding club name to page from database
         clubIdName = view.findViewById(R.id.clubNameTextID);
         clubNameRef.addValueEventListener(new ValueEventListener() {

@@ -27,6 +27,7 @@ public class ClubList extends ArrayAdapter<Club> {
     private static Activity context;
     List<Club> activeEvent;
     private static String accountName;
+    Button leaveClubButton;
 
     public ClubList(Activity context, List<Club> activeEvent, String accountName) {
         super(context, R.layout.club_view_item_layout, activeEvent);
@@ -35,10 +36,9 @@ public class ClubList extends ArrayAdapter<Club> {
         this.accountName = accountName;
         this.listener = listener;
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        leaveClubButton = convertView.findViewById(R.id.leaveClubButtonID);
         View listViewItem = convertView;
         ClubList.ViewHolder viewHolder;
 
@@ -106,7 +106,7 @@ public class ClubList extends ArrayAdapter<Club> {
                 String name = viewHolder.clubName.getText().toString();
 
                 // write to database
-                writeDatabaseJoinClub(name);
+                writeDatabaseJoinClub(name,v);
                 // make buttons invisible so they don't stay open for another item
                 viewHolder.joinButton.setVisibility(View.INVISIBLE);
                 viewHolder.arrow.setVisibility(View.INVISIBLE);
@@ -117,7 +117,7 @@ public class ClubList extends ArrayAdapter<Club> {
         return listViewItem;
 
     }
-    public static void writeDatabaseJoinClub(String name){
+    public void writeDatabaseJoinClub(String name,View v){
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference participantRef = rootRef.child("Participant").child(accountName).child("Joined Club");
         participantRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -125,6 +125,7 @@ public class ClubList extends ArrayAdapter<Club> {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue(String.class).equals("No club")){
                     participantRef.setValue(name);
+                    leaveClubButton.setVisibility(View.VISIBLE);
                     Toast.makeText(context, "You have joined: " + name, Toast.LENGTH_SHORT).show();
                 }
                 else{
