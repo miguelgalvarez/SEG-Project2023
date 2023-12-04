@@ -11,16 +11,22 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class ClubList extends ArrayAdapter<Club> {
-    private Activity context;
+    private static Activity context;
     List<Club> activeEvent;
-    private String accountName;
+    private static String accountName;
 
     public ClubList(Activity context, List<Club> activeEvent, String accountName) {
         super(context, R.layout.club_view_item_layout, activeEvent);
@@ -89,7 +95,6 @@ public class ClubList extends ArrayAdapter<Club> {
         // Get database references to be used for the edit/delete buttons
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference eventsRef = rootRef.child("Club Manager").child(this.accountName).child("Events");
-
         // Add click listener for the edit/delete buttons
         Button joinButton = listViewItem.findViewById(R.id.joinButton);
 
@@ -98,22 +103,40 @@ public class ClubList extends ArrayAdapter<Club> {
             public void onClick(View v) {
 
                 // create args variable
-
                 String name = viewHolder.clubName.getText().toString();
 
-                // Send name in args to next page
-
-                // Open join page
-
+                // write to database
+                writeDatabaseJoinClub(name);
                 // make buttons invisible so they don't stay open for another item
                 viewHolder.joinButton.setVisibility(View.INVISIBLE);
                 viewHolder.arrow.setVisibility(View.INVISIBLE);
-
                 viewHolder.buttonsVisible = false;
             }
         });
 
         return listViewItem;
+
+    }
+    public static void writeDatabaseJoinClub(String name){
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference participantRef = rootRef.child("Participant").child(accountName).child("Joined Club");
+        participantRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue(String.class) == "No club"){
+                    participantRef.setValue(name);
+                    Toast.makeText(context, "You have joined: " + name, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(context, "You have already joined a club!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, "Error joining club", Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 

@@ -10,6 +10,31 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/welcomeClubHomePageID4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/club_homepage"
+            android:textSize="40sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="14dp" />
+
+        <TextView
+            android:id="@+id/youAreCurrentMemberOfClubID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_club_name"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/clubNameTextID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
@@ -26,7 +51,23 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="20dp" />
+        <!-- Dividing Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"/>
 
+        <SearchView
+            android:id="@+id/searchbar"
+            android:layout_width="match_parent"
+            android:layout_height="60sp">
+        </SearchView>
+
+        <!-- Dividing Line -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"/>
         <ListView
             android:id="@+id/clubListParticipantViewID"
             android:layout_width="match_parent"
