@@ -1,8 +1,19 @@
 package com.example.myapplication;
 
-import org.junit.Test;
 
+import android.content.Context;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.Test;
 import static org.junit.Assert.*;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.*;
+
+@RunWith(MockitoJUnitRunner.class)
 
 /**
  * Example local unit test, which will execute on the development machine (host).

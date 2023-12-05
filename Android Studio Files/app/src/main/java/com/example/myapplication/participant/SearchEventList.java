@@ -39,6 +39,7 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         View listViewItem = convertView;
         SearchEventList.ViewHolder viewHolder;
 
+
         if (listViewItem == null) {
             listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.search_event_item, parent, false);
 
@@ -59,6 +60,8 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         } catch (Exception E) {
             E.printStackTrace();
         }
+
+        viewHolder.joinIcon.setVisibility(View.INVISIBLE);
 
         // Set click listeners for the item view
         listViewItem.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +113,18 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
             }
         });
 
+        // Check if the participant has joined the event
+        activeEventName.hasParticipantJoined(accountName, new SearchEvent.ParticipantJoinedCallback() {
+            @Override
+            public void onCallback(boolean hasJoined) {
+                if (hasJoined) {
+                    viewHolder.joinIcon.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.joinIcon.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
         return listViewItem;
 
     }
@@ -124,12 +139,15 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
 
         public String clubUsername;
 
+        public ImageView joinIcon;
+
         public ViewHolder(View itemView) {
             this.eventName = itemView.findViewById(R.id.textViewEventName);
             this.eventType = itemView.findViewById(R.id.textViewEventType);
             this.clubName = itemView.findViewById(R.id.textViewClubName);
             this.joinButton = itemView.findViewById(R.id.joinButton);
             this.arrow = itemView.findViewById(R.id.arrow);
+            this.joinIcon = itemView.findViewById(R.id.joined_icon);
             this.buttonsVisible = false;
         }
 

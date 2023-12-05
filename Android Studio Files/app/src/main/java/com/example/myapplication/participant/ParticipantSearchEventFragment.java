@@ -45,6 +45,7 @@ public class ParticipantSearchEventFragment extends Fragment {
     String searchFilter;
     String clubNameFilter;
     String eventTypeFilter;
+    String username;
 
 
     public ParticipantSearchEventFragment() {
@@ -56,7 +57,7 @@ public class ParticipantSearchEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_event_search, container, false);
 
         Bundle args = getArguments();
-        String username = args != null ? args.getString("username") : "N/A";
+        username = args != null ? args.getString("username") : "N/A";
 
         // Create the dynamic list of joinable events
         // This just reuses the ActiveEvent class which was used for the club manager home page
@@ -186,7 +187,7 @@ public class ParticipantSearchEventFragment extends Fragment {
 
                         // Try and add the event to the allSearchEvents list
                         if (eventTypeString != null) {
-                            SearchEvent activeEvent = new SearchEvent(eventName, eventTypeString, clubName, clubUsername);
+                            SearchEvent activeEvent = new SearchEvent(eventName, eventTypeString, clubName, clubUsername, username);
                             allSearchEvents.add(activeEvent);
                         }
                     }
