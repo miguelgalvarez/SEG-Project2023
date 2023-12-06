@@ -4,7 +4,7 @@ public class ParticipantClub {
 
     private String clubName;
 
-    ParticipantClub(String clubName) {
+    public ParticipantClub(String clubName) {
         this.clubName = clubName;
         return;
     }

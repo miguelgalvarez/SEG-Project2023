@@ -22,7 +22,7 @@ public class SearchEvent {
     private final String clubUsername;
     private String participantUsername;
 
-    SearchEvent(String eventName, String eventType, String clubName, String clubUsername, String participantUsername) {
+    public SearchEvent(String eventName, String eventType, String clubName, String clubUsername, String participantUsername) {
         this.eventName = eventName;
         this.eventType = eventType;
         this.clubName = clubName;
