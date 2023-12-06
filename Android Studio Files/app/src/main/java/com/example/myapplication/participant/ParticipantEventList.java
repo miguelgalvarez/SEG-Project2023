@@ -16,17 +16,19 @@ import com.example.myapplication.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 // This class just reuses the ActiveEvent objects instead of creating a new one
-public class ParticipantEventList extends ArrayAdapter<ActiveEvent> {
+public class ParticipantEventList extends ArrayAdapter<ParticipantEvent> {
 
     private Activity context;
-    List<ActiveEvent> activeEvent;
+    List<ParticipantEvent> activeEvent;
     private String accountName;
 
-    public ParticipantEventList(Activity context, List<ActiveEvent> activeEvent, String accountName) {
-        super(context, R.layout.active_event_item, activeEvent);
+    public ParticipantEventList(Activity context, List<ParticipantEvent> activeEvent, String accountName) {
+        super(context, R.layout.participant_event_item, activeEvent);
         this.context = context;
         this.activeEvent = activeEvent;
         this.accountName = accountName;
@@ -40,7 +42,7 @@ public class ParticipantEventList extends ArrayAdapter<ActiveEvent> {
         ParticipantEventList.ViewHolder viewHolder;
 
         if (listViewItem == null) {
-            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.active_participant_event_item, parent, false);
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.participant_event_item, parent, false);
 
             viewHolder = new ParticipantEventList.ViewHolder(listViewItem);
 
@@ -49,10 +51,12 @@ public class ParticipantEventList extends ArrayAdapter<ActiveEvent> {
             viewHolder = (ParticipantEventList.ViewHolder) listViewItem.getTag();
         }
 
-        ActiveEvent activeEventName = getItem(position);
+        ParticipantEvent activeEventName = getItem(position);
 
         try {
-            viewHolder.eventName.setText(activeEventName.getName());
+            viewHolder.eventName.setText(activeEventName.eventName);
+            viewHolder.eventType.setText(activeEventName.eventType);
+            viewHolder.clubName.setText(activeEventName.clubName);
         } catch (Exception E) {
             E.printStackTrace();
         }
@@ -120,13 +124,17 @@ public class ParticipantEventList extends ArrayAdapter<ActiveEvent> {
 
     public static class ViewHolder {
         public TextView eventName;
+        public TextView eventType;
+        public TextView clubName;
         public Button leaveButton;
         public ImageView arrow;
         public Boolean buttonsVisible;
 
 
         public ViewHolder(View itemView) {
-            this.eventName = itemView.findViewById(R.id.eventName);
+            this.eventName = itemView.findViewById(R.id.textViewEventName);
+            this.eventType = itemView.findViewById(R.id.textViewEventType);
+            this.clubName = itemView.findViewById(R.id.textViewClubName);
             this.leaveButton = itemView.findViewById(R.id.leaveButton);
             this.arrow = itemView.findViewById(R.id.arrow);
             this.buttonsVisible = false;

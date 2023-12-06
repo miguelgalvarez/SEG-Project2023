@@ -34,7 +34,7 @@ public class ParticipantHomePageFragment extends Fragment {
     DatabaseReference participantAccountRef = rootRef.child("Participant");
     DatabaseReference participantAccountEvents;
     DataSnapshot eventSnapshot;
-    List<ActiveEvent> participantEvents;
+    List<ParticipantEvent> participantEvents;
     ListView listParticipantEvents;
     ParticipantEventList participantEventAdapter;
 
@@ -81,7 +81,7 @@ public class ParticipantHomePageFragment extends Fragment {
 
         // Create the dynamic list of active events the participant has joined
         // This just reuses the ActiveEvent class which was used for the club manager home page
-        participantEvents = new ArrayList<ActiveEvent>();
+        participantEvents = new ArrayList<ParticipantEvent>();
         listParticipantEvents = view.findViewById(R.id.participantActiveEventsList);
         participantEventAdapter = new ParticipantEventList(getActivity(), participantEvents, username);
         listParticipantEvents.setAdapter(participantEventAdapter);
@@ -105,14 +105,11 @@ public class ParticipantHomePageFragment extends Fragment {
                 participantEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String eventNameString = childSnapshot.getKey();
-                    if (eventNameString != null) {
-                        try {
-                            ActiveEvent activeEvent = new ActiveEvent(eventNameString);
-                            participantEvents.add(activeEvent);
-                        } catch (Exception e) {
-                            ActiveEvent activeEvent = new ActiveEvent(eventNameString, true);
-                            participantEvents.add(activeEvent);
-                        }
+                    String eventTypeString = childSnapshot.child("Event Type").getValue(String.class);
+                    String clubNameString = childSnapshot.child("ClubName").getValue(String.class);
+                    if (eventNameString != null && eventTypeString != null && clubNameString != null) {
+                        ParticipantEvent activeEvent = new ParticipantEvent(eventNameString, eventTypeString, clubNameString);
+                        participantEvents.add(activeEvent);
                     }
                 }
                 participantEventAdapter.notifyDataSetChanged();
