@@ -64,6 +64,8 @@ public class SearchEvent {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChild(eventName)) {
                     callback.onCallback(snapshot.hasChild(eventName));
+                } else {
+                    callback.onCallback(false);
                 }
             }
 

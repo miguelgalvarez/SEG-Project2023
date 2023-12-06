@@ -102,9 +102,11 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
             @Override
             public void onClick(View v) {
                 // Check if the participant has joined the event
+                Log.d("DEBUGGG", "Join button clicked");
                 activeEventName.hasParticipantJoined(accountName, new SearchEvent.ParticipantJoinedCallback() {
                     @Override
                     public void onCallback(boolean hasJoined) {
+                        Log.d("DEBUGGG", "ONCALLBACK");
                         if (hasJoined) {
                             // They are already in the event
                             Toast.makeText(context, "You have already joined this event.", Toast.LENGTH_SHORT).show();
@@ -177,6 +179,8 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
     public void openEventJoinFragment(ViewHolder VH) {
         if (listener != null) {
             listener.onEditEventType(VH);
+        } else {
+            Log.d("debug", "Listener is null");
         }
     }
 

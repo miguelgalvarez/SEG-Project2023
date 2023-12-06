@@ -19,6 +19,7 @@ import com.example.myapplication.participant.ActiveEvent;
 import com.example.myapplication.participant.ActiveEventList;
 import com.example.myapplication.loginpage.LoginHomePageActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.participant.ParticipantEvent;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -178,14 +179,12 @@ public class ClubManagerHomePageFragment extends Fragment {
                 activeEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String eventTypeString = childSnapshot.getKey();
-                    if (eventTypeString != null) {
-                        try {
-                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString);
-                            activeEvents.add(activeEvent);
-                        } catch (Exception e) {
-                            ActiveEvent activeEvent = new ActiveEvent(eventTypeString, true);
-                            activeEvents.add(activeEvent);
-                        }
+                    String eventNameString = childSnapshot.child("Name").getValue(String.class);
+                    String clubNameString = managerAccountRef.getKey();
+
+                    if (eventNameString != null && eventTypeString != null && clubNameString != null) {
+                        ActiveEvent activeEvent = new ActiveEvent(eventTypeString, eventNameString, clubNameString);
+                        eventAdapter.add(activeEvent);
                     }
                 }
                 eventAdapter.notifyDataSetChanged();

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/darker_grotesque</item>
         <item>@font/darker_grotesque_light</item>
+        <item>@font/darker_grotesque_medium</item>
+        <item>@font/darker_grotesque_semibold</item>
     </array>
 </resources>

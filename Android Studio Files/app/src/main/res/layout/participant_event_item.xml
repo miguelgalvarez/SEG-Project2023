@@ -28,8 +28,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/darker_grotesque_medium"
                 android:text="eventName"
-                android:textSize="20sp"
+                android:textAlignment="viewStart"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,16 +39,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/darker_grotesque_medium"
                 android:text="test"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/textViewClubName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/darker_grotesque_medium"
                 android:text="test"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
             <Space
                 android:layout_width="match_parent"

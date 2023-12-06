@@ -28,7 +28,13 @@ public class ActiveEvent {
 
     public String name;
 
-    public ActiveEvent(String name) {
+    public String eventType;
+    public String clubName;
+
+    public ActiveEvent(String name, String type, String club) {
+
+        this.eventType = type;
+        this.clubName = club;
 
         // Checks if the name is a valid event type name
         for (String eventType : allTypes) {
@@ -60,4 +66,8 @@ public class ActiveEvent {
     public String getName() {
         return this.name;
     }
+
+    public String getEventType() {return this.eventType;}
+
+    public String getClubName() {return this.clubName;}
 }

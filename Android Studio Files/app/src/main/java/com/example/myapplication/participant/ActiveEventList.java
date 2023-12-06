@@ -58,6 +58,8 @@ public class ActiveEventList extends ArrayAdapter<ActiveEvent> {
 
         try {
             viewHolder.activeEventName.setText(activeEventName.getName());
+            viewHolder.eventType.setText(activeEventName.getEventType());
+            viewHolder.clubName.setText(activeEventName.getClubName());
         } catch (Exception E) {
             E.printStackTrace();
         }
@@ -153,9 +155,15 @@ public class ActiveEventList extends ArrayAdapter<ActiveEvent> {
         ImageView arrow;
         Boolean buttonsVisible;
 
+        TextView eventType;
+
+        TextView clubName;
+
 
         public ViewHolder(View itemView) {
             activeEventName = itemView.findViewById(R.id.textViewName);
+            eventType = itemView.findViewById(R.id.eventTypeTextView);
+            clubName = itemView.findViewById(R.id.clubNameTextView);
             editButton = itemView.findViewById(R.id.editButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             threeDots = itemView.findViewById(R.id.threeDots);

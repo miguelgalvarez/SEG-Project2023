@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Levels;
 import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -196,11 +197,18 @@ public class ParticipantJoinEventFragment extends Fragment {
     public boolean getUserInputs() {
         boolean isValid = true;
 
+        String enteredLevel = levelView.getText().toString();
         // Validate Level
         if (levelInput) {
-            if (levelView.getText().toString().isEmpty()) {
+            if (enteredLevel.isEmpty()) {
                 levelView.setError("Please enter a level");
                 isValid = false; // Not valid if level is empty
+            } else if (!enteredLevel.equalsIgnoreCase((Levels.BEGINNER).toString()) && !enteredLevel.equalsIgnoreCase((Levels.INTERMEDIATE).toString()) && !enteredLevel.equalsIgnoreCase((Levels.ELITE).toString())) {
+                levelView.setError("Please enter a valid level");
+                isValid = false;
+            } else if (!enteredLevel.equalsIgnoreCase(level)) {
+                Toast.makeText(getContext(), "This event is only for participants of level " + level, Toast.LENGTH_SHORT).show();
+                isValid = false;
             }
         }
 

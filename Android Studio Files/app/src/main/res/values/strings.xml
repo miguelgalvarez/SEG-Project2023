@@ -116,7 +116,7 @@
     <string name="join_event_requirements_title">Registration</string>
 
     // Strings for club_homepage
-    <string name="club_homepage">My club manager</string>
+    <string name="club_homepage">My Club Manager</string>
     <string name="current_club_name">You are a member of: </string>
 
 </resources>

@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.myapplication.Levels;
 import com.example.myapplication.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -269,7 +270,7 @@ public class ClubManagerCreateEventFragment extends Fragment {
         }
         String levelInput = level.getText().toString();
 
-        if (level.getVisibility() == View.VISIBLE && !(levelInput.equals("beginner") || levelInput.equals("intermediate") || levelInput.equals("elite"))) {
+        if (level.getVisibility() == View.VISIBLE && !(levelInput.equalsIgnoreCase((Levels.BEGINNER).toString()) || levelInput.equalsIgnoreCase((Levels.INTERMEDIATE).toString()) || levelInput.equalsIgnoreCase((Levels.ELITE).toString()))) {
             level.setError("Invalid level");
             return false;
         }

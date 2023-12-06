@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.SearchView;
@@ -47,6 +48,8 @@ public class ParticipantClubView extends Fragment {
     TextView clubIdName;
 
     public EditText ratingText;
+
+    RatingBar ratingBar;
 
     // Stores the search string
     String searchFilter;
@@ -155,7 +158,78 @@ public class ParticipantClubView extends Fragment {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.rate_club_popup_window, null);
 
-        ratingText = dialogView.findViewById(R.id.ratingInput);
+        ratingBar = dialogView.findViewById(R.id.ratingBar);
+
+        Button confirmButton = dialogView.findViewById(R.id.confirmButton);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        dialogBuilder.setView(dialogView);
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Prevents dismissing the dialog on back press or touch outside
+        dialog.show();
+        DatabaseReference participantNameRef = rootRef.child("Participant").child(username);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String rating = String.valueOf(ratingBar.getRating());
+                participantNameRef.child("rating").setValue(rating, new DatabaseReference.CompletionListener() {
+
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            // Handle the error
+                        }
+                    }
+                });
+                Toast.makeText(getContext(), "Rating " + rating + " added", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void showRatingDialog2() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.rate_club_popup_window, null);
+
+        //ratingText = dialogView.findViewById(R.id.ratingInput);
 
         Button confirmButton = dialogView.findViewById(R.id.confirmButton);
 

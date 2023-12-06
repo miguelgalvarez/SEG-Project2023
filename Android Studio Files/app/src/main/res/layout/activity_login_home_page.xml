@@ -29,7 +29,19 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="104dp" />
+            android:layout_height="26dp" />
+
+        <ImageView
+            android:id="@+id/cycling_app_logo"
+            android:layout_width="125sp"
+            android:layout_height="125sp"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:src="@drawable/cycling_app_logo"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="33dp" />
 
         <TextView
             android:id="@+id/adminTitle"
@@ -48,7 +60,9 @@
             android:layout_height="48sp"
             android:ems="10"
             android:hint="@string/username_hint"
-            android:inputType="text" />
+            android:inputType="text"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp" />
 
         <EditText
             android:id="@+id/passwordHint"
@@ -56,7 +70,9 @@
             android:layout_height="48sp"
             android:ems="10"
             android:hint="@string/password_hint"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="15sp"
+            android:paddingRight="15sp" />
 
         <Button
             android:id="@+id/button"

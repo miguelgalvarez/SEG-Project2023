@@ -22,9 +22,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:fontFamily="@font/darker_grotesque_medium"
             android:gravity="center"
             android:text="@string/les_grimpeurs"
-            android:textSize="24sp" />
+            android:textSize="32sp" />
 
         <Space
             android:layout_width="wrap_content"
@@ -48,23 +49,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|center_vertical"
+            android:fontFamily="@font/darker_grotesque_semibold"
             android:gravity="center|center_vertical"
             android:text="@string/welcome_admin_textdisplay"
-            android:textSize="40sp" />
+            android:textSize="45sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="29dp" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="4sp"
+            android:background="#555555" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="288dp"
-            app:srcCompat="@drawable/ride" />
+            android:layout_height="250sp"
+            android:background="#7A00BCD4"
+            app:srcCompat="@drawable/cycling_app_logo" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="4sp"
+            android:background="#555555" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="28dp" />
 
         <Button
             android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@android:color/holo_orange_dark"
-            android:text="@string/logout_button" />
+            android:backgroundTint="@android:color/holo_blue_light"
+            android:fontFamily="@font/darker_grotesque_medium"
+            android:text="@string/logout_button"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

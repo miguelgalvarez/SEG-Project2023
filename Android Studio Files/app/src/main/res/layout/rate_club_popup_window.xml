@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,11 +13,31 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <EditText
-            android:id="@+id/ratingInput"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#FF9800"
+            android:numStars="5"
+            android:progressTint="#FF9800"
+            android:stepSize="0.5" />
+
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter a Rating from 1-5" />
+            android:fontFamily="@font/darker_grotesque_light"
+            android:gravity="center"
+            android:text="Give a rating!"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="21dp" />
 
         <Button
             android:id="@+id/confirmButton"
@@ -25,7 +45,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#FF8800"
-            android:text="Confirm" />
+            android:text="Submit" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
