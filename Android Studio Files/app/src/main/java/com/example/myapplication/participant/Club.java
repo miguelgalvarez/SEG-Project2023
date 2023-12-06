@@ -22,4 +22,9 @@ public class Club {
         return this.clubName;
     }
 
+    public DataSnapshot getClubManager() {
+        return this.clubManager;
+    }
+
+
 }
