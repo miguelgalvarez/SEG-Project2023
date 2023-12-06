@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="85sp">
+    android:layout_height="55sp">
 
     <!-- Buttons for each item -->
     <LinearLayout
@@ -26,8 +26,7 @@
                 android:layout_gravity="center_vertical"
                 android:fontFamily="@font/darker_grotesque_medium"
                 android:text="test"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textSize="24sp" />
 
         </LinearLayout>
 

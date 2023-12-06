@@ -34,7 +34,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
     private EventTypeListListener listener;
 
     public EventTypeList(Activity context, List<EventType> eventTypes) {
-        super(context, R.layout.active_event_item, eventTypes);
+        super(context, R.layout.active_event_type_item, eventTypes);
         this.context = context;
         this.eventTypes = eventTypes;
         this.listener = listener;
@@ -47,7 +47,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
         ViewHolder viewHolder;
 
         if (listViewItem == null) {
-            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.active_event_item, parent, false);
+            listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.active_event_type_item, parent, false);
 
             viewHolder = new ViewHolder(listViewItem);
 
@@ -154,7 +154,7 @@ public class EventTypeList extends ArrayAdapter<EventType> {
 
 
         public ViewHolder(View itemView) {
-            eventTypeName = itemView.findViewById(R.id.textViewName);
+            eventTypeName = itemView.findViewById(R.id.eventTypeTextView);
             editButton = itemView.findViewById(R.id.editButton);
             deleteButton = itemView.findViewById(R.id.deleteButton);
             threeDots = itemView.findViewById(R.id.threeDots);

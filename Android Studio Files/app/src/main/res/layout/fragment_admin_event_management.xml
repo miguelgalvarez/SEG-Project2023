@@ -13,48 +13,23 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50sp"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/appNameWelcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/les_grimpeurs"
-                android:textSize="24sp" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="52dp" />
+                android:layout_height="16dp" />
 
             <TextView
                 android:id="@+id/listOfCurrentEventsID"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/darker_grotesque_medium"
                 android:gravity="center"
-                android:text="@string/list_of_current_events"
-                android:textSize="28sp" />
+                android:text="List of Active Event Types"
+                android:textSize="34sp"
+                android:textStyle="bold" />
 
             <Space
                 android:layout_width="match_parent"

@@ -2,83 +2,61 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".admin.AdminActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/appNameWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/les_grimpeurs"
-            android:textSize="24sp" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="52dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="13dp" />
 
-        <TextView
-            android:id="@+id/listOfCurrentEventsID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/account_management_text"
-            android:textSize="28sp" />
+            <TextView
+                android:id="@+id/listOfCurrentEventsID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/darker_grotesque_semibold"
+                android:gravity="center"
+                android:text="Account Management"
+                android:textSize="34sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="18dp" />
 
-        <TextView
-            android:id="@+id/activeclubsID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/active_clubs_text"
-            android:textSize="24dp" />
+            <TextView
+                android:id="@+id/activeclubsID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/darker_grotesque_semibold"
+                android:paddingLeft="10dp"
+                android:text="@string/active_clubs_text"
+                android:textSize="28sp" />
 
         <ListView
             android:id="@+id/activeClubs"
             android:layout_width="match_parent"
             android:layout_height="252dp" />
 
-        <TextView
-            android:id="@+id/activeAccountsID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/active_accounts_text"
-            android:textSize="24dp" />
+            <TextView
+                android:id="@+id/activeAccountsID"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/darker_grotesque_semibold"
+                android:paddingLeft="10dp"
+                android:text="@string/active_accounts_text"
+                android:textSize="28sp" />
 
         <ListView
             android:id="@+id/activeAccounts"

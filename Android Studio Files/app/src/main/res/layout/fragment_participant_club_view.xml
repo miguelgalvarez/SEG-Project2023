@@ -1,125 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".participant.ParticipantClubView" >
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/welcomeClubHomePageID4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:gravity="center"
-            android:text="@string/club_homepage"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/youAreCurrentMemberOfClubID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:paddingLeft="10sp"
-            android:text="@string/current_club_name"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/clubNameTextID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+        tools:context=".participant.ParticipantClubView" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/welcomeClubHomePageID4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/darker_grotesque_light"
+                android:gravity="center"
+                android:text="@string/club_homepage"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/leaveClubButtonID"
+            <TextView
+                android:id="@+id/youAreCurrentMemberOfClubID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FF9800"
-                android:gravity="center"
-                android:text="Leave" />
+                android:fontFamily="@font/darker_grotesque_light"
+                android:paddingLeft="10sp"
+                android:text="@string/current_club_name"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/rateClubButton"
+            <TextView
+                android:id="@+id/clubNameTextID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="#FF9800"
+                android:fontFamily="@font/darker_grotesque_semibold"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/leaveClubButtonID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#FF9800"
+                    android:gravity="center"
+                    android:text="Leave" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/rateClubButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#FF9800"
+                    android:gravity="center"
+                    android:text="Rate" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="60sp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/darker_grotesque_light"
                 android:gravity="center"
-                android:text="Rate" />
+                android:text="@string/participantclubview_title"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
             <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+            <!-- Dividing Line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2sp"
+                android:background="#555555"/>
 
+            <SearchView
+                android:id="@+id/searchbar"
+                android:layout_width="match_parent"
+                android:layout_height="60sp">
+            </SearchView>
+
+            <!-- Dividing Line -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2sp"
+                android:background="#555555"/>
+
+            <ListView
+                android:id="@+id/clubListParticipantViewID"
+                android:layout_width="match_parent"
+                android:layout_height="376dp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="60sp"
-            android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
-            android:gravity="center"
-            android:text="@string/participantclubview_title"
-            android:textSize="40sp"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-        <!-- Dividing Line -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2sp"
-            android:background="#555555"/>
-
-        <SearchView
-            android:id="@+id/searchbar"
-            android:layout_width="match_parent"
-            android:layout_height="60sp">
-        </SearchView>
-
-        <!-- Dividing Line -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2sp"
-            android:background="#555555"/>
-        <ListView
-            android:id="@+id/clubListParticipantViewID"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
