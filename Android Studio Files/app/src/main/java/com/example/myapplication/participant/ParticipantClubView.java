@@ -74,6 +74,8 @@ public class ParticipantClubView extends Fragment {
             @Override
             public void onClick(View v) {
                 clubNameRef.setValue("No club");
+                rootRef.child("Participant").child(username).child("rating").setValue("");
+
                 Toast.makeText(getContext(),"Successfully left club!",Toast.LENGTH_SHORT);
                 leaveClubButton.setVisibility(View.INVISIBLE);
                 rateButton.setVisibility(View.INVISIBLE);
