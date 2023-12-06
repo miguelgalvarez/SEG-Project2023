@@ -1,6 +1,7 @@
 package com.example.myapplication.participant;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,14 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.myapplication.AccountType;
 import com.example.myapplication.R;
+import com.example.myapplication.clubmanager.ClubManagerAccount;
+import com.example.myapplication.clubmanager.ClubManagerActivity;
 import com.example.myapplication.registrationpage.CreateAccountActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 
 import java.util.List;
 
@@ -25,11 +31,12 @@ public class ParticipantClubList extends ArrayAdapter<ParticipantClub> {
     private final Activity context;
     List<ParticipantClub> clubs;
     private final String clubName;
+
+
     //private final DataSnapshot clubManager;
 
 
-    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-    //DatabaseReference clubManagerRef = rootRef.child("Club Manager");
+
 
 
     public ParticipantClubList(Activity context, List<ParticipantClub> clubs, String clubName) {

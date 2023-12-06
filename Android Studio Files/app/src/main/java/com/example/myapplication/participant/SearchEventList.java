@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -100,16 +101,26 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         viewHolder.joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //hide buttons again
-                viewHolder.joinButton.setVisibility(View.INVISIBLE);
-                viewHolder.arrow.setVisibility(View.INVISIBLE);
+                // Check if the participant has joined the event
+                activeEventName.hasParticipantJoined(accountName, new SearchEvent.ParticipantJoinedCallback() {
+                    @Override
+                    public void onCallback(boolean hasJoined) {
+                        if (hasJoined) {
+                            // They are already in the event
+                            Toast.makeText(context, "You have already joined this event.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // hide buttons again
+                            viewHolder.joinButton.setVisibility(View.INVISIBLE);
+                            viewHolder.arrow.setVisibility(View.INVISIBLE);
+                            viewHolder.buttonsVisible = false;
 
-                Log.d("debug", "clicked join");
+                            Log.d("debug", "clicked join");
 
-                viewHolder.buttonsVisible = false;
-
-                // Open join event page
-                openEventJoinFragment(viewHolder);
+                            // Open join event page
+                            openEventJoinFragment(viewHolder);
+                        }
+                    }
+                });
             }
         });
 
