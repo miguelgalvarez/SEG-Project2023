@@ -68,7 +68,6 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="250sp"
-            android:background="#7A00BCD4"
             app:srcCompat="@drawable/cycling_app_logo" />
 
         <View
