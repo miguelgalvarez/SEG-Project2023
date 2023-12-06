@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         View listViewItem = convertView;
         SearchEventList.ViewHolder viewHolder;
 
+
         if (listViewItem == null) {
             listViewItem = LayoutInflater.from(getContext()).inflate(R.layout.search_event_item, parent, false);
 
@@ -59,6 +61,8 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         } catch (Exception E) {
             E.printStackTrace();
         }
+
+        viewHolder.joinIcon.setVisibility(View.INVISIBLE);
 
         // Set click listeners for the item view
         listViewItem.setOnClickListener(new View.OnClickListener() {
@@ -97,16 +101,38 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
         viewHolder.joinButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //hide buttons again
-                viewHolder.joinButton.setVisibility(View.INVISIBLE);
-                viewHolder.arrow.setVisibility(View.INVISIBLE);
+                // Check if the participant has joined the event
+                activeEventName.hasParticipantJoined(accountName, new SearchEvent.ParticipantJoinedCallback() {
+                    @Override
+                    public void onCallback(boolean hasJoined) {
+                        if (hasJoined) {
+                            // They are already in the event
+                            Toast.makeText(context, "You have already joined this event.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            // hide buttons again
+                            viewHolder.joinButton.setVisibility(View.INVISIBLE);
+                            viewHolder.arrow.setVisibility(View.INVISIBLE);
+                            viewHolder.buttonsVisible = false;
 
-                Log.d("debug", "clicked join");
+                            Log.d("debug", "clicked join");
 
-                viewHolder.buttonsVisible = false;
+                            // Open join event page
+                            openEventJoinFragment(viewHolder);
+                        }
+                    }
+                });
+            }
+        });
 
-                // Open join event page
-                openEventJoinFragment(viewHolder);
+        // Check if the participant has joined the event
+        activeEventName.hasParticipantJoined(accountName, new SearchEvent.ParticipantJoinedCallback() {
+            @Override
+            public void onCallback(boolean hasJoined) {
+                if (hasJoined) {
+                    viewHolder.joinIcon.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.joinIcon.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -124,12 +150,15 @@ public class SearchEventList extends ArrayAdapter<SearchEvent> {
 
         public String clubUsername;
 
+        public ImageView joinIcon;
+
         public ViewHolder(View itemView) {
             this.eventName = itemView.findViewById(R.id.textViewEventName);
             this.eventType = itemView.findViewById(R.id.textViewEventType);
             this.clubName = itemView.findViewById(R.id.textViewClubName);
             this.joinButton = itemView.findViewById(R.id.joinButton);
             this.arrow = itemView.findViewById(R.id.arrow);
+            this.joinIcon = itemView.findViewById(R.id.joined_icon);
             this.buttonsVisible = false;
         }
 

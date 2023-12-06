@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,7 @@ public class ParticipantClubView extends Fragment {
     DatabaseReference participantAccountClubs;
     DataSnapshot eventSnapshot;
     private Button leaveClubButton;
+    private Button rateButton;
     public String username;
 
     // Stuff for the dynamic list
@@ -42,6 +45,8 @@ public class ParticipantClubView extends Fragment {
     ListView listParticipantClubs;
     ClubList participantClubAdapter;
     TextView clubIdName;
+
+    public EditText ratingText;
 
     // Stores the search string
     String searchFilter;
@@ -69,8 +74,23 @@ public class ParticipantClubView extends Fragment {
             @Override
             public void onClick(View v) {
                 clubNameRef.setValue("No club");
+                rootRef.child("Participant").child(username).child("rating").setValue("");
+
                 Toast.makeText(getContext(),"Successfully left club!",Toast.LENGTH_SHORT);
                 leaveClubButton.setVisibility(View.INVISIBLE);
+                rateButton.setVisibility(View.INVISIBLE);
+
+            }
+        });
+
+        rateButton = view.findViewById(R.id.rateClubButton);
+        rateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //clubNameRef.setValue("No club");
+                //Toast.makeText(getContext(),"Successfully left club!",Toast.LENGTH_SHORT);
+                //leaveClubButton.setVisibility(View.INVISIBLE);
+                showRatingDialog();
             }
         });
 
@@ -106,17 +126,83 @@ public class ParticipantClubView extends Fragment {
         clubNameRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                clubIdName.setText(snapshot.getValue(String.class));
+                String joinedClub = snapshot.getValue(String.class);
+                if (joinedClub != null && !joinedClub.equals("No club")) {
+                    // User is in a club, make the rateButton & leaveClubButton visible
+                    rateButton.setVisibility(View.VISIBLE);
+                    leaveClubButton.setVisibility(View.VISIBLE);
+
+                } else {
+                    // User is not in a club, hide the rateButton & leaveClubButton
+                    rateButton.setVisibility(View.INVISIBLE);
+                    leaveClubButton.setVisibility(View.INVISIBLE);
+                }
+                clubIdName.setText(joinedClub);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                // Handle errors
             }
         });
+
         return view;
 
     }
+
+    public void showRatingDialog() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.rate_club_popup_window, null);
+
+        ratingText = dialogView.findViewById(R.id.ratingInput);
+
+        Button confirmButton = dialogView.findViewById(R.id.confirmButton);
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
+        dialogBuilder.setView(dialogView);
+        AlertDialog dialog = dialogBuilder.create();
+        dialog.setCancelable(false); // Prevents dismissing the dialog on back press or touch outside
+        dialog.show();
+        DatabaseReference participantNameRef = rootRef.child("Participant").child(username);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String rating = ratingText.getText().toString();
+                if (!rating.isEmpty()) {
+                    try {
+                        int ratingInt = Integer.parseInt(rating);
+                        if (ratingInt>=1 && ratingInt<=5 ){
+                            participantNameRef.child("rating").setValue(rating, new DatabaseReference.CompletionListener() {
+
+                                @Override
+                                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                                    if (databaseError != null) {
+                                        // Handle the error
+                                    }
+                                }
+                            });
+                            Toast.makeText(getContext(), "Rating added", Toast.LENGTH_SHORT).show();
+
+                        }
+                        else{
+                            Toast.makeText(getContext(), "Not a valid rating", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (NumberFormatException e) {
+                        Toast.makeText(getContext(), "Not a valid rating", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    dialog.dismiss();
+                } else {
+                    Toast.makeText(getContext(), "Not a valid rating", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
 
     public void onStart() {
         super.onStart();

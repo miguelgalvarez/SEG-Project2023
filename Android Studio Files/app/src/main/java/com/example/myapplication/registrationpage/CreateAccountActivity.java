@@ -17,8 +17,10 @@ import com.example.myapplication.AccountType;
 import com.example.myapplication.R;
 import com.example.myapplication.clubmanager.ClubManagerAccount;
 import com.example.myapplication.clubmanager.ClubManagerActivity;
+import com.example.myapplication.loginpage.LoginHomePageActivity;
 import com.example.myapplication.participant.ParticipantAccount;
 import com.example.myapplication.participant.ParticipantActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +45,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     boolean isParticipantAccount = false;
     Button registerButton;
 
+    FloatingActionButton backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +59,15 @@ public class CreateAccountActivity extends AppCompatActivity {
         username = findViewById(R.id.usernameField);
         password = findViewById(R.id.passwordField);
         registerButton = findViewById(R.id.registerButton);
+        backButton = findViewById(R.id.backButtonRegistration);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginHomePageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
