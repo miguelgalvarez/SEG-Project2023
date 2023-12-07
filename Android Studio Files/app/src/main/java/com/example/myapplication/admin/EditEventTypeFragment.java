@@ -34,7 +34,7 @@ public class EditEventTypeFragment extends Fragment {
     DatabaseReference rootAllEventTypes = rootMain.child("Event Type");
     DatabaseReference rootEventType;
 
-    boolean[] editFieldList = new boolean[9];
+    boolean[] editFieldList = new boolean[6];
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

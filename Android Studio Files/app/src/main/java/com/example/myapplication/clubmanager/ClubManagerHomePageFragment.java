@@ -179,7 +179,7 @@ public class ClubManagerHomePageFragment extends Fragment {
                 activeEvents.clear();
                 for (DataSnapshot childSnapshot : datasnapshot.getChildren()) {
                     String eventTypeString = childSnapshot.getKey();
-                    String eventNameString = childSnapshot.child("Name").getValue(String.class);
+                    String eventNameString = childSnapshot.child("Event Name").getValue(String.class);
                     String clubNameString = managerAccountRef.getKey();
 
                     if (eventNameString != null && eventTypeString != null && clubNameString != null) {
