@@ -161,7 +161,7 @@
         android:layout_below="@id/layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:backgroundTint="#FF9800"
+        android:backgroundTint="@color/app_colour"
         android:text="@string/submitButton"
         android:visibility="visible" />
 

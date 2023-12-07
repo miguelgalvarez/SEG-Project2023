@@ -129,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:backgroundTint="#FF9800"
+                android:backgroundTint="@color/app_colour"
                 android:gravity="center"
                 android:onClick="submitButton"
                 android:text="@string/submitButton" />

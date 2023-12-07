@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Club Name"
-            android:textColor="#FF9800"
+            android:textColor="@color/app_colour"
             android:textSize="18dp" />
 
 
@@ -184,7 +184,7 @@
         android:layout_below="@id/layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
-        android:backgroundTint="#FF9800"
+        android:backgroundTint="@color/app_colour"
         android:text="@string/submitButton"
         android:visibility="visible" />
 

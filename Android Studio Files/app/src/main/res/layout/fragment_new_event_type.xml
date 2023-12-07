@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/backarrow3"
-            app:backgroundTint="@android:color/holo_orange_dark"
+            app:backgroundTint="@color/app_colour"
             app:fabCustomSize="40sp"
             app:fabSize="auto"
             app:maxImageSize="35sp" />
@@ -246,7 +246,7 @@
                 android:layout_width="100sp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:backgroundTint="@android:color/holo_orange_dark"
+                android:backgroundTint="@color/app_colour"
                 android:gravity="center"
                 android:onClick="submitButton"
                 android:text="@string/submitButton" />
