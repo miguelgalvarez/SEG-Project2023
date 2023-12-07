@@ -100,7 +100,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             });
         }
 
-        if (accountType.equals((AccountType.CLUB_MANAGER).toString())) {
+        if (accountType.equals(AccountType.CLUB_MANAGER)) {
             // Create a new "club name" node under the user's node
             newUserRef.child("clubname").setValue(clubName.getText().toString(), new DatabaseReference.CompletionListener() {
                 @Override
