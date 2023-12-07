@@ -21,11 +21,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
+            android:fontFamily="@font/darker_grotesque_semibold"
             android:gravity="center"
             android:text="@string/app_title"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+            android:textSize="36sp" />
 
         <Space
             android:layout_width="match_parent"
@@ -37,7 +36,7 @@
             android:layout_height="125sp"
             android:layout_gravity="center"
             android:scaleType="centerInside"
-            android:src="@drawable/logooooo"/>
+            android:src="@drawable/logooooo" />
 
         <Space
             android:layout_width="match_parent"
@@ -48,11 +47,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/darker_grotesque_light"
+            android:fontFamily="@font/darker_grotesque_medium"
             android:gravity="center"
             android:text="@string/button_text_admin"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textSize="26sp" />
 
         <EditText
             android:id="@+id/usernameHint"
@@ -89,18 +87,23 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="16dp" />
+            android:layout_height="32dp" />
 
         <TextView
             android:id="@+id/adminTitle2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="48sp"
             android:layout_gravity="center"
+            android:background="@drawable/create_account_box"
             android:fontFamily="@font/darker_grotesque_light"
-            android:gravity="center"
+            android:gravity="center|center_vertical"
             android:onClick="CreateAccountLink"
+            android:paddingLeft="10dp"
+            android:paddingTop="6dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
             android:text="@string/register_account_text"
-            android:textColor="#2196F3"
+            android:textColor="@color/app_colour"
             android:textSize="24sp"
             android:textStyle="bold" />
 

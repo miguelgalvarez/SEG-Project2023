@@ -44,6 +44,13 @@
             android:layout_height="58dp" />
 
 
+        <View
+            android:id="@+id/view4"
+            android:layout_width="match_parent"
+            android:layout_height="2sp"
+            android:background="#555555"
+            android:visibility="visible" />
+
         <TextView
             android:id="@+id/welcomeAdminPageTitle"
             android:layout_width="match_parent"
@@ -56,29 +63,39 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="29dp" />
+            android:layout_height="14dp" />
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="4sp"
-            android:background="#555555" />
+            android:layout_height="2sp"
+            android:background="#555555"
+            android:visibility="visible" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="29dp" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="250sp"
+            android:layout_height="200sp"
             app:srcCompat="@drawable/logooooo" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="21dp" />
 
         <View
             android:id="@+id/view2"
             android:layout_width="match_parent"
-            android:layout_height="4sp"
-            android:background="#555555" />
+            android:layout_height="2sp"
+            android:background="#555555"
+            android:visibility="visible" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="28dp" />
+            android:layout_height="22dp" />
 
         <Button
             android:id="@+id/logoutButton"
